@@ -1,0 +1,13 @@
+{
+	"servers": {
+		"madeforaward": {
+			"type": "http",
+			"url": "https://www.madeforaward.com/api/mcp"
+		},
+		"my-mcp-server-c3acb29a": {
+			"url": "https://www.madeforaward.com/api/mcp",
+			"type": "http"
+		}
+	},
+	"inputs": []
+}

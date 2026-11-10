@@ -9,6 +9,7 @@ import {
   useState,
 } from "react";
 import type { GalleryCardData, GalleryImage } from "@/lib/gallery-data";
+import LiquidRevealCursor from "@/components/mfa/LiquidRevealCursor";
 
 const COLUMN_COUNT = 4;
 const MIN_ZOOM = 0.3;
@@ -21,6 +22,8 @@ const DEFAULT_SETTINGS: GallerySettings = {
   momentumFactor: 10,
   bufferZone: 1,
   borderRadius: 0,
+  vignetteStrength: 0.7,
+  vignetteSize: 1000,
   overlayOpacity: 0.9,
   overlayEaseDuration: 0.8,
   zoomDuration: 0.6,
@@ -42,12 +45,15 @@ type GallerySettings = {
   momentumFactor: number;
   bufferZone: number;
   borderRadius: number;
+  vignetteStrength: number;
+  vignetteSize: number;
   overlayOpacity: number;
   overlayEaseDuration: number;
   zoomDuration: number;
 };
 type GridPosition = { col: number; row: number; card: GalleryCardData };
 type VisibleGrid = { key: string; positions: GridPosition[] };
+type RevealImage = { image: GalleryImage; bounds: DOMRect };
 type DragState = {
   pointerId: number;
   lastX: number;
@@ -133,10 +139,14 @@ const GalleryTile = memo(function GalleryTile({
   number,
   itemGap,
   onExpand,
+  onReveal,
+  onHideReveal,
 }: GridPosition & {
   number: number;
   itemGap: number;
   onExpand: (image: GalleryImage, title: string) => void;
+  onReveal: (image: GalleryImage, bounds: DOMRect) => void;
+  onHideReveal: () => void;
 }) {
   const [slideIndex, setSlideIndex] = useState(0);
   const [size, setSize] = useState(IMAGE_SIZES[3]);
@@ -185,6 +195,19 @@ const GalleryTile = memo(function GalleryTile({
       className="gallery-item"
       type="button"
       style={{ left, top, width: size.width, height: size.height }}
+      onPointerEnter={(event) => {
+        if (event.pointerType === "mouse") {
+          onReveal(image, event.currentTarget.getBoundingClientRect());
+        }
+      }}
+      onPointerMove={(event) => {
+        if (event.pointerType === "mouse") {
+          onReveal(image, event.currentTarget.getBoundingClientRect());
+        }
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType === "mouse") onHideReveal();
+      }}
       onClick={() => onExpand(image, card.title)}
       aria-label={`Open ${card.title}`}
     >
@@ -253,6 +276,10 @@ export function InteractiveGallery({ cards }: { cards: GalleryCardData[] }) {
   const [isDragging, setIsDragging] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [expanded, setExpanded] = useState<{ image: GalleryImage; title: string } | null>(null);
+  const [isClosingExpanded, setIsClosingExpanded] = useState(false);
+  const [revealImage, setRevealImage] = useState<RevealImage | null>(null);
+  const closeTimerRef = useRef<number | null>(null);
+  const revealTimeoutRef = useRef<number | null>(null);
 
   const applyTransform = useCallback((next: Transform) => {
     targetTransformRef.current = {
@@ -268,16 +295,34 @@ export function InteractiveGallery({ cards }: { cards: GalleryCardData[] }) {
   useEffect(() => {
     document.documentElement.style.setProperty("--radius", `${settings.borderRadius}px`);
     document.documentElement.style.setProperty("--hover-scale", String(settings.hoverScale));
+    document.documentElement.style.setProperty("--vignette-strength", String(settings.vignetteStrength));
+    document.documentElement.style.setProperty("--vignette-size", `${settings.vignetteSize}px`);
     document.documentElement.style.setProperty("--overlay-opacity", String(settings.overlayOpacity));
     document.documentElement.style.setProperty("--overlay-duration", `${settings.overlayEaseDuration}s`);
     document.documentElement.style.setProperty("--zoom-duration", `${settings.zoomDuration}s`);
   }, [settings]);
 
   useEffect(() => {
-    const updateViewport = () => setViewport({ width: window.innerWidth, height: window.innerHeight });
+    const container = containerRef.current;
+    if (!container) return;
+
+    const updateViewport = () => {
+      const bounds = container.getBoundingClientRect();
+      setViewport((current) =>
+        current.width === bounds.width && current.height === bounds.height
+          ? current
+          : { width: bounds.width, height: bounds.height },
+      );
+    };
+
     updateViewport();
+    const resizeObserver = new ResizeObserver(updateViewport);
+    resizeObserver.observe(container);
     window.addEventListener("resize", updateViewport);
-    return () => window.removeEventListener("resize", updateViewport);
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateViewport);
+    };
   }, []);
 
   useEffect(() => {
@@ -364,6 +409,15 @@ export function InteractiveGallery({ cards }: { cards: GalleryCardData[] }) {
     [applyTransform, expanded],
   );
 
+  const zoomAtCenter = useCallback(
+    (nextScale: number) => {
+      const bounds = containerRef.current?.getBoundingClientRect();
+      if (!bounds) return;
+      zoomAt(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2, nextScale);
+    },
+    [zoomAt],
+  );
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
@@ -388,7 +442,6 @@ export function InteractiveGallery({ cards }: { cards: GalleryCardData[] }) {
   const startDrag = (event: ReactPointerEvent<HTMLDivElement>) => {
     if (expanded || (event.pointerType === "mouse" && event.button !== 0)) return;
     stopMomentum();
-    event.currentTarget.setPointerCapture(event.pointerId);
     dragRef.current = {
       pointerId: event.pointerId,
       lastX: event.clientX,
@@ -407,7 +460,12 @@ export function InteractiveGallery({ cards }: { cards: GalleryCardData[] }) {
 
     const dx = event.clientX - drag.lastX;
     const dy = event.clientY - drag.lastY;
-    if (Math.abs(dx) > 2 || Math.abs(dy) > 2) drag.moved = true;
+    if (Math.abs(dx) > 2 || Math.abs(dy) > 2) {
+      if (!drag.moved && event.currentTarget.hasPointerCapture(event.pointerId) === false) {
+        event.currentTarget.setPointerCapture(event.pointerId);
+      }
+      drag.moved = true;
+    }
     const now = performance.now();
     const elapsed = Math.max(10, now - drag.lastTime);
     const current = targetTransformRef.current;
@@ -465,23 +523,40 @@ export function InteractiveGallery({ cards }: { cards: GalleryCardData[] }) {
     applyTransform({ x: 0, y: 0, scale: 1 });
   }, [applyTransform, stopMomentum]);
 
+  const closeExpanded = useCallback(() => {
+    if (!expanded || isClosingExpanded) return;
+    setIsClosingExpanded(true);
+    closeTimerRef.current = window.setTimeout(() => {
+      setExpanded(null);
+      setIsClosingExpanded(false);
+      closeTimerRef.current = null;
+    }, 450);
+  }, [expanded, isClosingExpanded]);
+
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setExpanded(null);
+      if (event.key === "Escape") closeExpanded();
       if (event.key.toLowerCase() === "h") setSettingsOpen((open) => !open);
       if (expanded) return;
       if (event.key === "+" || event.key === "=") {
-        zoomAt(window.innerWidth / 2, window.innerHeight / 2, targetTransformRef.current.scale * 1.15);
+        zoomAtCenter(targetTransformRef.current.scale * 1.15);
       }
       if (event.key === "-") {
-        zoomAt(window.innerWidth / 2, window.innerHeight / 2, targetTransformRef.current.scale / 1.15);
+        zoomAtCenter(targetTransformRef.current.scale / 1.15);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [expanded, zoomAt]);
+  }, [closeExpanded, expanded, zoomAtCenter]);
 
-  useEffect(() => () => stopMomentum(), [stopMomentum]);
+  useEffect(
+    () => () => {
+      stopMomentum();
+      if (closeTimerRef.current !== null) window.clearTimeout(closeTimerRef.current);
+      if (revealTimeoutRef.current !== null) window.clearTimeout(revealTimeoutRef.current);
+    },
+    [stopMomentum],
+  );
 
   const settingSlider = (
     key: keyof GallerySettings,
@@ -507,175 +582,264 @@ export function InteractiveGallery({ cards }: { cards: GalleryCardData[] }) {
   );
 
   const expandImage = useCallback((image: GalleryImage, title: string) => {
-    if (!suppressClickRef.current) setExpanded({ image, title });
+    if (!suppressClickRef.current) {
+      if (closeTimerRef.current !== null) {
+        window.clearTimeout(closeTimerRef.current);
+        closeTimerRef.current = null;
+      }
+      setIsClosingExpanded(false);
+      setExpanded({ image, title });
+    }
+  }, []);
+
+  const showReveal = useCallback((image: GalleryImage, bounds: DOMRect) => {
+    if (revealTimeoutRef.current !== null) {
+      window.clearTimeout(revealTimeoutRef.current);
+      revealTimeoutRef.current = null;
+    }
+    setRevealImage((current) =>
+      current?.image.src === image.src &&
+      current.bounds.left === bounds.left &&
+      current.bounds.top === bounds.top &&
+      current.bounds.width === bounds.width &&
+      current.bounds.height === bounds.height
+        ? current
+        : { image, bounds },
+    );
+  }, []);
+
+  const hideReveal = useCallback(() => {
+    if (revealTimeoutRef.current !== null) window.clearTimeout(revealTimeoutRef.current);
+    revealTimeoutRef.current = window.setTimeout(() => {
+      setRevealImage(null);
+      revealTimeoutRef.current = null;
+    }, 100);
   }, []);
 
   return (
     <main className="interactive-gallery">
-      <div
-        ref={containerRef}
-        className={`gallery-viewport${isDragging ? " is-dragging" : ""}`}
-        onPointerDown={startDrag}
-        onPointerMove={moveDrag}
-        onPointerUp={endDrag}
-        onPointerCancel={endDrag}
-        onDoubleClick={(event) =>
-          zoomAt(
-            event.clientX,
-            event.clientY,
-            targetTransformRef.current.scale < 1.5 ? 2 : 1,
-          )
-        }
-        aria-label="Interactive design gallery. Drag to move and scroll to zoom."
-      >
-        <div ref={canvasRef} className="gallery-canvas">
-          {positions.map(({ col, row, card }, index) => (
-            <GalleryTile
-              key={`${col},${row}`}
-              card={card}
-              col={col}
-              row={row}
-              number={index + 1}
-              itemGap={settings.itemGap}
-              onExpand={expandImage}
+      {revealImage && (
+        <LiquidRevealCursor
+          size={72}
+          trail={0.8}
+          smear={0.35}
+          flow={0.55}
+          speed={0.65}
+          delay={0.12}
+          splash={false}
+          lens={false}
+          grain={false}
+          fixed
+          zIndex={4}
+        >
+          <div className="liquid-image-reveal">
+            <img
+              src={revealImage.image.src}
+              alt=""
+              draggable={false}
+              style={{
+                position: "absolute",
+                left: revealImage.bounds.left,
+                top: revealImage.bounds.top,
+                width: revealImage.bounds.width,
+                height: revealImage.bounds.height,
+                objectFit: "cover",
+              }}
             />
-          ))}
-        </div>
-      </div>
-
-      <header className="gallery-heading">
-        <p>Selected work · Graphic design</p>
-        <span>Drag to explore</span>
-      </header>
-
-      <div className="gallery-hint">
-        <span>DRAG TO MOVE</span>
-        <span>SCROLL TO ZOOM</span>
-        <span>DOUBLE-CLICK TO RESET</span>
-      </div>
-
-      <nav className="gallery-controls" aria-label="Gallery controls">
-        <button
-          type="button"
-          aria-label="Zoom out"
-          onPointerDown={(event) => event.stopPropagation()}
-          onClick={() => zoomAt(viewport.width / 2, viewport.height / 2, targetTransformRef.current.scale / 1.2)}
-        >
-          −
-        </button>
-        <button
-          type="button"
-          className="zoom-readout"
-          onPointerDown={(event) => event.stopPropagation()}
-          onClick={resetView}
-          aria-label="Reset zoom"
-        >
-          {Math.round(transform.scale * 100)}%
-        </button>
-        <button
-          type="button"
-          aria-label="Zoom in"
-          onPointerDown={(event) => event.stopPropagation()}
-          onClick={() => zoomAt(viewport.width / 2, viewport.height / 2, targetTransformRef.current.scale * 1.2)}
-        >
-          +
-        </button>
-      </nav>
-
-      <button
-        className="settings-toggle"
-        type="button"
-        onPointerDown={(event) => event.stopPropagation()}
-        onClick={() => setSettingsOpen((open) => !open)}
-        aria-expanded={settingsOpen}
-      >
-        Settings <span>{settingsOpen ? "−" : "+"}</span>
-      </button>
-
-      {settingsOpen && (
-        <aside
-          className="settings-panel"
-          aria-label="Gallery settings"
-          onPointerDown={(event) => event.stopPropagation()}
-        >
-          <div className="settings-panel-header">
-            <h2>Gallery Settings</h2>
-            <button type="button" onClick={() => setSettingsOpen(false)} aria-label="Close settings">
-              ×
-            </button>
           </div>
-          <section>
-            <h3>Layout</h3>
-            {settingSlider("itemGap", "Item gap", 0, 120, 5)}
-            {settingSlider("bufferZone", "Buffer zone", 1, 5, 0.5)}
-          </section>
-          <section>
-            <h3>Style</h3>
-            {settingSlider("borderRadius", "Corner radius", 0, 30, 1)}
-            {settingSlider("hoverScale", "Hover scale", 1, 1.5, 0.05)}
-          </section>
-          <section>
-            <h3>Motion & zoom</h3>
-            {settingSlider("expandedScale", "Expanded size", 0.2, 0.8, 0.05)}
-            {settingSlider("dragEase", "Smooth flow", 0.01, 0.2, 0.01)}
-            {settingSlider("momentumFactor", "Momentum", 50, 500, 10)}
-            {settingSlider("zoomDuration", "Zoom duration", 0.2, 1.5, 0.1)}
-            {settingSlider("overlayOpacity", "Overlay opacity", 0.2, 1, 0.05)}
-            {settingSlider("overlayEaseDuration", "Overlay duration", 0.2, 1.5, 0.1)}
-            <label className="settings-control">
-              <span>Zoom level</span>
-              <input
-                type="range"
-                min={MIN_ZOOM}
-                max={MAX_ZOOM}
-                step={0.05}
-                value={transform.scale}
-                onChange={(event) =>
-                  zoomAt(viewport.width / 2, viewport.height / 2, Number(event.target.value))
-                }
-              />
-              <output>{transform.scale.toFixed(2)}</output>
-            </label>
-          </section>
-          <button className="settings-reset" type="button" onClick={resetView}>
-            Reset view
-          </button>
-        </aside>
+        </LiquidRevealCursor>
       )}
-
-      {expanded && (
+      <div className="mac-window">
+        <div className="mac-titlebar">
+          <div className="mac-traffic-lights" aria-hidden="true">
+            <span />
+            <span />
+            <span />
+          </div>
+          <span className="mac-window-title">Interactive Design Gallery</span>
+          <a className="mac-window-status mac-window-link" href="/desktop">
+            FOLDER VIEW <span aria-hidden="true">↗</span>
+          </a>
+        </div>
         <div
-          className="expanded-overlay"
-          style={{ backgroundColor: `rgba(0, 0, 0, ${settings.overlayOpacity})` }}
-          onClick={() => setExpanded(null)}
+          ref={containerRef}
+          className={`gallery-viewport${isDragging ? " is-dragging" : ""}${expanded ? " is-expanded" : ""}`}
+          onPointerDown={startDrag}
+          onPointerMove={moveDrag}
+          onPointerUp={endDrag}
+          onPointerCancel={endDrag}
+          onDoubleClick={(event) =>
+            zoomAt(
+              event.clientX,
+              event.clientY,
+              targetTransformRef.current.scale < 1.5 ? 2 : 1,
+            )
+          }
+          aria-label="Interactive design gallery. Drag to move and scroll to zoom."
         >
-          <div
-            className="expanded-content"
-            style={{
-              width: `min(100%, 1200px, ${settings.expandedScale * 100}vw)`,
-              height: `min(90vh, 1000px, ${settings.expandedScale * 100}vh)`,
-              animationDuration: `${settings.zoomDuration}s`,
-            }}
-            role="dialog"
-            aria-modal="true"
-            aria-label={expanded.title}
-            onClick={(event) => event.stopPropagation()}
+          <div className="gallery-backdrop" aria-hidden="true" />
+          <div ref={canvasRef} className="gallery-canvas">
+            {positions.map(({ col, row, card }, index) => (
+              <GalleryTile
+                key={`${col},${row}`}
+                card={card}
+                col={col}
+                row={row}
+                number={index + 1}
+                itemGap={settings.itemGap}
+                onExpand={expandImage}
+                onReveal={showReveal}
+                onHideReveal={hideReveal}
+              />
+            ))}
+          </div>
+          <div className="gallery-vignette" aria-hidden="true" />
+        </div>
+
+        <header className="gallery-heading">
+          <p>Selected work · Graphic design</p>
+          <span>Drag to explore</span>
+        </header>
+
+        <div className="gallery-hint">
+          <span>DRAG TO MOVE</span>
+          <span>SCROLL TO ZOOM</span>
+          <span>DOUBLE-CLICK TO RESET</span>
+        </div>
+
+        <nav className="gallery-controls" aria-label="Gallery controls">
+          <button
+            type="button"
+            aria-label="Zoom out"
+            onPointerDown={(event) => event.stopPropagation()}
+            onClick={() => zoomAtCenter(targetTransformRef.current.scale / 1.2)}
           >
-            <div className="expanded-heading">
-              <p>{expanded.title}</p>
-              <button
-                type="button"
-                onPointerDown={(event) => event.stopPropagation()}
-                onClick={() => setExpanded(null)}
-                aria-label="Close image"
-              >
-                Close <span>×</span>
+            −
+          </button>
+          <button
+            type="button"
+            className="zoom-readout"
+            onPointerDown={(event) => event.stopPropagation()}
+            onClick={resetView}
+            aria-label="Reset zoom"
+          >
+            {Math.round(transform.scale * 100)}%
+          </button>
+          <button
+            type="button"
+            aria-label="Zoom in"
+            onPointerDown={(event) => event.stopPropagation()}
+            onClick={() => zoomAtCenter(targetTransformRef.current.scale * 1.2)}
+          >
+            +
+          </button>
+        </nav>
+
+        <button
+          className="settings-toggle"
+          type="button"
+          onPointerDown={(event) => event.stopPropagation()}
+          onClick={() => setSettingsOpen((open) => !open)}
+          aria-expanded={settingsOpen}
+        >
+          Settings <span>{settingsOpen ? "−" : "+"}</span>
+        </button>
+
+        {settingsOpen && (
+          <aside
+            className="settings-panel"
+            aria-label="Gallery settings"
+            onPointerDown={(event) => event.stopPropagation()}
+          >
+            <div className="settings-panel-header">
+              <h2>Gallery Settings</h2>
+              <button type="button" onClick={() => setSettingsOpen(false)} aria-label="Close settings">
+                ×
               </button>
             </div>
-            <img className="expanded-image" src={expanded.image.src} alt={expanded.image.alt} />
+            <section>
+              <h3>Layout</h3>
+              {settingSlider("itemGap", "Item gap", 0, 120, 5)}
+              {settingSlider("bufferZone", "Buffer zone", 1, 5, 0.5)}
+            </section>
+            <section>
+              <h3>Style</h3>
+              {settingSlider("borderRadius", "Corner radius", 0, 30, 1)}
+              {settingSlider("hoverScale", "Hover scale", 1, 1.5, 0.05)}
+              {settingSlider("vignetteStrength", "Vignette strength", 0, 1, 0.05)}
+              {settingSlider("vignetteSize", "Vignette size", 0, 500, 10)}
+            </section>
+            <section>
+              <h3>Motion & zoom</h3>
+              {settingSlider("expandedScale", "Expanded size", 0.2, 0.8, 0.05)}
+              {settingSlider("dragEase", "Smooth flow", 0.01, 0.2, 0.01)}
+              {settingSlider("momentumFactor", "Momentum", 50, 500, 10)}
+              {settingSlider("zoomDuration", "Zoom duration", 0.2, 1.5, 0.1)}
+              {settingSlider("overlayOpacity", "Overlay opacity", 0.2, 1, 0.05)}
+              {settingSlider("overlayEaseDuration", "Overlay duration", 0.2, 1.5, 0.1)}
+              <label className="settings-control">
+                <span>Zoom level</span>
+                <input
+                  type="range"
+                  min={MIN_ZOOM}
+                  max={MAX_ZOOM}
+                  step={0.05}
+                  value={transform.scale}
+                  onChange={(event) => zoomAtCenter(Number(event.target.value))}
+                />
+                <output>{transform.scale.toFixed(2)}</output>
+              </label>
+            </section>
+            <button className="settings-reset" type="button" onClick={resetView}>
+              Reset view
+            </button>
+          </aside>
+        )}
+
+        {expanded && (
+          <div
+            className={`expanded-overlay${isClosingExpanded ? " is-closing" : ""}`}
+            style={{ backgroundColor: `rgba(0, 0, 0, ${settings.overlayOpacity})` }}
+            onClick={closeExpanded}
+          >
+            <div
+              className="expanded-content"
+              style={{
+                width: `min(92vw, 1200px, ${settings.expandedScale * 230}vw)`,
+                height: `min(90vh, 1000px, ${settings.expandedScale * 225}vh)`,
+                animationDuration: `${settings.zoomDuration}s`,
+              }}
+              role="dialog"
+              aria-modal="true"
+              aria-label={expanded.title}
+              onClick={(event) => event.stopPropagation()}
+            >
+              <div className="expanded-heading">
+                <p className={`expanded-title${isClosingExpanded ? " is-closing" : ""}`}>
+                  {expanded.title.split(/\s+/).map((word, index) => (
+                    <span
+                      className="expanded-title-word"
+                      key={`${word}-${index}`}
+                      style={{ animationDelay: `${isClosingExpanded ? index * 0.04 : 0.25 + index * 0.08}s` }}
+                    >
+                      {word}
+                    </span>
+                  ))}
+                </p>
+                <button
+                  type="button"
+                  onPointerDown={(event) => event.stopPropagation()}
+                  onClick={closeExpanded}
+                  aria-label="Close image"
+                >
+                  Close <span>×</span>
+                </button>
+              </div>
+              <img className="expanded-image" src={expanded.image.src} alt={expanded.image.alt} />
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </main>
   );
 }
