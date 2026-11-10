@@ -1,0 +1,547 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Interactive Design Gallery</title>
+<style>
+  :root { --bg:#090909; --fg:#f4f4f4; --gap:65px; --radius:0px; --hover-scale:1.05; }
+  * { box-sizing:border-box; }
+  html,body { width:100%; height:100%; margin:0; overflow:hidden; background:var(--bg); color:var(--fg); font-family:Arial,Helvetica,sans-serif; }
+  .container { position:fixed; inset:0; overflow:hidden; cursor:grab; touch-action:none; }
+  #canvas { position:absolute; left:50%; top:50%; transform-origin:0 0; will-change:transform; }
+  .item { position:absolute; overflow:hidden; border-radius:var(--radius); user-select:none; cursor:pointer; background:#171717; }
+  .item-image-container { width:100%; height:100%; overflow:hidden; }
+  .item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease; pointer-events:none; }
+  .item:hover img { transform:scale(var(--hover-scale)); }
+  .item-caption { position:absolute; left:0; right:0; bottom:0; display:flex; justify-content:space-between; align-items:end; gap:12px; padding:14px; color:#fff; font-size:12px; letter-spacing:.04em; text-shadow:0 1px 8px #000; background:linear-gradient(transparent,rgba(0,0,0,.65)); pointer-events:none; }
+  .item-name { font-size:13px; font-weight:600; }
+  .item-number { white-space:nowrap; opacity:.8; font-variant-numeric:tabular-nums; }
+  .project-title { position:fixed; z-index:10003; top:7vh; left:50%; transform:translateX(-50%); width:min(90vw,900px); text-align:center; pointer-events:none; overflow:hidden; }
+  .project-title p { margin:0; font-size:clamp(24px,5vw,64px); font-weight:600; letter-spacing:-.045em; }
+  #overlay { position:fixed; inset:0; z-index:9998; background:rgba(0,0,0,.9); opacity:0; pointer-events:none; }
+  #overlay.active { pointer-events:auto; }
+  .expanded-item { position:fixed; z-index:10000; left:50%; top:50%; transform:translate(-50%,-50%); overflow:hidden; background:#111; cursor:zoom-out; border-radius:var(--radius); will-change:width,height,transform; }
+  .expanded-item img { width:100%; height:100%; object-fit:cover; display:block; }
+  .hint { position:fixed; z-index:5; left:20px; bottom:18px; color:#aaa; font-size:11px; letter-spacing:.08em; pointer-events:none; }
+  @media (max-width:700px) { .item-caption { padding:9px; } .item-name {font-size:11px;} .hint {font-size:9px;} }
+  @media (prefers-reduced-motion:reduce) { .item img { transition:none; } }
+</style>
+</head>
+<body>
+<div class="container" id="gallery">
+  <div id="canvas"></div>
+</div>
+<div id="overlay"></div>
+<div class="project-title"><p></p></div>
+<div class="hint">DRAG TO MOVE · SCROLL TO ZOOM · DOUBLE-CLICK TO RESET ZOOM · H TO HIDE SETTINGS</div>
+
+<script type="module">
+import { Pane } from "https://esm.sh/tweakpane@4.0.4";
+import { gsap } from "https://esm.sh/gsap@3.12.5";
+import { CustomEase } from "https://esm.sh/gsap@3.12.5/CustomEase";
+import SplitType from "https://esm.sh/split-type@0.3.4";
+
+gsap.registerPlugin(CustomEase);
+CustomEase.create("hop", "0.9, 0, 0.1, 1");
+
+const items = [
+  "Chromatic Loopscape","Solar Bloom","Neon Handscape","Echo Discs","Void Gaze",
+  "Gravity Sync","Heat Core","Fractal Mirage","Nova Pulse","Sonic Horizon",
+  "Dream Circuit","Lunar Mesh","Radiant Dusk","Pixel Drift","Vortex Bloom",
+  "Shadow Static","Crimson Phase","Retro Cascade","Photon Fold","Zenith Flow"
+];
+
+const imageUrls = [
+  "/QuantHexa/webp/quantHexa_1.webp",
+  "/QuantHexa/webp/quantHexa_2.webp",
+  "/ani_visa_services/webp/ani_1.webp",
+  "/ani_visa_services/webp/ani_2.webp",
+  "/ani_visa_services/webp/ani_3.webp",
+  "/ani_visa_services/webp/ani_4.webp",
+  "/ani_visa_services/webp/ani_5.webp",
+  "/ani_visa_services/webp/ani_6.webp",
+  "/ani_visa_services/webp/ani_7.webp",
+  "/ani_visa_services/webp/ani_8.webp",
+  "/ani_visa_services/webp/ani_9.webp",
+  "/inights_carousel/webp/insights_carousel_1.webp",
+  "/inights_carousel/webp/insights_carousel_10.webp",
+  "/inights_carousel/webp/insights_carousel_2.webp",
+  "/inights_carousel/webp/insights_carousel_3.webp",
+  "/inights_carousel/webp/insights_carousel_4.webp",
+  "/inights_carousel/webp/insights_carousel_5.webp",
+  "/inights_carousel/webp/insights_carousel_6.webp",
+  "/inights_carousel/webp/insights_carousel_7.webp",
+  "/inights_carousel/webp/insights_carousel_8.webp",
+  "/inights_carousel/webp/insights_carousel_9.webp",
+  "/nortiqa/webp/nortiqa_1.webp",
+  "/nortiqa/webp/nortiqa_10.webp",
+  "/nortiqa/webp/nortiqa_11.webp",
+  "/nortiqa/webp/nortiqa_2.webp",
+  "/nortiqa/webp/nortiqa_3.webp",
+  "/nortiqa/webp/nortiqa_4.webp",
+  "/nortiqa/webp/nortiqa_5.webp",
+  "/nortiqa/webp/nortiqa_6.webp",
+  "/nortiqa/webp/nortiqa_7.webp",
+  "/nortiqa/webp/nortiqa_8.webp",
+  "/nortiqa/webp/nortiqa_9.webp",
+  "/studentCare/webp/studnet_care_1.webp",
+  "/studentCare/webp/studnet_care_10.webp",
+  "/studentCare/webp/studnet_care_11.webp",
+  "/studentCare/webp/studnet_care_12.webp",
+  "/studentCare/webp/studnet_care_13.webp",
+  "/studentCare/webp/studnet_care_14.webp",
+  "/studentCare/webp/studnet_care_15.webp",
+  "/studentCare/webp/studnet_care_16.webp",
+  "/studentCare/webp/studnet_care_17.webp",
+  "/studentCare/webp/studnet_care_18.webp",
+  "/studentCare/webp/studnet_care_19.webp",
+  "/studentCare/webp/studnet_care_2.webp",
+  "/studentCare/webp/studnet_care_20.webp",
+  "/studentCare/webp/studnet_care_3.webp",
+  "/studentCare/webp/studnet_care_4.webp",
+  "/studentCare/webp/studnet_care_5.webp",
+  "/studentCare/webp/studnet_care_6.webp",
+  "/studentCare/webp/studnet_care_7.webp",
+  "/studentCare/webp/studnet_care_8.webp",
+  "/studentCare/webp/studnet_care_9.webp",
+  "/travellersBridge/webp/travellers_bridge_1.webp",
+  "/travellersBridge/webp/travellers_bridge_10.webp",
+  "/travellersBridge/webp/travellers_bridge_11.webp",
+  "/travellersBridge/webp/travellers_bridge_2.webp",
+  "/travellersBridge/webp/travellers_bridge_3.webp",
+  "/travellersBridge/webp/travellers_bridge_4.webp",
+  "/travellersBridge/webp/travellers_bridge_5.webp",
+  "/travellersBridge/webp/travellers_bridge_6.webp",
+  "/travellersBridge/webp/travellers_bridge_7.webp",
+  "/travellersBridge/webp/travellers_bridge_8.webp",
+  "/travellersBridge/webp/travellers_bridge_9.webp",
+  "/tristoneCarouselBanners/webp/tristone_creations_1.webp",
+  "/tristoneCarouselBanners/webp/tristone_creations_2.webp",
+  "/tristoneCarouselBanners/webp/tristone_creations_3.webp",
+  "/tristoneCarouselBanners/webp/tristone_creations_4.webp",
+  "/tristoneCarouselBanners/webp/tristone_creations_5.webp"
+];
+
+const container = document.querySelector("#gallery");
+const canvas = document.querySelector("#canvas");
+const overlay = document.querySelector("#overlay");
+const titleElement = document.querySelector(".project-title p");
+
+const settings = {
+  itemGap: 65,
+  hoverScale: 1.05, expandedScale: 0.4, dragEase: 0.075,
+  momentumFactor: 200, bufferZone: 3, borderRadius: 0,
+  vignetteStrength: 0.7, vignetteSize: 200, overlayOpacity: 0.9,
+  overlayEaseDuration: 0.8, zoomDuration: 0.6, zoomLevel: 1
+};
+
+const itemSizes = [
+  { label:"4:5", ratio:4/5, width:320, height:400 },
+  { label:"9:16", ratio:9/16, width:225, height:400 },
+  { label:"16:9", ratio:16/9, width:400, height:225 },
+  { label:"1:1", ratio:1, width:400, height:400 }
+];
+const maxItemWidth = Math.max(...itemSizes.map(size => size.width));
+const maxItemHeight = Math.max(...itemSizes.map(size => size.height));
+let columns = 4;
+let cellWidth = maxItemWidth + settings.itemGap;
+let cellHeight = maxItemHeight + settings.itemGap;
+let currentX = 0, currentY = 0, targetX = 0, targetY = 0;
+let currentScale = 1, targetScale = 1;
+const minZoom = 0.3, maxZoom = 3;
+let isDragging = false, startX = 0, startY = 0;
+let dragVelocityX = 0, dragVelocityY = 0, lastDragTime = 0;
+let mouseHasMoved = false, canDrag = true;
+let lastX = 0, lastY = 0, lastUpdateTime = 0;
+let visibleItems = new Set();
+let isExpanded = false, activeItemId = null, expandedItem = null;
+let originalPosition = null, titleSplit = null, overlayAnimation = null;
+let paneInstance = null;
+
+function clamp(value, min, max) { return Math.max(min, Math.min(max, value)); }
+
+function getItemSize(width, height) {
+  const imageRatio = width / height;
+  return itemSizes.reduce((closest, size) =>
+    Math.abs(Math.log(imageRatio / size.ratio)) < Math.abs(Math.log(imageRatio / closest.ratio))
+      ? size
+      : closest
+  );
+}
+
+function updateCssSettings() {
+  document.documentElement.style.setProperty("--radius", `${settings.borderRadius}px`);
+  document.documentElement.style.setProperty("--hover-scale", settings.hoverScale);
+}
+
+function setTitle(title) {
+  if (titleSplit) titleSplit.revert();
+  titleElement.textContent = title;
+  titleSplit = new SplitType(titleElement, { types: "words" });
+  gsap.set(titleSplit.words, { y: "100%", opacity: 0 });
+}
+function animateTitleIn() {
+  if (titleSplit) gsap.to(titleSplit.words, {
+    y:"0%", opacity:1, duration:.8, stagger:.08, ease:"power3.out"
+  });
+}
+function animateTitleOut() {
+  if (titleSplit) gsap.to(titleSplit.words, {
+    y:"-100%", opacity:0, duration:.45, stagger:.04, ease:"power3.in"
+  });
+}
+function animateOverlayIn() {
+  if (overlayAnimation) overlayAnimation.kill();
+  overlay.classList.add("active");
+  overlayAnimation = gsap.to(overlay, {
+    opacity:settings.overlayOpacity, duration:settings.overlayEaseDuration,
+    ease:"power2.inOut", overwrite:true
+  });
+}
+function animateOverlayOut() {
+  if (overlayAnimation) overlayAnimation.kill();
+  overlayAnimation = gsap.to(overlay, {
+    opacity:0, duration:settings.overlayEaseDuration, ease:"power2.inOut",
+    onComplete:() => overlay.classList.remove("active")
+  });
+}
+
+function getItemId(col, row) { return `${col},${row}`; }
+function getItemPosition(col, row) { return { x:col * cellWidth, y:row * cellHeight }; }
+
+function updateVisibleItems() {
+  const buffer = settings.bufferZone;
+  const viewWidth = (window.innerWidth / currentScale) * (1 + buffer);
+  const viewHeight = (window.innerHeight / currentScale) * (1 + buffer);
+  const startCol = Math.floor((-currentX - viewWidth / 2) / cellWidth);
+  const endCol = Math.ceil((-currentX + viewWidth * 1.5) / cellWidth);
+  const startRow = Math.floor((-currentY - viewHeight / 2) / cellHeight);
+  const endRow = Math.ceil((-currentY + viewHeight * 1.5) / cellHeight);
+  const needed = new Set();
+
+  for (let row = startRow; row <= endRow; row++) {
+    for (let col = startCol; col <= endCol; col++) {
+      const id = getItemId(col, row);
+      needed.add(id);
+      if (visibleItems.has(id) || (activeItemId === id && isExpanded)) continue;
+
+      const pos = getItemPosition(col, row);
+      const index = Math.abs((row * columns + col) % items.length);
+      const item = document.createElement("div");
+      item.className = "item";
+      item.id = id;
+      item.style.width = `${maxItemWidth}px`;
+      item.style.height = `${maxItemHeight}px`;
+      item.style.left = `${pos.x}px`;
+      item.style.top = `${pos.y}px`;
+      item.dataset.width = maxItemWidth;
+      item.dataset.height = maxItemHeight;
+
+      const imageWrap = document.createElement("div");
+      imageWrap.className = "item-image-container";
+      const img = document.createElement("img");
+      img.alt = items[index];
+      img.loading = "lazy";
+      img.addEventListener("load", () => {
+        const size = getItemSize(img.naturalWidth, img.naturalHeight);
+        item.style.width = `${size.width}px`;
+        item.style.height = `${size.height}px`;
+        item.style.left = `${pos.x + (maxItemWidth - size.width) / 2}px`;
+        item.style.top = `${pos.y + (maxItemHeight - size.height) / 2}px`;
+        item.dataset.width = size.width;
+        item.dataset.height = size.height;
+      });
+      img.src = imageUrls[index % imageUrls.length];
+      imageWrap.appendChild(img);
+      item.appendChild(imageWrap);
+
+      const caption = document.createElement("div");
+      caption.className = "item-caption";
+      const name = document.createElement("div");
+      name.className = "item-name";
+      name.textContent = items[index];
+      const number = document.createElement("div");
+      number.className = "item-number";
+      number.textContent = `#${String(index + 1).padStart(5,"0")}`;
+      caption.append(name, number);
+      item.appendChild(caption);
+
+      item.addEventListener("click", () => {
+        if (!mouseHasMoved && !isDragging && canDrag) expandItem(item, index);
+      });
+      canvas.appendChild(item);
+      visibleItems.add(id);
+    }
+  }
+
+  for (const id of [...visibleItems]) {
+    if (!needed.has(id) || (activeItemId === id && isExpanded)) {
+      document.getElementById(id)?.remove();
+      visibleItems.delete(id);
+    }
+  }
+}
+
+function expandItem(item, index) {
+  if (isExpanded) return;
+  isExpanded = true;
+  canDrag = false;
+  activeItemId = item.id;
+  container.style.cursor = "default";
+
+  const rect = item.getBoundingClientRect();
+  const imgSrc = item.querySelector("img").src;
+  const width = Number(item.dataset.width);
+  const height = Number(item.dataset.height);
+  originalPosition = {
+    id:item.id, rect, width, height,
+    name:item.querySelector(".item-name").textContent,
+    number:item.querySelector(".item-number").textContent
+  };
+
+  setTitle(items[index]);
+  animateOverlayIn();
+  gsap.delayedCall(.25, animateTitleIn);
+
+  expandedItem = document.createElement("div");
+  expandedItem.className = "expanded-item";
+  expandedItem.style.width = `${width}px`;
+  expandedItem.style.height = `${height}px`;
+  const img = document.createElement("img");
+  img.src = imgSrc;
+  img.alt = items[index];
+  expandedItem.appendChild(img);
+  expandedItem.addEventListener("click", closeExpandedItem);
+  document.body.appendChild(expandedItem);
+
+  document.querySelectorAll(".item").forEach(el => {
+    if (el !== item) gsap.to(el, { opacity:0, duration:.35, ease:"power2.out" });
+  });
+
+  const targetScale = Math.min(
+    window.innerWidth * settings.expandedScale / width,
+    window.innerHeight * .92 / height
+  );
+  const targetWidth = width * targetScale;
+  const targetHeight = height * targetScale;
+  const x = rect.left + width / 2 - window.innerWidth / 2;
+  const y = rect.top + height / 2 - window.innerHeight / 2;
+
+  gsap.fromTo(expandedItem,
+    { width, height, x, y, xPercent:-50, yPercent:-50 },
+    { width:targetWidth, height:targetHeight, x:0, y:0,
+      duration:settings.zoomDuration, ease:"hop" }
+  );
+}
+
+function closeExpandedItem() {
+  if (!expandedItem || !originalPosition) return;
+  animateTitleOut();
+  animateOverlayOut();
+
+  const original = document.getElementById(activeItemId);
+  const rect = originalPosition.rect;
+  const width = originalPosition.width;
+  const height = originalPosition.height;
+  const x = rect.left + width / 2 - window.innerWidth / 2;
+  const y = rect.top + height / 2 - window.innerHeight / 2;
+
+  gsap.to(expandedItem, {
+    width, height, x, y, duration:settings.zoomDuration, ease:"hop",
+    onComplete:() => {
+      expandedItem?.remove();
+      expandedItem = null;
+      if (original) {
+        original.style.opacity = "1";
+        original.style.visibility = "visible";
+      }
+      document.querySelectorAll(".item").forEach(el => {
+        gsap.to(el, { opacity:1, duration:.45, delay:.12, ease:"power2.out" });
+      });
+      isExpanded = false;
+      canDrag = true;
+      activeItemId = null;
+      originalPosition = null;
+      container.style.cursor = "grab";
+      dragVelocityX = dragVelocityY = 0;
+      if (titleSplit) { titleSplit.revert(); titleSplit = null; }
+      titleElement.textContent = "";
+      updateVisibleItems();
+    }
+  });
+}
+
+function applyTransform() {
+  // Translation is in canvas/world units; scale is applied around the viewport centre.
+  canvas.style.transform =
+    `translate(${currentX}px, ${currentY}px) scale(${currentScale})`;
+}
+
+function animate() {
+  if (canDrag) {
+    const ease = settings.dragEase;
+    currentX += (targetX - currentX) * ease;
+    currentY += (targetY - currentY) * ease;
+    currentScale += (targetScale - currentScale) * .12;
+    if (Math.abs(targetScale - currentScale) < .0005) currentScale = targetScale;
+    applyTransform();
+
+    const now = performance.now();
+    const moved = Math.hypot(currentX - lastX, currentY - lastY);
+    if (moved > 70 || Math.abs(currentScale - targetScale) > .002 || now - lastUpdateTime > 120) {
+      updateVisibleItems();
+      lastX = currentX; lastY = currentY; lastUpdateTime = now;
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+function zoomAt(clientX, clientY, nextScale) {
+  const rect = container.getBoundingClientRect();
+  const px = clientX - rect.left - rect.width / 2;
+  const py = clientY - rect.top - rect.height / 2;
+  const oldScale = targetScale;
+  const newScale = clamp(nextScale, minZoom, maxZoom);
+  const ratio = newScale / oldScale;
+  // Keep the world point beneath the pointer fixed while scaling around viewport centre.
+  targetX = px - (px - targetX) * ratio;
+  targetY = py - (py - targetY) * ratio;
+  targetScale = newScale;
+  settings.zoomLevel = Number(newScale.toFixed(2));
+  if (paneInstance) paneInstance.refresh();
+}
+
+function startDrag(x, y) {
+  if (!canDrag) return;
+  isDragging = true;
+  mouseHasMoved = false;
+  startX = x; startY = y;
+  lastDragTime = performance.now();
+}
+function moveDrag(x, y) {
+  if (!isDragging || !canDrag) return;
+  const dx = x - startX, dy = y - startY;
+  if (Math.abs(dx) > 3 || Math.abs(dy) > 3) mouseHasMoved = true;
+  const now = performance.now();
+  const dt = Math.max(10, now - lastDragTime);
+  dragVelocityX = (dx / dt) / currentScale;
+  dragVelocityY = (dy / dt) / currentScale;
+  targetX += dx / currentScale;
+  targetY += dy / currentScale;
+  startX = x; startY = y; lastDragTime = now;
+}
+function endDrag() {
+  if (!isDragging) return;
+  isDragging = false;
+  if (canDrag) {
+    container.style.cursor = "grab";
+    targetX += dragVelocityX * settings.momentumFactor;
+    targetY += dragVelocityY * settings.momentumFactor;
+  }
+}
+
+container.addEventListener("mousedown", e => {
+  if (e.button !== 0) return;
+  startDrag(e.clientX, e.clientY);
+  container.style.cursor = "grabbing";
+});
+window.addEventListener("mousemove", e => moveDrag(e.clientX, e.clientY));
+window.addEventListener("mouseup", endDrag);
+
+container.addEventListener("touchstart", e => {
+  if (e.touches.length !== 1) return;
+  startDrag(e.touches[0].clientX, e.touches[0].clientY);
+}, { passive:true });
+window.addEventListener("touchmove", e => {
+  if (e.touches.length === 1) moveDrag(e.touches[0].clientX, e.touches[0].clientY);
+}, { passive:true });
+window.addEventListener("touchend", endDrag);
+
+container.addEventListener("wheel", e => {
+  if (isExpanded) return;
+  e.preventDefault();
+  const factor = Math.exp(-e.deltaY * .0015);
+  zoomAt(e.clientX, e.clientY, targetScale * factor);
+}, { passive:false });
+
+container.addEventListener("dblclick", e => {
+  if (isExpanded) return;
+  zoomAt(e.clientX, e.clientY, targetScale < 1.5 ? 2 : 1);
+});
+
+overlay.addEventListener("click", () => { if (isExpanded) closeExpandedItem(); });
+
+window.addEventListener("keydown", e => {
+  if (e.key.toLowerCase() === "h" && paneInstance) {
+    paneInstance.element.style.display =
+      paneInstance.element.style.display === "none" ? "" : "none";
+  }
+  if (e.key === "Escape" && isExpanded) closeExpandedItem();
+  if ((e.key === "+" || e.key === "=") && !isExpanded) zoomAt(innerWidth/2, innerHeight/2, targetScale * 1.15);
+  if (e.key === "-" && !isExpanded) zoomAt(innerWidth/2, innerHeight/2, targetScale / 1.15);
+});
+
+window.addEventListener("resize", () => {
+  if (isExpanded && expandedItem && originalPosition) {
+    const targetScale = Math.min(
+      window.innerWidth * settings.expandedScale / originalPosition.width,
+      window.innerHeight * .92 / originalPosition.height
+    );
+    const targetWidth = originalPosition.width * targetScale;
+    const targetHeight = originalPosition.height * targetScale;
+    gsap.to(expandedItem, { width:targetWidth, height:targetHeight, duration:.25, ease:"power2.out" });
+  } else {
+    updateVisibleItems();
+  }
+});
+
+function updateSettings() {
+  cellWidth = maxItemWidth + settings.itemGap;
+  cellHeight = maxItemHeight + settings.itemGap;
+  canvas.querySelectorAll(".item").forEach(el => el.remove());
+  visibleItems.clear();
+  updateCssSettings();
+  updateVisibleItems();
+}
+
+function initTweakpane() {
+  paneInstance = new Pane({ title:"Gallery Settings", expanded:false });
+  const el = paneInstance.element;
+  el.style.position = "fixed";
+  el.style.top = "10px";
+  el.style.right = "10px";
+  el.style.zIndex = "10010";
+
+  const layout = paneInstance.addFolder({ title:"Layout", expanded:false });
+  layout.addBinding(settings,"itemGap",{min:0,max:120,step:5}).on("change",updateSettings);
+  layout.addBinding(settings,"bufferZone",{min:1,max:5,step:.5}).on("change",updateVisibleItems);
+
+  const style = paneInstance.addFolder({ title:"Style", expanded:false });
+  style.addBinding(settings,"borderRadius",{min:0,max:30,step:1}).on("change",updateCssSettings);
+  style.addBinding(settings,"hoverScale",{min:1,max:1.5,step:.05}).on("change",updateCssSettings);
+
+  const animation = paneInstance.addFolder({ title:"Animation & Zoom", expanded:false });
+  animation.addBinding(settings,"expandedScale",{min:.2,max:.8,step:.05});
+  animation.addBinding(settings,"dragEase",{min:.01,max:.2,step:.01});
+  animation.addBinding(settings,"momentumFactor",{min:50,max:500,step:10});
+  animation.addBinding(settings,"zoomDuration",{min:.2,max:1.5,step:.1});
+  animation.addBinding(settings,"zoomLevel",{min:minZoom,max:maxZoom,step:.05})
+    .on("change",ev => zoomAt(innerWidth/2,innerHeight/2,ev.value));
+
+  paneInstance.addButton({ title:"Reset View" }).on("click",resetView);
+}
+
+function resetView() {
+  targetX = 0; targetY = 0; targetScale = 1;
+  settings.zoomLevel = 1;
+  if (paneInstance) paneInstance.refresh();
+}
+
+updateCssSettings();
+updateVisibleItems();
+initTweakpane();
+animate();
+</script>
+</body>
+</html>
