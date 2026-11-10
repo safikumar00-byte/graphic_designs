@@ -14,11 +14,11 @@ const COLUMN_COUNT = 4;
 const MIN_ZOOM = 0.3;
 const MAX_ZOOM = 3;
 const DEFAULT_SETTINGS: GallerySettings = {
-  itemGap: 65,
+  itemGap: 20,
   hoverScale: 1.05,
   expandedScale: 0.4,
-  dragEase: 0.075,
-  momentumFactor: 200,
+  dragEase: 0.025,
+  momentumFactor: 10,
   bufferZone: 1,
   borderRadius: 0,
   overlayOpacity: 0.9,
