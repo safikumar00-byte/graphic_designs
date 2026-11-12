@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<!-- saved from url=(0042)https://tejkunitsolutions.com/mystery_box/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gift Box Landing Page</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./index_files/css2" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @media only screen and (min-width: 768px) {
+            body {
+                display: none;
+            }
+        }
+
+        body {
+            background: radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(255, 255, 255, 0.5) 90%, #FFF2D3 100%);
+            background-repeat: no-repeat;
+            background-color: #FFF2D3;
+            position: relative;
+            height: 100vh;
+        }
+
+        .main {
+            height: fit-content;
+            position: relative;
+        }
+
+        .gift-box {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 90px;
+            height: 90px;
+            background: radial-gradient(50% 50% at 50% 50%, #ffffff 0%, #fff 90%, #ffffff00 100%);
+        }
+
+        .lid {
+            margin-bottom: -40px;
+            z-index: 2;
+        }
+
+        .giftbox-container {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            padding: 5px;
+            gap: 30px;
+            margin-top: 10px;
+        }
+
+        .gift-part {
+            width: 80px;
+            transition: margin 0.3s ease;
+        }
+
+        .banner {
+            padding-top: 40px;
+            width: 100%;
+            margin: 0px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url(./assets/bg.webp), linear-gradient(180deg, #727BFB 0%, #5865FF 100%);
+            background-size: 140%;
+            background-position: center;
+            color: white;
+            text-align: center;
+            gap: 10px;
+            flex-direction: column;
+            font-family: "Lilita One", sans-serif;
+            letter-spacing: 1px;
+            box-shadow: 0px 1px 5px #7f7f7f;
+            background-blend-mode: lighten;
+        }
+
+        .banner h1,
+        .banner p {
+            color: #ffed9f;
+            text-shadow: 0px 1px 5px #fffb006a;
+        }
+
+        .white {
+            color: white !important;
+        }
+
+        .game-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 10px;
+            font-size: 18px;
+            color: #7e7e7e;
+            margin-top: 20px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .wobble-hor-bottom {
+            animation: wobble-hor-bottom 0.8s both;
+        }
+
+        @keyframes wobble-hor-bottom {
+
+            0%,
+            100% {
+                transform: translateX(0%);
+                transform-origin: 50% 50%;
+            }
+
+            15% {
+                transform: translateX(-30px) rotate(-6deg);
+            }
+
+            30% {
+                transform: translateX(15px) rotate(6deg);
+            }
+
+            45% {
+                transform: translateX(-15px) rotate(-3.6deg);
+            }
+
+            60% {
+                transform: translateX(9px) rotate(2.4deg);
+            }
+
+            75% {
+                transform: translateX(-6px) rotate(-1.2deg);
+            }
+        }
+
+        marquee {
+            backdrop-filter: blur(10px);
+        }
+
+        .marquee_elements {
+            display: flex;
+            height: 70px;
+            padding: 5px 0px;
+            padding-bottom: 10px;
+        }
+
+        .marquee_elements div p {
+            font-size: 1em;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            border: 1px solid #d0d0d0;
+            border-radius: 10px;
+            padding: 5px;
+            font-size: 0.75rem;
+        }
+
+        .align-last {
+            display: flex;
+            align-items: end;
+            height: 100%;
+        }
+
+        small {
+            text-align: center;
+        }
+
+        .popup-con {
+            position: absolute;
+            z-index: 3;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100vw;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .envelope {
+            width: 80%;
+            padding-bottom: 40px;
+            background-color: #652887;
+            border-radius: 10px 10px 30px 30px;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            flex-direction: column;
+            height: 180px;
+            overflow: visible;
+        }
+
+        .envelope-img {
+            margin-top: -100px;
+        }
+
+        .claim {
+            box-sizing: border-box;
+            padding: 10px;
+            gap: 10px;
+            font-size: 20px;
+            position: relative;
+            color: #830A00;
+            font-weight: 700;
+            width: 90%;
+            text-transform: uppercase;
+            text-wrap: nowrap;
+            background: linear-gradient(183.05deg, #FFC60A 2.52%, #FDF578 97.48%);
+            box-shadow: inset 0px 4px 11px #DEA71C;
+            border-radius: 97px;
+            margin-top: -60px;
+            border: 5px solid transparent;
+        }
+
+        .offer {
+            width: 90%;
+            height: 300px;
+            background-color: white;
+            border-radius: 15px;
+            margin-top: -120px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 20px;
+            flex-direction: column;
+            gap: 10px;
+            border: 10px solid #815E95;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .hr {
+            width: 75%;
+            height: 1px;
+            border: 0.5px dashed #815e9587;
+
+        }
+
+        .offer h3 {
+            font-size: 1.5rem;
+
+        }
+
+        .offer h1 {
+            font-size: 2rem;
+            color: #652887;
+        }
+
+        canvas {
+            overflow-y: hidden;
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            position: absolute;
+            top: 0;
+            z-index: -10;
+        }
+
+        .icon {
+            font-size: 30px;
+            background-color: #652887;
+            border-radius: 50%;
+            padding: 20px;
+            width: 36px;
+            height: 36px;
+            color: white;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .scale-in-center {
+            animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        @keyframes scale-in-center {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+    </style>
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body>
+    <div class="main">
+        <div>
+            <div class="banner">
+                <h1>Mystery Gift Box</h1>
+                <h1 class="white">WIN CASH PRIZES</h1>
+                <marquee behavior="scroll" direction="right">
+                    <div class="marquee_elements">
+                        <div>
+                            <p>+91 87******** has successfully Withdraw Rs.15000</p>
+                        </div>
+                        <div class="align-last">
+                            <p>+91 64******** has successfully Withdraw Rs.15000</p>
+                        </div>
+                        <div>
+                            <p>+91 71******** has successfully Withdraw Rs.15000</p>
+                        </div>
+                        <div class="align-last">
+                            <p>+91 93******** has successfully Withdraw Rs.15000</p>
+                        </div>
+                        <div>
+                            <p>+91 82******** has successfully Withdraw Rs.15000</p>
+
+                        </div>
+                    </div>
+                </marquee>
+            </div>
+            <div class="game-container">
+                <div>
+                    Tap on the gift box to Win Prize!
+                </div>
+                <div class="giftbox-container">
+                    <div class="gift-box" style="animation: auto ease 0s 1 normal none running none;">
+                        <img src="./index_files/lid.svg" alt="" class="gift-part lid">
+                        <img src="./index_files/box.svg" alt="" class="box gift-part">
+                    </div>
+                    <div class="gift-box" style="animation: auto ease 0s 1 normal none running none;">
+                        <img src="./index_files/lid.svg" alt="" class="gift-part lid">
+                        <img src="./index_files/box.svg" alt="" class="box gift-part">
+                    </div>
+                    <div class="gift-box" style="animation: auto ease 0s 1 normal none running none;">
+                        <img src="./index_files/lid.svg" alt="" class="gift-part lid">
+                        <img src="./index_files/box.svg" alt="" class="box gift-part">
+                    </div>
+                    <div class="gift-box" style="animation: auto ease 0s 1 normal none running none;">
+                        <img src="./index_files/lid.svg" alt="" class="gift-part lid">
+                        <img src="./index_files/box.svg" alt="" class="box gift-part">
+                    </div>
+                    <div class="gift-box" style="animation: auto ease 0s 1 normal none running none;">
+                        <img src="./index_files/lid.svg" alt="" class="gift-part lid">
+                        <img src="./index_files/box.svg" alt="" class="box gift-part">
+                    </div>
+                    <div class="gift-box">
+                        <img src="./index_files/lid.svg" alt="" class="gift-part lid">
+                        <img src="./index_files/box.svg" alt="" class="box gift-part">
+                    </div>
+                    <div class="gift-box">
+                        <img src="./index_files/lid.svg" alt="" class="gift-part lid">
+                        <img src="./index_files/box.svg" alt="" class="box gift-part">
+                    </div>
+                    <div class="gift-box" style="animation: 0.8s ease 0s 1 normal both running wobble-hor-bottom;">
+                        <img src="./index_files/lid.svg" alt="" class="gift-part lid">
+                        <img src="./index_files/box.svg" alt="" class="box gift-part">
+                    </div>
+                    <div class="gift-box" style="animation: auto ease 0s 1 normal none running none;">
+                        <img src="./index_files/lid.svg" alt="" class="gift-part lid">
+                        <img src="./index_files/box.svg" alt="" class="box gift-part">
+                    </div>
+                </div>
+                <small>
+                    Limited Time Prizes, <br> Claim your reward now !
+                </small>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="popup-con">
+        <canvas id="canvas" width="375" height="667"></canvas>
+        <div class="envelope">
+            <div class="offer">
+                <!-- <img src="./assets/rummycircle.jpg" width="60%" alt=""> -->
+                <div class="icon">₹</div>
+                <div class="hr"></div>
+                <div>
+                    <h3>Congratulations</h3>
+                    <h1>Rs.15000</h1>
+                </div>
+            </div>
+            <img src="./index_files/envelope.svg" alt="" class="envelope-img" width="100%">
+            <button class="claim">Claim Now</button>
+        </div>
+    </div>
+    <script>
+        document.querySelectorAll('.gift-box').forEach(box => {
+            box.addEventListener('click', () => {
+                const lid = box.firstElementChild;
+                if (lid) {
+                    lid.style.marginBottom = '0px';
+                    setTimeout(() => {
+                        document.querySelector('.popup-con').style.display = 'flex';
+                        document.querySelector('.popup-con').style.opacity = 1;
+                        document.querySelector('.envelope').style.animation = "scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both";
+                    }, 500)
+                    setTimeout(() => {
+                        lid.style.marginBottom = '-40px';
+                    }, 2000);
+                }
+            });
+        });
+
+        document.querySelector('.claim').addEventListener('click', () => {
+            window.location.href = "www.google.com";
+        });
+
+        setInterval(() => {
+            const giftBoxes = document.querySelectorAll('.gift-box');
+            const randomIndex = Math.floor(Math.random() * giftBoxes.length);
+            giftBoxes[randomIndex].style.animation = "wobble-hor-bottom 0.8s both";
+            setTimeout(() => {
+                giftBoxes[randomIndex].style.animation = "none";
+            }, 1200);
+        }, 1200);
+    </script>
+
+    <script>
+        let W = window.innerWidth;
+        let H = window.innerHeight;
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+        const maxConfettis = 30;
+        const particles = [];
+
+
+        const possibleColors = [
+            "DodgerBlue",
+            "OliveDrab",
+            "Gold",
+            "Pink",
+            "SlateBlue",
+            "LightBlue",
+            "Gold",
+            "Violet",
+            "PaleGreen",
+            "SteelBlue",
+            "SandyBrown",
+            "Chocolate",
+            "Crimson"
+        ];
+
+
+        function randomFromTo(from, to) {
+            return Math.floor(Math.random() * (to - from + 1) + from);
+        }
+
+
+        function confettiParticle() {
+            this.x = Math.random() * W; // x
+            this.y = Math.random() * H - H; // y
+            this.r = randomFromTo(11, 33); // radius
+            this.d = Math.random() * maxConfettis + 11;
+            this.color =
+                possibleColors[Math.floor(Math.random() * possibleColors.length)];
+            this.tilt = Math.floor(Math.random() * 33) - 11;
+            this.tiltAngleIncremental = Math.random() * 0.07 + 0.05;
+            this.tiltAngle = 0;
+
+
+            this.draw = function () {
+                context.beginPath();
+                context.lineWidth = this.r / 2;
+                context.strokeStyle = this.color;
+                context.moveTo(this.x + this.tilt + this.r / 3, this.y);
+                context.lineTo(this.x + this.tilt, this.y + this.tilt + this.r / 5);
+                return context.stroke();
+            };
+        }
+
+
+        function Draw() {
+            const results = [];
+
+
+            // Magical recursive functional love
+            requestAnimationFrame(Draw);
+
+
+            context.clearRect(0, 0, W, window.innerHeight);
+
+
+            for (var i = 0; i < maxConfettis; i++) {
+                results.push(particles[i].draw());
+            }
+
+
+            let particle = {};
+            let remainingFlakes = 0;
+            for (var i = 0; i < maxConfettis; i++) {
+                particle = particles[i];
+
+
+                particle.tiltAngle += particle.tiltAngleIncremental;
+                particle.y += (Math.cos(particle.d) + 3 + particle.r / 2) / 2;
+                particle.tilt = Math.sin(particle.tiltAngle - i / 3) * 15;
+
+
+                if (particle.y <= H) remainingFlakes++;
+
+
+                // If a confetti has fluttered out of view,
+                // bring it back to above the viewport and let if re-fall.
+                if (particle.x > W + 30 || particle.x < -30 || particle.y > H) {
+                    particle.x = Math.random() * W;
+                    particle.y = -30;
+                    particle.tilt = Math.floor(Math.random() * 10) - 20;
+                }
+            }
+
+
+            return results;
+        }
+
+
+        window.addEventListener(
+            "resize",
+            function () {
+                W = window.innerWidth;
+                H = window.innerHeight;
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            },
+            false
+        );
+
+
+        // Push new confetti objects to `particles[]`
+        for (var i = 0; i < maxConfettis; i++) {
+            particles.push(new confettiParticle());
+        }
+
+
+        // Initialize
+        canvas.width = W;
+        canvas.height = H;
+        Draw();
+    </script>
+
+<script type="module" src="./index_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style><button class="glasp-banner-root glasp-fab-root" aria-label="Glasp" title="Glasp" style="position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); z-index: 2147483646; pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(255, 255, 255, 0.92); box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"></path><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path></svg></button></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

@@ -1,0 +1,156 @@
+
+* {
+    margin: 0 !important;
+}
+
+.g-10 {
+    gap: 10px;
+}
+
+.des {
+    font-size: 12px;
+    line-height: 12px;
+}
+
+
+.lock::before {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    min-height: 115px;
+    width: 84%;
+    content: '🔒 Verify your mobile number to start earning';
+    font-size: 16px;
+    position: absolute;
+    padding: 5px;
+}
+
+
+.icon-column {
+    width: fit-content;
+    border-radius: 15px !important;
+    /* padding-right: 10px !important; */
+    /* background-color: blue; */
+}
+
+.btn-success {
+    /* font-size: 14px; */
+    /* width: fit-content; */
+}
+
+.btn-success {
+    z-index: 3;
+}
+
+.btn-success-link {
+    text-wrap: nowrap;
+    /* width: fit-content;
+    height: fit-content; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custom-icon-size {
+    font-size: 1.5rem;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-link {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.amount {
+    font-size: 40px;
+}
+
+.otp-con {
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    z-index: 4;
+}
+
+.otp-pop-up {
+    height: fit-content
+}
+
+.otp-in {
+    width: 50px;
+    height: 50px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* For Firefox */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+/* For Edge */
+input[type="number"]::-ms-expand {
+    display: none;
+}
+
+.info-con {
+    z-index: 6;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    backdrop-filter: blur(10px);
+}
+
+.info-popup {
+    width: 100vw !important;
+    height: 80vh !important;
+    overflow: scroll;
+}
+
+.modal-header {
+    z-index: 7 !important;
+}
+
+.dummy-bal {
+    font-size: 12px;
+}
+
+.dummy-bal-icon {
+    font-size: 0.8rem;
+}
+
+.hero {
+    z-index: 2 !important;
+    border-radius: 0px 0px 20px 20px !important;
+}
+
+.info-icon {
+    z-index: 3 !important;
+}
+
+.wallet {
+    border: 2px dashed rgba(255,255,255, 0.8);
+}
+
+
+.loader {
+    opacity: 1; /* Initial opacity */
+    transition: opacity 1s ease-out; /* Smooth transition for fading out */
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    z-index: 20 !important;
+}
+
+
+.loader>img {
+    animation: rotate 10s linear;
+}

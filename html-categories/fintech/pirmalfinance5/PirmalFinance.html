@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://tejkunitsolutions.com/pirmalFinance5/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="https://tejkunitsolutions.com/pirmalFinance5/src/piramalfinance-fav-icon.ico" type="image/x-icon">
+    <title>Pirmal Finance</title>
+    <link rel="stylesheet" href="./PirmalFinance_files/output.css">
+    <style>
+        li {
+            list-style: none;
+            /* font-style: italic; */
+        }
+
+        .red-dot::after {
+            content: "*";
+            color: red;
+        }
+
+        .fade-in {
+            animation: fadeInAnimation 0.5s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        .fade-out {
+            animation: fadeOutAnimation 0.5s ease-in-out forwards;
+            opacity: 1;
+        }
+
+        @keyframes fadeInAnimation {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOutAnimation {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        .fade-in-flex {
+            display: flex;
+            animation: fade-in 0.5s ease-in-out forwards;
+            flex-direction: column;
+            opacity: 0;
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .fade-in-none {
+            display: none;
+            animation: fade-out 0.5s ease-in-out forwards;
+            opacity: 1;
+        }
+
+        @keyframes fade-out {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
+        .loader {
+            width: 100px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 8px solid;
+            border-color: #000 #0000;
+            animation: l1 1s infinite;
+        }
+
+        @keyframes l1 {
+            to {
+                transform: rotate(.5turn)
+            }
+        }
+
+        .gradient-button {
+            /* background-image: linear-gradient(to bottom, #0d6efd, #0a58ca); */
+            /* blue */
+            /* background-image: linear-gradient(to bottom, #7a00e6, #7a00e6); */
+            /* violet */
+            /* background-image: linear-gradient(to bottom, #0000ff, #0000ff); */
+            /* blue */
+            /* background-image: linear-gradient(to bottom, #ff7f00, #ff4500);  */
+            /* orange */
+            background-image: linear-gradient(to bottom, #03b903, #008000);
+            /* green */
+            /* background-image: linear-gradient(to bottom, #00e200, #00e200); */
+            /* light green */
+            transition: background-image 0.5s ease-in-out;
+        }
+
+        .gradient-button:hover {
+            background-image: linear-gradient(to bottom, #00ca00, #01ca01);
+        }
+
+        .pre-loader,
+        .step1,
+        .step2,
+        .step3 {
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        .typer {
+            animation: typing 1s steps(30), blink 0.5s step-end 1;
+            white-space: nowrap;
+            overflow: hidden;
+            border-right: 4px solid transparent;
+        }
+
+        @keyframes typing {
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
+        }
+
+        @keyframes blink {
+            50% {
+                border-color: #000;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            body {
+                display: none;
+            }
+        }
+    </style>
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body class="bg-gradient-to-b from-yellow-400 via-yellow-300 to-yellow-200">
+    <header class="flex items-center justify-center w-full p-2 bg-white">
+        <img src="./PirmalFinance_files/pirmal_fin_logo.svg" alt="" width="25%">
+    </header>
+
+    <div class="items-center flex-col flex gap-10 justify-center min-h-[92vh] bg-gradient-to-b from-yellow-400 via-yellow-300 to-yellow-200 p-4">
+
+        <div class="max-w-sm p-4 text-center bg-white rounded-lg shadow-lg base-step">
+
+            <div class="overflow-hidden rounded-t-md">
+                <img src="./PirmalFinance_files/banner-img.webp" alt="Couple sitting" class="w-full">
+            </div>
+            <h2 class="mt-4 text-xl font-bold text-gray-800 leading-snug">Are you salaried Employee ?<br>
+                <span class="text-balance font-normal text-base">Check your eligibility and get <b class="font-bold">Rs.5,00,000/-</b></span>
+            </h2>
+
+            <!-- <ul class="my-4 px-2 text-sm text-left list-disc list-inside">
+                <li class="flex items-start gap-2">
+                    <img src="./src/tick.svg" class="mt-1" width="16px" alt="">
+                    Ensure your salary is credited to your bank account
+                </li>
+                <li class="flex items-start gap-2">
+                    <img src="./src/tick.svg" class="mt-1" width="16px" alt="">
+                    Annual income above ₹3 Lakhs
+                </li>
+                <li class="flex items-start gap-2">
+                    <img src="./src/tick.svg" class="mt-1" width="16px" alt="">
+                    Office email ID to check your eligibility
+                </li>
+            </ul> -->
+
+            <button id="getting-started" class="w-full px-4 py-2 mt-4 mb-6 font-medium text-white bg-yellow-500 rounded-md btn-disabled hover:bg-yellow-600 gradient-button">
+                Apply Now
+            </button>
+
+            <div class="flex gap-2 w-full text-left pt-1 max-w-sm py-2 bg-white ">
+                <img src="./PirmalFinance_files/instant.svg" alt="" class="w-12 h-12 p-2 border rounded-md shadow-inner">
+                <div class="flex flex-col">
+                    <p class="text-md font-semibold">Instant Approval</p>
+                    <p class="text-sm ">Get Approval up to ₹5,00,000</p>
+                </div>
+            </div>
+            <div class="flex gap-2 w-full text-left pt-3 max-w-sm py-2 bg-white border-t ">
+                <img src="./PirmalFinance_files/low_interest.svg" alt="" class="w-12 h-12 p-2 border rounded-md shadow-inner">
+                <div class="flex flex-col">
+                    <p class="text-md font-semibold">Low Interest Rates</p>
+                    <p class="text-sm ">With Lowest Interest Rates</p>
+                </div>
+            </div>
+            <div class="flex gap-2 w-full text-left pt-3 max-w-sm py-2 bg-white border-t ">
+                <img src="./PirmalFinance_files/transparent.svg" alt="" class="w-12 h-12 p-2 border rounded-md shadow-inner">
+                <div class="flex flex-col">
+                    <p class="text-md font-semibold">100% Transparency</p>
+                    <p class="text-sm ">No Hidden charges</p>
+                </div>
+            </div>
+            <div class="flex gap-2 w-full text-left pt-3 max-w-sm py-2 bg-white border-t ">
+                <img src="./PirmalFinance_files/digita_process.svg" alt="" class="w-12 h-12 p-2 border rounded-md shadow-inner">
+                <div class="flex flex-col">
+                    <p class="text-md font-semibold">100% Digital Process</p>
+                    <p class="text-sm ">Complete Digital Process</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="max-w-sm p-4 text-center bg-white rounded-lg shadow-lg pre-step hidden">
+
+            <div class="overflow-hidden rounded-t-md">
+                <img src="./PirmalFinance_files/banner-img.webp" alt="Couple sitting" class="w-full">
+            </div>
+            <h2 class="mt-4 text-lg font-bold text-gray-800 leading-snug">Answer Simple Questions and Get your loan
+                approved upto <br>
+                <span class="text-3xl">Rs. 5,00,000/-</span>
+            </h2>
+
+            <hr class="my-5">
+
+            <div class="font-semibold text-gray-700">
+                <ul id="questions-list">
+                    <li class="flex flex-col w-full gap-1 text-left mb-2 pre-questions">
+                        <p class="text-lg mb-2 text-gray-600 red-dot text-balance">1. Are you a salaried individual?</p>
+                        <div class="flex gap-4">
+                            <button class="flex items-center justify-center w-full gap-1 px-2 py-2 text-base text-center text-green-500 border border-green-500 btn-sec rounded gradient-border gray-100" onclick="showNextQuestion(this)">No</button>
+                            <button class="flex items-center justify-center w-full gap-1 px-2 py-2 text-base text-center text-white border rounded gradient-button gray-100" onclick="showNextQuestion(this)">Yes</button>
+                        </div>
+                    </li>
+                    <li class="hidden flex-col w-full gap-1 text-left mb-2 pre-questions">
+                        <p class="text-lg mb-2 text-gray-600 red-dot text-balance">2. Annual Income is Above 3 Lakhs?
+                        </p>
+                        <div class="flex gap-4">
+                            <button class="flex items-center justify-center w-full gap-1 px-2 py-2 text-base text-center text-green-500 border border-green-500 btn-sec rounded gradient-border gray-100" onclick="showNextQuestion(this)">No</button>
+                            <button class="flex items-center justify-center w-full gap-1 px-2 py-2 text-base text-center text-white border rounded gradient-button gray-100" onclick="showNextQuestion(this)">Yes</button>
+                        </div>
+                    </li>
+                    <li class="hidden flex-col w-full gap-1 text-left mb-2 pre-questions">
+                        <p class="text-lg mb-2 text-gray-600 red-dot text-balance">3. Salary is getting credited in
+                            Bank?</p>
+                        <div class="flex gap-4">
+                            <button class="flex items-center justify-center w-full gap-1 px-2 py-2 text-base text-center text-green-500 border border-green-500 btn-sec rounded gradient-border gray-100" onclick="showNextQuestion(this)">No</button>
+                            <button class="flex items-center justify-center w-full gap-1 px-2 py-2 text-base text-center text-white border rounded gradient-button gray-100" onclick="showNextQuestion(this)">Yes</button>
+                        </div>
+                    </li>
+                    <li class="hidden flex-col w-full gap-1 text-left mb-2 pre-questions">
+                        <p class="text-lg mb-2 text-gray-600 red-dot text-balance">4. Yes I have office email &amp; EPF A/C
+                        </p>
+                        <div class="flex gap-4">
+                            <button class="flex items-center justify-center w-full gap-1 px-2 py-2 text-base text-center text-green-500 border border-green-500 btn-sec rounded gradient-border gray-100" onclick="showNextQuestion(this)">No</button>
+                            <button class="flex items-center justify-center w-full gap-1 px-2 py-2 text-base text-center text-white border rounded gradient-button gray-100" onclick="showNextQuestion(this)">Yes</button>
+                        </div>
+                    </li>
+
+                </ul>
+            </div>
+            <!-- <button id="check-eligibility"
+                class="w-full px-4 py-2 mt-2 font-medium text-white bg-yellow-500 rounded-md btn-disabled hover:bg-yellow-600 gradient-button">
+                Check Eligibility!
+            </button> -->
+        </div>
+
+
+        <div class="hidden gap-4 step-1">
+            <div class="max-w-sm p-4 text-center bg-white rounded-lg shadow-lg ">
+
+                <div class="overflow-hidden rounded-t-lg">
+                    <img src="./PirmalFinance_files/banner-img.webp" alt="Couple sitting" class="w-full">
+                </div>
+
+
+                <h2 class="mt-4 text-2xl font-bold text-gray-800">Get Instant Approval <br> up to ₹5,00,000!</h2>
+                <p class="mt-2 text-sm text-gray-600">
+                    We offer access to instant approval for salaried individuals.
+                </p>
+                <ul class="mt-4 text-sm text-left list-disc list-inside">
+                    <li class="flex items-start gap-2">
+                        <img src="./PirmalFinance_files/tick.svg" class="mt-1" width="16px" alt="">
+                        Ensure your salary is credited to your bank account
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <img src="./PirmalFinance_files/tick.svg" class="mt-1" width="16px" alt="">
+                        Annual income above ₹3 Lakhs
+                    </li>
+                    <li class="flex items-start gap-2">
+                        <img src="./PirmalFinance_files/tick.svg" class="mt-1" width="16px" alt="">
+                        Office email ID to check your eligibility
+                    </li>
+                </ul>
+
+
+                <div class="mt-4 text-left">
+                    <div class="relative">
+                        <input type="number" id="pincode" placeholder="Enter Your Present Pincode" class="w-full py-2 pl-10 text-sm border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500 ">
+                        <span class="absolute inset-y-0 flex items-center text-gray-400 left-3">
+                            <img src="./PirmalFinance_files/location.svg" width="16px" alt="">
+                        </span>
+                    </div>
+                    <span class="hidden text-xs text-red-500 error-msg">Enter Valid Pincode</span>
+                </div>
+                <button id="verify-pincode" class="w-full px-4 py-2 mt-4 font-medium text-white bg-yellow-500 rounded-md  btn-disabled hover:bg-yellow-600 gradient-button">
+                    Verify Pincode
+                </button>
+            </div>
+
+            <div class="flex gap-2 w-full max-w-sm p-2 bg-white border-t rounded-md shadow-lg">
+                <img src="./PirmalFinance_files/instant.svg" alt="" class="w-12 h-12 p-2 border rounded-md shadow-inner">
+                <div class="flex flex-col">
+                    <p class="text-lg font-bold">Instant Approval</p>
+                    <p class="text-sm">Get Instant Approval up to ₹5,00,000</p>
+                </div>
+            </div>
+            <div class="flex gap-2 w-full max-w-sm p-2 bg-white border-t rounded-md shadow-lg">
+                <img src="./PirmalFinance_files/low_interest.svg" alt="" class="w-12 h-12 p-2 border rounded-md shadow-inner">
+                <div class="flex flex-col">
+                    <p class="text-lg font-bold">Low Interest Rates</p>
+                    <p class="text-sm">We Offer Loan with Lowest Interest Rates</p>
+                </div>
+            </div>
+            <div class="flex gap-2 w-full max-w-sm p-2 bg-white border-t rounded-md shadow-lg">
+                <img src="./PirmalFinance_files/transparent.svg" alt="" class="w-12 h-12 p-2 border rounded-md shadow-inner">
+                <div class="flex flex-col">
+                    <p class="text-lg font-bold">100% Transparency</p>
+                    <p class="text-sm">No Hidden charges</p>
+                </div>
+            </div>
+            <div class="flex gap-2 w-full max-w-sm p-2 bg-white border-t rounded-md shadow-lg">
+                <img src="./PirmalFinance_files/digita_process.svg" alt="" class="w-12 h-12 p-2 border rounded-md shadow-inner">
+                <div class="flex flex-col">
+                    <p class="text-lg font-bold">100% Digital Process</p>
+                    <p class="text-sm">Complete Digital Process</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden max-w-sm p-4 text-center bg-white rounded-lg shadow-lg step-2">
+            <div class="overflow-hidden rounded-t-lg">
+                <img src="./PirmalFinance_files/banner-img-2.webp" alt="Couple sitting" class="w-full">
+            </div>
+
+
+            <h2 class="mt-4 text-2xl font-bold text-gray-800">Check Your Eligibility<br>for Personal Loan</h2>
+
+
+            <div class="mt-4 text-left">
+                <label for="mobile-number" class="text-sm font-medium text-gray-600 red-dot">Mobile Number:</label>
+                <div class="relative py-2 pl-3 mt-1 text-sm border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500">
+                    <input type="number" id="mobile-number" placeholder="Enter Your Mobile Number" class="w-full pl-5 focus:outline-none">
+                    <img src="./PirmalFinance_files/telephone.svg" class="absolute p-1 py-1 text-lg text-gray-600 top-1.5 left-1" alt="">
+                </div>
+                <span class="hidden text-xs text-red-500 step-2-error-msg">Enter Valid Mobile Number</span>
+            </div>
+
+            <div class="mt-2 text-left">
+                <label for="salary" class="text-sm font-medium text-gray-600 red-dot">Annual Income in Lakhs:</label>
+                <div class="relative py-2 pl-3 mt-1 text-sm border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500">
+                    <input type="number" id="salary" placeholder="Enter your Annual Income" class="w-full pl-5 focus:outline-none">
+                    <p class="absolute top-0 p-2 py-1 text-lg text-gray-600 left-1">₹</p>
+                </div>
+                <span class="hidden text-xs text-red-500 step-2-error-msg">Enter Annual Salary in INR (Example :
+                    180000)</span>
+            </div>
+
+            <!-- <div class="mt-4 text-left">
+                <label class="text-sm font-medium text-gray-600 red-dot">Select Monthly Income:</label>
+                <div class="grid grid-cols-2 gap-2 mt-2">
+                    <div class="flex items-center gap-1 px-2 py-2 text-sm bg-gray-100 border rounded"
+                        onclick="document.querySelector(`input[name='income'][value='₹3 to 4 Lakhs']`).checked = true">
+                        <input type="radio" class="" name="income" value="₹3 to 4 Lakhs">
+                        ₹3 to 4 Lakhs
+                    </div>
+                    <div class="flex items-center gap-1 px-2 py-2 text-sm bg-gray-100 border rounded"
+                        onclick="document.querySelector(`input[name='income'][value='₹4 to 5 Lakhs']`).checked = true">
+                        <input type="radio" class="" name="income" value="₹4 to 5 Lakhs">
+                        ₹4 to 5 Lakhs
+                    </div>
+                    <div class="flex items-center gap-1 px-2 py-2 text-sm bg-gray-100 border rounded"
+                        onclick="document.querySelector(`input[name='income'][value='₹5 to 6 Lakhs']`).checked = true">
+                        <input type="radio" class="" name="income" value="₹5 to 6 Lakhs">
+                        ₹5 to 6 Lakhs
+                    </div>
+                    <div class="flex items-center gap-1 px-2 py-2 text-sm bg-gray-100 border rounded"
+                        onclick="document.querySelector(`input[name='income'][value='Above ₹6 Lakhs']`).checked = true">
+                        <input type="radio" class="" name="income" value="Above ₹6 Lakhs">
+                        Above ₹6 Lakhs
+                    </div>
+                </div>
+                <span class="hidden text-xs text-red-500 step-2-error-msg">Select Monthly Income</span>
+            </div> -->
+
+
+            <!-- <div class="mt-4 text-left">
+                <label class="text-sm font-medium text-gray-600 red-dot">Office Email Address</label>
+                <input type="text" placeholder="Enter Office Email Address"
+                    class="w-full py-2 pl-3 text-sm border border-gray-300 rounded-md focus:ring-yellow-500 focus:border-yellow-500">
+                <span class="hidden text-xs text-red-500 step-2-error-msg">Enter Valid Email Address</span>
+            </div> -->
+
+
+            <button class="w-full px-4 py-2 mt-4 font-medium text-white bg-yellow-500 rounded-md  btn-disabled hover:bg-yellow-600 gradient-button" id="submit">
+                Submit
+            </button>
+        </div>
+
+        <div class="h-[80vh] items-center justify-center hidden flex-col text-center gap-5 pre-loader">
+            <div class="loader"></div>
+            <img src="./PirmalFinance_files/success_tick.svg" width="100px" alt="tick-mark" class="hidden tick-mark">
+            <p class="pre-loader-text text-pretty">Please wait while we are checking your Eligibility....</p>
+        </div>
+
+        <div class="flex-col hidden gap-4 step-3">
+            <div class="bg-gray-100 ">
+                <div class="bg-white rounded-lg shadow-lg max-w-sm p-4 text-center h-full max-h-[400px] flex flex-col justify-center">
+                    <h2 class="text-2xl font-bold text-gray-800">Congratulations!</h2>
+                    <p class="mt-2 text-base text-gray-600">Your Pre-approved Eligibility is Confirmed, you can get upto
+                    </p>
+
+                    <div class="flex flex-col p-4 my-8 text-center border border-gray-200 rounded-lg shadow-lg bg-gray-50">
+                        <img src="./PirmalFinance_files/pirmal_fin_logo.svg" width="20%" alt="">
+                        <span class="text-3xl font-bold text-gray-800">₹5,00,000</span>
+                    </div>
+
+                    <p class="text-base text-gray-600">
+                        You are eligible for an instant loan every active day.
+                    </p>
+
+                    <a href="https://www.google.com/" class="w-full px-4 py-2 mt-4 font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600 apply gradient-button">
+                        Apply Now
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex gap-2 w-full max-w-sm p-2 bg-white border-t rounded-md shadow-lg">
+                <img src="./PirmalFinance_files/instant.svg" alt="" class="w-12 h-12 p-2 border rounded-md shadow-inner">
+                <div class="flex flex-col">
+                    <p class="text-lg font-bold">Instant Approval</p>
+                    <p class="text-sm">Get Instant Approval up to ₹5,00,000</p>
+                </div>
+            </div>
+            <div class="flex gap-2 w-full max-w-sm p-2 bg-white border-t rounded-md shadow-lg">
+                <img src="./PirmalFinance_files/low_interest.svg" alt="" class="w-12 h-12 p-2 border rounded-md shadow-inner">
+                <div class="flex flex-col">
+                    <p class="text-lg font-bold">Low Interest Rates</p>
+                    <p class="text-sm">We Offer Loan with Lowest Interest Rates</p>
+                </div>
+            </div>
+            <div class="flex gap-2 w-full max-w-sm p-2 bg-white border-t rounded-md shadow-lg">
+                <img src="./PirmalFinance_files/transparent.svg" alt="" class="w-12 h-12 p-2 border rounded-md shadow-inner">
+                <div class="flex flex-col">
+                    <p class="text-lg font-bold">100% Transparency</p>
+                    <p class="text-sm">No Hidden charges</p>
+                </div>
+            </div>
+            <div class="flex gap-2 w-full max-w-sm p-2 bg-white border-t rounded-md shadow-lg">
+                <img src="./PirmalFinance_files/digita_process.svg" alt="" class="w-12 h-12 p-2 border rounded-md shadow-inner">
+                <div class="flex flex-col">
+                    <p class="text-lg font-bold">100% Digital Process</p>
+                    <p class="text-sm">Complete Digital Process</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="hidden bg-gray-100 failed">
+            <div class="flex flex-col justify-center h-full max-w-sm p-4 text-center bg-white rounded-lg shadow-lg">
+                <h2 class="text-2xl font-bold text-gray-800">Sorry!</h2>
+                <p class="mt-2 text-base text-gray-600">Your eligibility does not match our requirements.</p>
+
+                <div class="flex flex-col items-center justify-center p-4 my-8 text-center border border-gray-200 rounded-lg bg-gray-50">
+                    <img src="./PirmalFinance_files/sad_emoji.webp" width="20%" alt="">
+                    <span class="text-3xl font-bold text-gray-800">Better Luck Next Time!</span>
+                </div>
+
+                <p class="text-base text-gray-600 reason">
+                    Unfortunately, your profile does not meet our eligibility criteria. Please try again after some
+                    time.
+                </p>
+
+                <a href="https://www.google.com/" class="w-full px-4 py-2 mt-4 font-medium text-white bg-yellow-500 rounded-md hover:bg-yellow-600 gradient-button close">
+                    Close
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer class="w-full p-2 text-center text-black border-t border-black">
+        Copyright © 2024. All Rights Reserved.
+    </footer>
+
+    <script>
+        const pincodeInput = document.getElementById('pincode');
+        const checkEligibility = document.getElementById('check-eligibility');
+        const verifyPincode = document.getElementById('verify-pincode');
+        const preStep = document.querySelector('.pre-step');
+        const step1 = document.querySelector('.step-1');
+        const step2 = document.querySelector('.step-2');
+        const step3 = document.querySelector('.step-3');
+        const errorMessage = document.querySelector('.error-msg');
+        const mobileNumberInput = document.getElementById('mobile-number');
+        const incomeRadios = document.querySelectorAll('input[name="income"]');
+        const officeEmailInput = document.querySelector('input[placeholder="Enter Office Email Address"]');
+        const submitButton = document.getElementById('submit');
+        const errorMessages = document.querySelectorAll('.step-2-error-msg');
+        const preLoader = document.querySelector('.pre-loader');
+        const failed = document.querySelector('.failed');
+        const reason = document.querySelector('.reason');
+        const close = document.querySelector('.close');
+        const tickMark = document.querySelector('.tick-mark');
+        const loader = document.querySelector('.loader');
+        const salaryInput = document.getElementById('salary');
+        const start = document.getElementById('getting-started');
+        const baseStep = document.querySelector('.base-step');
+        let answers = []; // Initialize the answers array
+
+        const questions = document.querySelectorAll('.pre-questions');
+
+        start.addEventListener('click', () => {
+            baseStep.classList.add('hidden');
+            preStep.classList.remove('hidden');
+            preStep.classList.add('fade-in-flex');
+        })
+
+        let allAnswered = false;
+
+        questions.forEach(question => {
+            const radioButtons = question.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radioButton => {
+                radioButton.addEventListener('change', () => {
+                    const allAnswered = Array.from(questions).every(question => {
+                        const radioButtons = question.querySelectorAll('input[type="radio"]');
+                        return Array.from(radioButtons).some(radioButton => radioButton.checked);
+                    });
+                    if (allAnswered) {
+                        console.log('All 4 questions answered!');
+                        checkEligibility.classList.remove('btn-disabled');
+                        // You can also log the answers here
+                        const answers = [];
+                        questions.forEach(question => {
+                            const radioButtons = question.querySelectorAll('input[type="radio"]');
+                            const answer = Array.from(radioButtons).find(radioButton => radioButton.checked).value;
+                            answers.push(answer);
+                        });
+                    }
+                    else {
+                        checkEligibility.classList.add('btn-disabled');
+                    }
+                });
+            });
+        });
+
+        // checkEligibility.addEventListener('click', () => {
+        //     if (checkEligibility.classList.contains('btn-disabled')) {
+        //         alert('Please answer all 4 questions.');
+        //     } else {
+        //         const answers = Array.from(questions).map(question => {
+        //             const radioButtons = question.querySelectorAll('input[type="radio"]');
+        //             return Array.from(radioButtons).find(radioButton => radioButton.checked).value;
+        //         });
+
+        //         if (answers.every(answer => answer === "yes")) {
+        //             preStep.classList.add('hidden');
+        //             preLoader.classList.add('fade-in-flex');
+        //             setTimeout(() => {
+        //                 preLoader.classList.replace('fade-in-flex', 'fade-in-none');
+        //                 step1.classList.remove('hidden');
+        //                 step1.classList.add('fade-in-flex');
+        //             }, 2500);
+        //         } else {
+        //             preStep.classList.add('hidden');
+        //             preLoader.classList.add('fade-in-flex');
+        //             setTimeout(() => {
+        //                 preLoader.classList.replace('fade-in-flex', 'fade-in-none');
+        //                 failed.classList.remove('hidden');
+        //                 failed.classList.add('fade-in-flex');
+        //                 reason.innerHTML = "Sorry! we are not available at your current Location.";
+        //             }, 2500);
+        //         }
+        //     }
+        // });
+
+        pincodeInput.addEventListener('input', () => {
+            let pincode = pincodeInput.value;
+            if (pincode.length > 6) {
+                pincode = pincode.slice(0, 6);
+                pincodeInput.value = pincode;
+            }
+            if (pincode.length === 6 && !isNaN(pincode)) {
+                verifyPincode.classList.remove('btn-disabled');
+                verifyPincode.disabled = false;
+                errorMessage.classList.add('hidden');
+            } else {
+                verifyPincode.classList.add('btn-disabled');
+                verifyPincode.disabled = true;
+                errorMessage.classList.remove('hidden');
+            }
+        });
+
+        verifyPincode.addEventListener('click', () => {
+            if (verifyPincode.classList.contains('btn-disabled')) {
+                alert('Please enter your area pincode');
+            } else if (parseInt(pincodeInput.value) === 120000) {
+                step1.classList.replace('fade-in-flex', 'fade-in-none');
+                preLoader.classList.replace('fade-in-none', 'fade-in-flex');
+                setTimeout(() => {
+                    preLoader.classList.replace('fade-in-flex', 'fade-in-none');
+                    failed.classList.remove('hidden');
+                    failed.classList.add('fade-in-flex');
+                    reason.innerHTML = "Sorry! we are not available at your current Location.";
+                }, 2500);
+            } else {
+                step1.classList.replace('fade-in-flex', 'fade-in-none');
+                preLoader.classList.replace('fade-in-none', 'fade-in-flex');
+                setTimeout(() => {
+                    preLoader.classList.replace('fade-in-flex', 'fade-in-none');
+                    step2.classList.remove('hidden');
+                    step2.classList.add('fade-in-flex');
+                }, 2500);
+            }
+        });
+
+        mobileNumberInput.addEventListener('input', () => {
+            let mobileNumber = mobileNumberInput.value;
+            const indianMobileRegex = /^[6-9]\d{0,9}$/;
+            if (mobileNumber.length > 10) {
+                mobileNumberInput.value = mobileNumber.slice(0, 10);
+            } else if (indianMobileRegex.test(mobileNumber)) {
+                mobileNumberInput.classList.remove('error');
+                errorMessages[0].classList.add('hidden');
+            } else {
+                mobileNumberInput.classList.add('error');
+                errorMessages[0].classList.remove('hidden');
+            }
+            validateForm();
+        });
+
+        salaryInput.addEventListener('input', function () {
+            const salary = parseInt(salaryInput.value.replace(/[^0-9]/g, ''));
+            if (isNaN(salary) || salary <= 99999) {
+                errorMessages[1].classList.remove('hidden');
+                salaryInput.setCustomValidity('Invalid salary');
+            } else {
+                errorMessages[1].classList.add('hidden');
+                salaryInput.setCustomValidity('');
+            }
+            validateForm();
+        });
+        function validateForm() {
+            const indianMobileRegex = /^[6-9]\d{9}$/;
+            const mobileNumberValid = indianMobileRegex.test(mobileNumberInput.value);
+            const salaryValid = salaryInput.value > 99999 && !isNaN(salaryInput.value.replace(/[^0-9]/g, ''));
+            // const incomeSelected = Array.from(incomeRadios).some((radio) => radio.checked);
+            // const emailValid = officeEmailInput.value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
+
+            if (mobileNumberValid && salaryValid) {
+                submitButton.classList.remove('btn-disabled');
+                return true;
+            } else {
+                submitButton.classList.add('btn-disabled');
+                return false;
+            }
+        }
+
+        submitButton.addEventListener('click', () => {
+            const mobileNumberValid = mobileNumberInput.value.length === 10 && !isNaN(mobileNumberInput.value);
+            const salaryValid = salaryInput.value > 99999 && !isNaN(salaryInput.value.replace(/[^0-9]/g, ''));
+            // const incomeSelected = Array.from(incomeRadios).some((radio) => radio.checked);
+            // const emailValid = officeEmailInput.value.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/);
+
+            if (!mobileNumberValid) {
+                mobileNumberInput.classList.add('error');
+                errorMessages[0].classList.remove('hidden');
+            }
+
+            if (!salaryValid) {
+                errorMessages[1].classList.remove('hidden');
+            }
+
+            // if (!incomeSelected) {
+            //     errorMessages[1].classList.remove('hidden');
+            // }
+
+            // if (!emailValid) {
+            //     officeEmailInput.classList.add('error');
+            //     errorMessages[2].classList.remove('hidden');
+            // }
+
+            if (!(mobileNumberValid && salaryValid && validateForm())) {
+                if (!mobileNumberValid && !salaryValid && validateForm()) {
+                    alert('Please fill in all the required fields');
+                }
+            } else if (salaryInput.value <= 299999) {
+                step2.classList.replace('fade-in-flex', 'fade-in-none');
+                preLoader.classList.replace('fade-in-none', 'fade-in-flex');
+                setTimeout(() => {
+                    preLoader.classList.replace('fade-in-flex', 'fade-in-none');
+                    failed.classList.remove('hidden');
+                    failed.classList.add('fade-in-flex');
+                    reason.innerHTML = "Sorry! we are not available at your current Location.";
+                }, 2500);
+            }
+            else {
+                step2.classList.add('fade-in-none');
+                preLoader.classList.replace('fade-in-none', 'fade-in-flex');
+                setTimeout(() => {
+                    loader.classList.add('fade-in-none');
+                    tickMark.classList.remove('hidden');
+                    tickMark.classList.add('fade-in-flex');
+                }, 1000);
+                setTimeout(() => {
+                    tickMark.classList.remove('fade-in-flex');
+                    tickMark.classList.add('hidden');
+                    preLoader.classList.replace('fade-in-flex', 'fade-in-none');
+                    step3.classList.replace('hidden', 'fade-in-flex');
+                }, 3000);
+                console.log('Form submitted successfully!');
+            }
+        });
+
+
+
+        function showNextQuestion(el) {
+            const questions = document.querySelectorAll('#questions-list li');
+            const selectedOption = el.textContent;
+            answers.push(selectedOption);
+
+            for (let i = 0; i < questions.length; i++) {
+                if (questions[i] === el.parentElement.parentElement) {
+
+                    if (i < questions.length - 1) {
+                        questions[i].classList.add('fade-out');
+                        setTimeout(() => {
+                            questions[i].classList.add('hidden');
+                            questions[i].classList.remove('fade-out');
+                        }, 500);
+                        setTimeout(() => {
+                            questions[i + 1].classList.remove('hidden');
+                            questions[i + 1].classList.add('fade-in');
+                        }, 500);
+                        break;
+                    } else {
+                        preStep.classList.replace('fade-in-flex', 'fade-in-none');
+                        preLoader.classList.add('fade-in-flex');
+                        setTimeout(() => {
+                            preLoader.classList.replace('fade-in-flex', 'fade-in-none');
+                            if (answers.every(answer => answer === "Yes")) {
+                                step1.classList.remove('hidden');
+                                step1.classList.add('fade-in-flex');
+                                console.log("all are correct")
+                            } else {
+                                failed.classList.remove('hidden');
+                                failed.classList.add('fade-in-flex');
+                                reason.innerHTML = "Sorry! You are not eligible for the loan.";
+                            }
+                        }, 2500);
+                    }
+                }
+            }
+            console.log(answers);
+        }
+    </script>
+
+<script type="module" src="./PirmalFinance_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style><button class="glasp-banner-root glasp-fab-root" aria-label="Glasp" title="Glasp" style="position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); z-index: 2147483646; pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(255, 255, 255, 0.92); box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"></path><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path></svg></button></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

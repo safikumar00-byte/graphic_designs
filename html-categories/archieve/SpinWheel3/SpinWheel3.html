@@ -1,0 +1,530 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#7246D7">
+    <title>Spin & Win | Jackpot Cash Prize</title>
+
+    <!-- Tailwind CSS CDN. No Bootstrap or compiled local CSS dependency. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        violetBrand: {
+                            900: '#351370',
+                            800: '#5923B1',
+                            700: '#7246D7',
+                            600: '#8961e3',
+                            100: '#f3edff'
+                        },
+                        gold: {
+                            300: '#ffe58a',
+                            400: '#FED54C',
+                            500: '#FFB633'
+                        }
+                    },
+                    boxShadow: {
+                        glow: '0 0 18px rgba(114, 70, 215, 0.55)',
+                        card: '0 18px 45px rgba(53, 19, 112, 0.25)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            color-scheme: light;
+        }
+
+        body {
+            background: url("./assets/bg-grid.png") center / 100% repeat,
+                linear-gradient(180deg, #f8f5ff 0%, #ede6ff 100%);
+            min-height: 100vh;
+        }
+
+        /* Locked aspect-ratio canvas scaling for iframe widths (<200px to >400px) */
+        #scaler-viewport {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        #scaler-container {
+            width: 375px;
+            position: relative;
+        }
+
+        #app-scaler {
+            width: 375px;
+            transform-origin: top center;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .wheel-stage {
+            width: 260px;
+            height: 260px;
+        }
+
+        .wheel-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .inner-wheel {
+            transform: translate(-50%, -50%) rotate(23deg);
+        }
+
+        .is-spinning .inner-wheel {
+            animation: wheel-spin 3s cubic-bezier(.15, .8, .2, 1) forwards;
+        }
+
+        .spin-btn-pulse {
+            animation: pulse-scale 1s ease-in-out infinite;
+        }
+
+        .is-spinning .spin-btn-pulse {
+            animation: none;
+        }
+
+        .hand-guide {
+            animation: hand-tap 1s ease-in-out infinite;
+        }
+
+        .marquee-track {
+            animation: ticker 14s linear infinite;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        .balance-zoom {
+            animation: zoom-badge 0.9s ease forwards;
+        }
+
+        .popup-visible {
+            display: flex !important;
+            animation: fade-in 0.25s ease forwards;
+        }
+
+        .pop-card {
+            animation: swipe-up 0.5s cubic-bezier(.22, .85, .3, 1) both;
+        }
+
+        @keyframes wheel-spin {
+            from {
+                transform: translate(-50%, -50%) rotate(70deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(3173deg);
+            }
+        }
+
+        @keyframes pulse-scale {
+
+            0%,
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                transform: translate(-50%, -50%) scale(1.06);
+            }
+        }
+
+        @keyframes hand-tap {
+
+            0%,
+            100% {
+                transform: translate(0, 12px) rotate(-30deg);
+            }
+
+            50% {
+                transform: translate(-6px, -6px) rotate(-20deg);
+            }
+        }
+
+        @keyframes ticker {
+            from {
+                transform: translateY(0);
+            }
+
+            to {
+                transform: translateY(-50%);
+            }
+        }
+
+        @keyframes zoom-badge {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.16);
+            }
+
+            100% {
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes fade-in {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes swipe-up {
+            from {
+                transform: translateY(140px) scale(0.92);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="m-0 overflow-x-hidden p-0 text-violetBrand-900 antialiased">
+    <div id="scaler-viewport">
+        <div id="scaler-container">
+            <div id="app-scaler">
+                <!-- Spotlight focus overlay -->
+                <div id="focus-overlay"
+                    class="pointer-events-none fixed inset-0 z-10 bg-black/75 transition-opacity duration-300"></div>
+
+                <!-- Confetti canvas -->
+                <canvas id="confetti" class="pointer-events-none fixed inset-0 z-30 hidden h-full w-full"></canvas>
+
+                <!-- Top Banner -->
+                <header class="w-full">
+                    <img src="./SpinWheel3_files/banner.webp" alt="Spin & Win Banner"
+                        class="block h-auto w-full object-cover">
+                </header>
+
+                <!-- Main Game Section -->
+                <main class="relative flex w-full flex-col items-center px-4 pb-6 pt-3">
+                    <!-- Earnings Pill -->
+                    <div id="balance-badge"
+                        class="relative z-20 mb-3 flex items-center justify-center gap-1.5 rounded-full border-2 border-amber-400 bg-white px-4 py-1.5 text-sm font-bold text-violetBrand-900 shadow-md">
+                        <span>Your Earnings :</span>
+                        <span id="balance-amount" class="font-extrabold text-violetBrand-700">₹ 0</span>
+                    </div>
+
+                    <!-- Spin Wheel Stage -->
+                    <section aria-label="Prize wheel game" class="relative z-20 my-1 flex flex-col items-center">
+                        <div id="wheel-stage" class="wheel-stage relative flex items-center justify-center">
+                            <!-- Outer Border -->
+                            <img src="./SpinWheel3_files/border.webp" alt="Wheel Border"
+                                class="wheel-center z-0 w-full select-none drop-shadow-xl">
+
+                            <!-- Inner Rotating Segments -->
+                            <img src="./SpinWheel3_files/inner.webp" alt="Prize Wheel"
+                                class="inner-wheel wheel-center z-10 w-[86%] select-none">
+
+                            <!-- Center Spin Button -->
+                            <button id="spin-button" type="button" aria-label="Spin the wheel"
+                                class="spin-btn-pulse wheel-center z-20 w-[30%] cursor-pointer rounded-full border-0 bg-transparent p-0 focus:outline-none focus:ring-4 focus:ring-amber-300 disabled:cursor-not-allowed">
+                                <img src="./SpinWheel3_files/btn.webp" alt="Spin" class="w-full drop-shadow-lg">
+                            </button>
+
+                            <!-- Animated Hand Pointer -->
+                            <button id="hand-button" type="button" aria-label="Click here to spin"
+                                class="hand-guide absolute bottom-2 right-1 z-30 flex cursor-pointer items-center border-0 bg-transparent p-0 focus:outline-none">
+                                <img src="./SpinWheel3_files/hand.webp" alt="" class="w-14 drop-shadow-md">
+                                <span
+                                    class="-ml-1 whitespace-nowrap rounded-full bg-violetBrand-700/90 px-2.5 py-0.5 text-xs font-bold text-white shadow">Click
+                                    here</span>
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- Recent Winners Ticker -->
+                    <section aria-label="Recent winners" class="mt-4 w-full max-w-[330px]">
+                        <div
+                            class="flex flex-col items-center rounded-xl border border-violetBrand-700 bg-white/95 p-3 shadow-glow">
+                            <img src="./SpinWheel3_files/winner.webp" alt="Recent Winners"
+                                class="mb-2 h-auto w-[58%] object-contain">
+                            <div class="h-24 w-full overflow-hidden text-center">
+                                <ul
+                                    class="marquee-track flex flex-col gap-2 text-xs font-semibold text-violetBrand-900">
+                                    <li class="whitespace-nowrap">+91 99******86 won cash prize <span
+                                            class="font-extrabold text-violetBrand-700">₹10,000/-</span></li>
+                                    <li class="whitespace-nowrap">+91 63******76 won cash prize <span
+                                            class="font-extrabold text-violetBrand-700">₹5,000/-</span></li>
+                                    <li class="whitespace-nowrap">+91 79******13 won cash prize <span
+                                            class="font-extrabold text-violetBrand-700">₹2,000/-</span></li>
+                                    <li class="whitespace-nowrap">+91 86******46 won cash prize <span
+                                            class="font-extrabold text-violetBrand-700">₹4,000/-</span></li>
+                                    <li class="whitespace-nowrap">+91 83******96 won cash prize <span
+                                            class="font-extrabold text-violetBrand-700">₹15,000/-</span></li>
+                                    <!-- Duplicated items for seamless infinite loop -->
+                                    <li class="whitespace-nowrap">+91 99******86 won cash prize <span
+                                            class="font-extrabold text-violetBrand-700">₹10,000/-</span></li>
+                                    <li class="whitespace-nowrap">+91 63******76 won cash prize <span
+                                            class="font-extrabold text-violetBrand-700">₹5,000/-</span></li>
+                                    <li class="whitespace-nowrap">+91 79******13 won cash prize <span
+                                            class="font-extrabold text-violetBrand-700">₹2,000/-</span></li>
+                                    <li class="whitespace-nowrap">+91 86******46 won cash prize <span
+                                            class="font-extrabold text-violetBrand-700">₹4,000/-</span></li>
+                                    <li class="whitespace-nowrap">+91 83******96 won cash prize <span
+                                            class="font-extrabold text-violetBrand-700">₹15,000/-</span></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+
+                <!-- Jackpot Result Modal -->
+                <div id="result-modal"
+                    class="fixed inset-0 z-40 hidden flex-col items-center justify-center bg-black/90 px-5 backdrop-blur-sm"
+                    role="dialog" aria-modal="true" aria-labelledby="result-title">
+                    <h3 id="result-title" class="mb-10 text-center text-xl font-extrabold leading-snug text-white">
+                        Congratulations<br>you won the jackpot
+                    </h3>
+
+                    <div
+                        class="pop-card relative flex w-full max-w-[300px] flex-col items-center rounded-xl bg-gradient-to-br from-violetBrand-700 to-violetBrand-800 px-5 pb-6 pt-12 text-center text-white shadow-2xl">
+                        <!-- Gift Box -->
+                        <img src="./SpinWheel3_files/giftbox.webp" alt="Jackpot Gift Box"
+                            class="absolute -top-14 w-28 drop-shadow-xl">
+
+                        <p class="mt-2 text-sm font-semibold text-white/90">You have won</p>
+                        <p class="my-1 text-4xl font-black tracking-tight text-gold-400">₹15,000</p>
+
+                        <!-- Countdown Timer -->
+                        <div class="my-3 flex items-center justify-center gap-1.5 text-xs font-bold">
+                            <span>Limited Offer -</span>
+                            <span id="timer-min"
+                                class="inline-block w-7 rounded bg-white py-0.5 text-center font-extrabold text-red-600">01</span>
+                            <span>:</span>
+                            <span id="timer-sec"
+                                class="inline-block w-7 rounded bg-white py-0.5 text-center font-extrabold text-red-600">00</span>
+                            <span>:</span>
+                            <span id="timer-ms"
+                                class="inline-block w-7 rounded bg-white py-0.5 text-center font-extrabold text-red-600">00</span>
+                        </div>
+
+                        <button id="claim-button" type="button"
+                            class="mt-2 w-full cursor-pointer rounded-xl bg-gradient-to-b from-gold-400 to-gold-500 px-5 py-3 text-base font-extrabold uppercase tracking-wide text-black shadow-lg transition hover:brightness-105 active:scale-95">
+                            Claim Now
+                        </button>
+                    </div>
+                </div>
+            </div> <!-- /#app-scaler -->
+        </div> <!-- /#scaler-container -->
+    </div> <!-- /#scaler-viewport -->
+
+    <script>
+            (() => {
+                const BASE_WIDTH = 375;
+                const appScaler = document.getElementById('app-scaler');
+                const scalerContainer = document.getElementById('scaler-container');
+
+                const wheelStage = document.getElementById('wheel-stage');
+                const spinButton = document.getElementById('spin-button');
+                const handButton = document.getElementById('hand-button');
+                const focusOverlay = document.getElementById('focus-overlay');
+                const balanceBadge = document.getElementById('balance-badge');
+                const balanceAmount = document.getElementById('balance-amount');
+                const modal = document.getElementById('result-modal');
+                const claimButton = document.getElementById('claim-button');
+                const canvas = document.getElementById('confetti');
+                const ctx = canvas.getContext('2d');
+
+                const timerMin = document.getElementById('timer-min');
+                const timerSec = document.getElementById('timer-sec');
+                const timerMs = document.getElementById('timer-ms');
+
+                let hasSpun = false;
+                let confettiFrame = null;
+                let timerInterval = null;
+                let particles = [];
+
+                // Lock aspect ratio across any iframe width (<200px or >400px)
+                function fitCanvas() {
+                    if (!appScaler || !scalerContainer) return;
+                    const availableWidth = window.innerWidth || document.documentElement.clientWidth;
+                    const scale = availableWidth / BASE_WIDTH;
+                    appScaler.style.transform = `scale(${scale})`;
+                    scalerContainer.style.height = `${appScaler.offsetHeight * scale}px`;
+                }
+
+                window.addEventListener('resize', () => {
+                    fitCanvas();
+                    if (!canvas.classList.contains('hidden')) resizeCanvas();
+                });
+                window.addEventListener('orientationchange', fitCanvas);
+                fitCanvas();
+
+                function animateBalance() {
+                    const target = 15000;
+                    const duration = 1000;
+                    const stepTime = 16;
+                    const steps = duration / stepTime;
+                    const increment = target / steps;
+                    let current = 0;
+
+                    balanceBadge.classList.add('balance-zoom');
+                    const counter = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            balanceAmount.textContent = `₹ ${target.toLocaleString('en-IN')}`;
+                            clearInterval(counter);
+                        } else {
+                            balanceAmount.textContent = `₹ ${Math.floor(current).toLocaleString('en-IN')}`;
+                        }
+                    }, stepTime);
+                }
+
+                function startCountdown() {
+                    let minutes = 1;
+                    let seconds = 0;
+                    let centiseconds = 0;
+
+                    const pad = n => (n < 10 ? '0' + n : String(n));
+
+                    timerInterval = setInterval(() => {
+                        centiseconds -= 1;
+                        if (centiseconds < 0) {
+                            centiseconds = 99;
+                            seconds -= 1;
+                        }
+                        if (seconds < 0) {
+                            seconds = 59;
+                            minutes -= 1;
+                        }
+                        if (minutes < 0) {
+                            clearInterval(timerInterval);
+                            timerMin.textContent = '00';
+                            timerSec.textContent = '00';
+                            timerMs.textContent = '00';
+                            return;
+                        }
+                        timerMin.textContent = pad(minutes);
+                        timerSec.textContent = pad(seconds);
+                        timerMs.textContent = pad(centiseconds);
+                    }, 10);
+                }
+
+                function resizeCanvas() {
+                    const width = BASE_WIDTH;
+                    const height = appScaler.offsetHeight || 667;
+                    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                    canvas.width = Math.floor(width * dpr);
+                    canvas.height = Math.floor(height * dpr);
+                    canvas.style.width = width + 'px';
+                    canvas.style.height = height + 'px';
+                    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                }
+
+                function startConfetti() {
+                    canvas.classList.remove('hidden');
+                    resizeCanvas();
+                    const width = BASE_WIDTH;
+                    const height = appScaler.offsetHeight || 667;
+                    const colors = ['#FED54C', '#7246D7', '#FFB633', '#38bdf8', '#f472b6', '#4ade80'];
+
+                    particles = Array.from({ length: 55 }, () => ({
+                        x: Math.random() * width,
+                        y: Math.random() * height - height,
+                        r: 6 + Math.random() * 10,
+                        d: Math.random() * 55 + 10,
+                        color: colors[Math.floor(Math.random() * colors.length)],
+                        tilt: Math.floor(Math.random() * 20) - 10,
+                        tiltAngle: 0,
+                        tiltSpeed: Math.random() * 0.07 + 0.05
+                    }));
+
+                    function draw() {
+                        ctx.clearRect(0, 0, width, height);
+                        particles.forEach((p, i) => {
+                            p.tiltAngle += p.tiltSpeed;
+                            p.y += (Math.cos(p.d) + 3 + p.r / 3) / 2;
+                            p.tilt = Math.sin(p.tiltAngle - i / 3) * 12;
+
+                            if (p.x > width + 20 || p.x < -20 || p.y > height) {
+                                p.x = Math.random() * width;
+                                p.y = -20;
+                            }
+
+                            ctx.beginPath();
+                            ctx.lineWidth = p.r / 2.2;
+                            ctx.strokeStyle = p.color;
+                            ctx.moveTo(p.x + p.tilt + p.r / 3, p.y);
+                            ctx.lineTo(p.x + p.tilt, p.y + p.tilt + p.r / 5);
+                            ctx.stroke();
+                        });
+                        confettiFrame = requestAnimationFrame(draw);
+                    }
+
+                    if (confettiFrame) cancelAnimationFrame(confettiFrame);
+                    draw();
+                }
+
+                function spin() {
+                    if (hasSpun) return;
+                    hasSpun = true;
+
+                    spinButton.disabled = true;
+                    handButton.style.display = 'none';
+                    focusOverlay.classList.add('opacity-0');
+                    wheelStage.classList.add('is-spinning');
+
+                    // At 3s: wheel completes rotation -> trigger confetti & balance counter
+                    setTimeout(() => {
+                        startConfetti();
+                        animateBalance();
+                    }, 3000);
+
+                    // At 5s: reveal jackpot modal & countdown timer
+                    setTimeout(() => {
+                        modal.classList.remove('hidden');
+                        modal.classList.add('popup-visible');
+                        startCountdown();
+                        claimButton.focus();
+                    }, 5000);
+                }
+
+                spinButton.addEventListener('click', spin);
+                handButton.addEventListener('click', spin);
+
+                // Update destination URL before publishing
+                claimButton.addEventListener('click', () => {
+                    window.location.href = 'https://www.google.com';
+                });
+            })();
+    </script>
+</body>
+
+</html>

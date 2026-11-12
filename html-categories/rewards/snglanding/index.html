@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<!-- saved from url=(0041)https://tejkunitsolutions.com/snglanding/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./index_files/all.min.css">
+    <link rel="stylesheet" href="./index_files/styles.css">
+    <link rel="icon" type="image/x-icon" href="https://tejkunitsolutions.com/snglanding/images/favicon.png">
+
+    <title>Share and Gain </title>
+
+    <style>
+        body {
+            background-color: #3e0067;
+        }
+
+        .main-bg {
+            background-color: #3e0067 !important;
+        }
+
+        .btn-main {
+            background-color: #fce608 !important;
+            color: black;
+            font-weight: 600;
+        }
+
+        .text-main {
+            color: #3e0066;
+        }
+
+        .btn-outline-main {
+            border-color: #3e0066 !important;
+        }
+
+        #landing {
+            border-radius: 0px 0px 10px 10px !important;
+        }
+
+        .offer {
+            background-color: #f6f7ff !important;
+        }
+
+        .bg-sec {
+            background-color: #f6f7ff;
+        }
+
+        .btn-main-bg {
+            background-color: #3e0066 !important;
+            z-index: 3;
+        }
+
+
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(3600deg);
+            }
+        }
+
+        .overflow-h {
+            height: 90vh !important;
+            overflow: hidden !important;
+        }
+
+        @media screen and (min-width: 768px) {
+            body {
+                display: none;
+            }
+        }
+
+        .banner-popup {
+            width: 100vw;
+            height: 100vh;
+            z-index: 20;
+            background-color: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        .inner-popup {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .wallet-p {
+            border-color: black;
+        }
+    </style>
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body class="bg-light body overflow-h">
+
+    <div class="bg-light loader d-none" style="opacity: 0;">
+        <img src="./index_files/loader.png" width="50%" alt="">
+    </div>
+
+    <!--info icon -->
+    <div class="position-absolute info-icon shadow-sm" style="top: 40px; right: 20px;" onclick="infoopen()">
+        <div class="icon-column d-flex flex-column gap-3 p-2 bg-light shadow-lg border">
+            <a href="https://tejkunitsolutions.com/snglanding/#" class="icon-link text-main">
+                <i class="fas  rounded p-2 custom-icon-size text-main fa-info-circle"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- otp validation -->
+    <div id="otp-con" class="otp-con position-absolute container-fluid d-none align-items-center justify-content-center">
+        <div class="otp-pop-up col-12 bg-light border rounded p-4 d-flex align-items-center justify-content-center flex-column">
+            <div class="d-flex col-12 align-items-end justify-content-end">
+                <button class="btn btn-white border rounded shadow-sm" onclick="otpclose()"><i class="fa fa-close" style="font-size: 16px;"></i></button>
+            </div>
+            <h3>Verify OTP to Login</h3>
+            <div class="mt-3 mb-2">
+                <div class="d-flex align-items-center justify-content-between gap-3">
+                    <input type="number" class="form-control otp-in text-center">
+                    <input type="number" class="form-control otp-in text-center">
+                    <input type="number" class="form-control otp-in text-center">
+                    <input type="number" class="form-control otp-in text-center">
+                </div>
+            </div>
+            <p class="d-flex align-items-center justify-content-center gap-1"><button type="button" class="text-primary decoration-none text-muted btn p-0 m-0" style="border-color: transparent; background-color: transparent;" onclick="resendotp()" disabled="" id="resend">Resend </button> the code in <span class="otp-timer">01:00</span> </p>
+            <small class="text-muted mb-2"><i class="fas fa-info-circle"></i> Enter the received four digits
+                OTP</small>
+            <button class="btn btn-main-bg text-light col-12 btn-md" onclick="verifyotp()">Verify OTP</button>
+        </div>
+    </div>
+
+    <!--banner popup-->
+
+    <div class="banner-popup container position-absolute d-flex align-items-center justify-content-center p-3 flex-column " id="banner-popup">
+        <div class="inner-popup bg-light rounded border p-4">
+            <img src="./index_files/banner.webp" alt="logo" class="border shadow-sm container p-0 m-0">
+            <div class="text-center container rounded  p-3 wallet-p wallet shadow-sm d-flex align-items justify-content-center flex-column gap-1 m-1">
+                <h3 class="text-uppercase">Available Loot</h3>
+                <h1 class="amount fw-bold">INR 10,000</h1>
+            </div>
+            <small>Earn money sitting at home by sharing offers with your friends, family, relatives. Everyone is
+                eligible to earn through this </small>
+            <small>Don’t delay — start your earnings by verifying your mobile number! </small>
+            <button class="btn btn-main-bg col-12 text-light" onclick="closepopup()">Earn Now</button>
+        </div>
+    </div>
+
+    <!-- info popup -->
+    <div class="info-con container position-absolute d-none align-items-center justify-content-center p-3 bg-transparent pt-0" id="infocon">
+        <div class="modal-content my-0 py-0 m-1 border rounded d-flex p-2 bg-sec border info-popup">
+            <div class="modal-header position-sticky top-0 bg-light py-2 border-bottom">
+                <h5 class="modal-title" id="howToEarnModalLabel"> <i class="fas fa-info-circle"></i> Info</h5>
+                <button type="button" class="btn-close m-2" data-bs-dismiss="modal" aria-label="Close" onclick="infoclose()"></button>
+            </div>
+            <hr>
+            <div class="modal-body my-4">
+                <p class="mb-4 text-center">Welcome to Share n Gain! Follow these simple steps to start earning by
+                    sharing exciting offers. It’s easy and secure. Just follow the steps below to unlock your
+                    earning
+                    potential.</p>
+                <div class="col-12 my-4 d-flex align-items-center justify-content-center"><img src="./index_files/share.webp" width="60%" alt=""></div>
+
+                <ul>
+                    <li><b>Register Your Account</b><br>Begin by signing up for a free account on the
+                        Share n Gain platform.</li>
+                    <li><b>Enter Your UPI ID</b><br>For secure transactions, enter your UPI ID. This
+                        will be used to credit your earnings directly to your account.</li>
+                    <li><b>Verify Your Mobile Number</b><br>Enter your mobile number to receive a
+                        one-time password (OTP). Verify your number by entering the OTP to unlock exclusive
+                        offers.</li>
+                    <li><b>Unlock Offers</b><br>Once your mobile number is verified, special offers
+                        will be unlocked. You can now access and share these offers with your network.</li>
+                    <li><b>Share and Earn</b><br>Share the unlocked offers with your contacts through
+                        social media, messaging apps, or any platform of your choice. The more you share, the
+                        more you earn!</li>
+                    <li><b>Track Your Earnings</b><br>After your first registration, you can review
+                        and track your earnings on the platform. Watch your balance grow as you share more
+                        offers!</li>
+                    <li><b>Withdraw Your Earnings</b><br>Your earnings will be automatically credited
+                        to your registered UPI ID. Enjoy hassle-free withdrawals and keep earning with Share n
+                        Gain!</li>
+                </ul>
+            </div>
+            <div class="modal-footer position-sticky bottom-0 bg-light p-2 d-flex align-items-center justify-content-center col-12 border-top">
+                <button type="button" class="btn btn-main-bg text-light col-8" data-bs-dismiss="modal" onclick="infoclose()">Start
+                    Earning Now</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- hero section -->
+    <div id="landing" class="container gap-1 p-4 d-flex flex-column align-items-center justify-content-center top-0 her main-bg text-light">
+        <!-- <div class="col-12 d-flex align-items-center justify-content-end">
+            <div class="rounded border px-3 border-primary d-flex align-items-center justify-content-center p-1 gap-1">
+                <i class="fas fa-trophy dummy-bal-icon"></i>
+                <small class="dummy-bal">1,000/-</small>
+            </div>
+        </div> -->
+        <div class="logo-con container d-flex align-items-center justify-content-center mb-2">
+            <img src="./index_files/logo.webp" alt="" width="35%">
+        </div>
+        <div class="mb-2">
+            <h4 class="text-center">Earn By Sharing</h4>
+            <small class="p-2 text-center">
+                Enter number &amp; UPI ID to complete registration
+            </small>
+        </div>
+        <div class="col-12 d-flex align-items-center justify-content-center flex-column gap-2">
+            <div class="container-fluid w-100 p-0">
+
+                <div class="container-fluid w-100 d-flex align-items-center justify-content-center flex-column gap-2 p-0">
+                    <div class="col-12">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
+                            <input type="number" placeholder="Enter your mobile number" id="mobile" class="form-control" required="" onchange="numbervalidation()">
+                        </div>
+                        <div class="mobile-error d-none text-danger">
+                            <small>Please enter a valid mobile number.</small>
+                        </div>
+                    </div>
+
+                    <div class="col-12">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-credit-card"></i></span>
+                            <input type="text" placeholder="Enter your UPI ID" class="form-control" id="upi" required="" onchange="upivalidation()">
+                        </div>
+                        <div class="upi-error d-none text-danger">
+                            <small>Please enter a valid UPI ID.</small>
+                        </div>
+                    </div>
+                    <button class="container btn btn-main shadow" type="button" onclick="enterotp()">
+                        Unlock Now !
+                    </button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- after validation hero section -->
+    <div id="wallet" class="container gap-1 p-4 d-none flex-column align-items-center text-light justify-content-center main-bg">
+        <div class="text-center  container rounded p-3 wallet shadow-sm d-flex align-items justify-content-center flex-column gap-1 m-1">
+            <h3 class="text-uppercase">Available Offers Worth</h3>
+            <div class="d-flex align-items-center justify-content-center gap-2">
+                <h1 class="amount fw-bold">INR 10,000</h1>
+                <div class="icon-column d-flex flex-column p-0 m-0 p-1 bg-light shadow-lg border" onclick="infoopen()">
+                    <a href="https://tejkunitsolutions.com/snglanding/#" class="icon-link text-main">
+                        <i class="fas  rounded p-0 custom-icon-size text-main fa-info-circle"></i>
+                    </a>
+                </div>
+            </div>
+            <p class="d-flex align-items-center justify-content-center">
+                <small class=""> for Number - <span id="usernumber"></span></small>
+            </p>
+        </div>
+        <div class="d-flex align-items-center col-12 justify-content-center gap-1">
+
+            <p class="border rounded pl-2 d-flex gap-1 align-items-center justify-content-center">
+                <small><b class="px-2">UPI :</b> <input class="bg-transparent text-light" type="text" id="userupi" disabled=""> </small>
+            </p>
+            <span class="rounded gap-1 px-2 py-1 btn-main  d-flex align-items-center justify-content-center" onclick="editupi()">
+                <i class="fa fa-pen" style="font-size: 12px;"></i>
+                <small id="editbtn">Edit</small>
+            </span>
+        </div>
+    </div>
+
+    <!-- offers row -->
+    <div class="offer container rounded d-flex p-4 flex-column align-items-center justify-content-center gap-3">
+        <small class="text-danger " id="unlocked-line"><i class="fas fa-lock"></i> Verify your mobile number to
+            unlock
+            offers</small>
+
+        <div class="offer-card container d-flex p-0 shadow-sm bg-white border rounded g-10 p-2 align-items-start">
+            <div class="d-flex col-12 flex-column gap-2 align-items-end">
+                <div class="d-flex flex-row gap-2 w-100">
+                    <img src="./index_files/rcicon.webp" alt="icon" width="50px">
+                    <div>
+                        <p class="fw-bold">Rs.10,000/- Bonus</p>
+                        <p class="des text-muted" style="height: 30px !important;">
+                            For every successful registration you will earn Rs.50/-
+                        </p>
+                    </div>
+                </div>
+                <hr class="border-dark w-100">
+                <div class="d-flex align-items-center justify-content-between col-12 gap-2" style="padding-left: 0px;">
+                    <button class="w-100 btn btn-outline-main d-flex align-items-center justify-content-center copy-link-button" data-link="copied">
+                        <a class="text-main text-decoration-none btn-success-link gap-2">
+                            <i class="fas fa-copy"></i>Copy link
+                        </a>
+                    </button>
+                    <button class="w-100 btn btn-main-bg whatsapp-share">
+                        <a class="btn-success-link text-light text-decoration-none gap-2">
+                            <i class="fas fa-lock"></i>Earn Rs.500/-</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="offer-card container d-flex p-0 shadow-sm bg-white border rounded g-10 p-2 align-items-start">
+            <div class="d-flex col-12 flex-column gap-2 align-items-end">
+                <div class="d-flex flex-row gap-2 w-100">
+                    <img src="./index_files/creditmantri-icon-filled-256.webp" alt="icon" width="50px">
+                    <div>
+                        <p class="fw-bold">Free Credit Score</p>
+                        <p class="des text-muted" style="height: 30px !important;">
+                            For every successful check you will earn Rs.10/-
+                        </p>
+                    </div>
+                </div>
+                <hr class="border-dark w-100">
+                <div class="d-flex align-items-center justify-content-between col-12 gap-2" style="padding-left: 0px;">
+                    <button class="w-100 btn btn-outline-main d-flex align-items-center justify-content-center copy-link-button" data-link="copied">
+                        <a class="text-main text-decoration-none btn-success-link gap-2">
+                            <i class="fas fa-copy"></i>Copy link
+                        </a>
+                    </button>
+                    <button class="w-100 btn btn-main-bg  whatsapp-share">
+                        <a class="btn-success-link text-light text-decoration-none gap-2">
+                            <i class="fas fa-lock"></i>Earn Rs.500/-</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="offer-card container d-flex p-0 shadow-sm bg-white border rounded g-10 p-2 align-items-start">
+            <div class="d-flex col-12 flex-column gap-2 align-items-end">
+                <div class="d-flex flex-row gap-2 w-100">
+                    <img src="./index_files/axis_bank_logo2.webp" alt="icon" width="50px">
+                    <div>
+                        <p class="fw-bold">Axis Amaze</p>
+                        <p class="des text-muted" style="height: 30px !important;">
+                            Get your free credit card for free without any charges
+                        </p>
+                    </div>
+                </div>
+                <hr class="border-dark w-100">
+                <div class="d-flex align-items-center justify-content-between col-12 gap-2" style="padding-left: 0px;">
+                    <button class="w-100 btn btn-outline-main d-flex align-items-center justify-content-center copy-link-button" data-link="copied">
+                        <a class="text-main text-decoration-none btn-success-link gap-2">
+                            <i class="fas fa-copy"></i>Copy link
+                        </a>
+                    </button>
+                    <button class="w-100 btn btn-main-bg  whatsapp-share">
+                        <a class="btn-success-link text-light text-decoration-none gap-2">
+                            <i class="fas fa-lock"></i>Earn Rs.500/-</a></button>
+                </div>
+            </div>
+        </div>
+
+        <div class="offer-card container d-flex p-0 shadow-sm bg-white border rounded g-10 p-2 align-items-start">
+            <div class="d-flex col-12 flex-column gap-2 align-items-end">
+                <div class="d-flex flex-row gap-2 w-100">
+                    <img src="./index_files/axis_bank_logo2.webp" alt="icon" width="50px">
+                    <div>
+                        <p class="fw-bold">Ruppee Redee</p>
+                        <p class="des text-muted" style="height: 30px !important;">
+                            Share with the contacts who needs financial support
+                        </p>
+                    </div>
+                </div>
+                <hr class="border-dark w-100">
+                <div class="d-flex align-items-center justify-content-between col-12 gap-2" style="padding-left: 0px;">
+                    <button class="w-100 btn btn-outline-main d-flex align-items-center justify-content-center copy-link-button" data-link="copied">
+                        <a class="text-main text-decoration-none btn-success-link gap-2">
+                            <i class="fas fa-copy"></i>Copy link
+                        </a>
+                    </button>
+                    <button class="w-100 btn btn-main-bg  whatsapp-share">
+                        <a class="btn-success-link text-light text-decoration-none gap-2">
+                            <i class="fas fa-lock"></i>Earn Rs.500/-</a></button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <footer class="mobile-footer container d-flex align-items-center justify-content-center flex-column p-4">
+        <div class="social-icons">
+            <a class="text-decoration-none" href="https://facebook.com/" target="_blank"><i class="fab text-main fa-facebook-f"></i></a>
+            <a class="text-decoration-none" href="https://twitter.com/" target="_blank"><i class="fab text-main fa-twitter"></i></a>
+            <a class="text-decoration-none" href="https://instagram.com/" target="_blank"><i class="fab text-main fa-instagram"></i></a>
+            <a class="text-decoration-none" href="https://linkedin.com/" target="_blank"><i class="fab text-main fa-linkedin-in"></i></a>
+        </div>
+        <div class="copyright">
+            © 2024 Share N Gain. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var otpInputs = document.querySelectorAll('.otp-in');
+
+            otpInputs.forEach(function (input, index) {
+                input.addEventListener('input', function () {
+                    if (this.value.length === 1 && index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                });
+                input.addEventListener('keydown', function (event) {
+                    if (event.key === 'Backspace' && this.value.length === 0 && index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                });
+            });
+
+        });
+    </script>
+
+    <script src="./index_files/script.js.download"></script>
+<script type="module" src="./index_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style><button class="glasp-banner-root glasp-fab-root" aria-label="Glasp" title="Glasp" style="position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); z-index: 2147483646; pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(255, 255, 255, 0.92); box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"></path><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path></svg></button></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

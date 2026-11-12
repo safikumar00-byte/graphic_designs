@@ -1,0 +1,134 @@
+// Get URL parameter
+const urlParams = new URLSearchParams(window.location.search);
+let spinParam = urlParams.get('id') || '9500'; // Default value if parameter is missing
+
+// On window load
+window.onload = function () {
+    // Hide pre-loader and show main content
+    document.querySelector(".pre-loader").style.display = "none";
+    document.querySelector("main").style.display = "flex";
+
+    // Display the valid time section and initialize timer
+    const validTime = document.querySelector(".valid_time");
+    validTime.style.display = "flex";
+
+    let endTime = new Date(Date.now() + 90000); // 1 min 30 sec from now
+
+    const updateTimer = () => {
+        const now = new Date();
+        const timeLeft = endTime - now;
+
+        const mins = Math.floor((timeLeft / 1000 / 60) % 60);
+        const secs = Math.floor((timeLeft / 1000) % 60);
+
+        validTime.querySelector(".mins").textContent = mins.toString().padStart(2, '0');
+        validTime.querySelector(".secs").textContent = secs.toString().padStart(2, '0');
+
+        if (timeLeft > 0) {
+            setTimeout(updateTimer, 1000);
+        }
+    };
+    updateTimer();
+};
+
+// Trigger spin when the hand is clicked
+document.querySelector('.hand').addEventListener('click', function () {
+    document.getElementById("spin").click();
+});
+
+// Handle the spin logic
+document.getElementById("spin").addEventListener("click", function () {
+    // Play spin audio and start animations
+    document.getElementById("myAudio").play();
+    document.querySelector(".hand").style.display = "none";
+    document.querySelector(".pointer").classList.add("pointer-toggle");
+
+    const wheel = document.getElementById("wheel");
+    let degree;
+
+    // Determine spin degree based on spinParam
+    switch (spinParam) {
+        case '4000': degree = 4020; break;
+        case '9500': degree = 4200; break;
+        case '6500': degree = 4080; break;
+        case '8000': degree = 4140; break;
+        case '3000': degree = 3960; break;
+        case '2000': degree = 4259; break;
+        case '5000': degree = 3840; break;
+        default: 
+            degree = 4200;
+            spinParam = '9500'; // Default to this value
+            document.querySelector('.amount').innerHTML = '₹ ' + 9500 + '.00';
+    }
+
+    // Apply spin animation
+    wheel.style.transition = "transform 4s ease-out";
+    wheel.style.transform = `rotate(${degree}deg)`;
+
+    // Handle post-spin logic after animation
+    setTimeout(() => {
+        document.getElementById('coins_audio').play();
+        document.querySelector(".pointer").classList.remove("pointer-toggle");
+
+        // Highlight the winning segment
+        document.querySelectorAll('.segment').forEach(segment => {
+            segment.classList.add('dull');
+            if (segment.getAttribute('data-value') === spinParam) {
+                segment.classList.add('highlight');
+                const textContent = segment.firstElementChild.innerHTML;
+                segment.firstElementChild.innerHTML = `You won <br>${textContent}<br> Bonus`;
+        
+                // Show fireworks and update the winning amount
+                document.querySelector('.fireworks-con').style.display = 'block';
+        
+                let count = 0;
+                const targetAmount = parseInt(spinParam, 10); // Ensure it's a number
+        
+                const interval = setInterval(() => {
+                    document.getElementById('winner_cheer').play();
+        
+                    if (count < targetAmount) {
+                        count += Math.ceil(targetAmount / 50); // Increment smoothly
+                        if (count > targetAmount) count = targetAmount; // Prevent overshooting
+                        document.querySelector('.amount').innerHTML = '₹ ' + count + '.00'; // Update amount
+                    } else {
+                        clearInterval(interval);
+                    }
+                }, 30); // Adjust timing for smooth animatio
+
+                // Display limited time offer popup
+                setTimeout(() => {
+                    let minutes = 0;
+                    let seconds = 59;
+                    const timer = setInterval(function () {
+                        if (minutes === 0 && seconds === 0) {
+                            clearInterval(timer);
+                            document.getElementById('timer').innerHTML = 'Limited Time Offer: 00:00 minutes remaining!';
+                        } else {
+                            const display = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                            document.getElementById('timer').innerHTML = 'Limited Time Offer: ' + display;
+                            seconds -= 1;
+                            if (seconds < 0) {
+                                minutes -= 1;
+                                seconds = 59;
+                            }
+                        }
+                    }, 1000);
+
+                    document.getElementById('canvas').style.display = 'block';
+                    document.querySelector('.popup-model').style.display = "flex";
+                    document.querySelector('.popup-model').style.bottom = "0";
+                    document.querySelector('.popup-model').style.transition = "bottom 0.1s ease-out";
+                    document.body.style.overflow = 'hidden';
+                }, 3000);
+
+                document.querySelector('.prize-money').innerHTML = '₹ ' + spinParam; // Update prize money
+            }
+        });
+    }, 4000); // Match CSS transition duration
+
+    // Handle claim button click
+    document.querySelector('.claim-amount').addEventListener('click', () => {
+        window.location.href = "https://www.google.com/";
+    });
+});

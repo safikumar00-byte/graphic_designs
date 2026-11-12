@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<!-- saved from url=(0051)https://tejkunitsolutions.com/spins/new_spins/spin/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucky Spin Wheel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            height: 100vh;
+            /* background: linear-gradient(140deg, #EABC62 -0.2%, #EABC62 9.78%, #FFFFFF 9.78%, #FFFFFF 67.71%, #EABC62 67.71%, #EABC62 68.71%, #10369A 69.21%, #10369A 89.69%, #EABC62 89.69%, #EABC62 99.67%); */
+            background-repeat: no-repeat;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        main {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .ui {
+            max-width: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 40px;
+            position: relative;
+            gap: 10px;
+        }
+
+        .spin {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .wheel {
+            width: 100%;
+            max-width: 320px;
+            object-fit: cover;
+            border-radius: 50%;
+            /* border: 15px solid #1736a3; */
+            /* filter: drop-shadow(0px 0px 2px #f7ce1a); */
+            box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.5);
+        }
+
+        .auto-spin {
+            animation: auto-rotate 60s linear infinite forwards;
+        }
+
+        @keyframes auto-rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(2909deg);
+            }
+        }
+
+        .spin-btn {
+            width: 80px;
+            height: 80px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #1736a3, #092074);
+            color: white;
+            font-weight: 600;
+            box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            font-size: 20px;
+            z-index: 3;
+            transform: translate(-50%, -50%);
+            animation: bounce 1s infinite;
+        }
+
+        .sub-heading {
+            text-align: center;
+            color: #092074;
+            font-weight: 500;
+        }
+
+        .pointer {
+            width: 50px;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            filter: brightness(0);
+        }
+
+        .sparks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .sparks1 {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            z-index: -1;
+        }
+
+        .spinning {
+            animation: spin 3s ease-in-out 1 forwards;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(3151deg);
+            }
+        }
+
+
+
+        .winners-list {
+            height: 20px;
+            overflow: hidden;
+            border: 2px solid #1736a3;
+            border-radius: 30px;
+            padding: 10px 20px 10px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #1736a3;
+            font-weight: 600;
+            background-color: white;
+        }
+
+        .hand {
+            position: absolute;
+            top: 60%;
+            left: 55%;
+            transform: translate(-50%, -50%) rotate(-30deg);
+            width: 60px;
+            animation: hand 1s ease-in-out infinite forwards;
+            z-index: 3;
+        }
+
+        .overlay {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
+        @keyframes hand {
+
+            0%,
+            100% {
+                top: 65%;
+                left: 55%;
+            }
+
+            50% {
+                top: 70%;
+                left: 65%;
+            }
+        }
+
+        .popup {
+            width: 80%;
+            border-radius: 20px;
+            /* background: linear-gradient(to right, #6e28b9, #9343d3, #6e28b9); */
+            background-color: #fffae0;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 8;
+            box-shadow: inset 0px -5px 10px 0px rgba(255, 255, 255, 0.5);
+        }
+
+        .amount-container {
+            color: #5f22a9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            font-size: 1.5rem;
+            border: 1px solid #5f22a9;
+            text-align: center;
+            background: linear-gradient(45deg, #fff7d3, #fffbe7);
+            border-radius: 20px 20px 20px 20px;
+            padding-bottom: 10px;
+            gap: 5px;
+        }
+
+        .amount-container img {
+            border-radius: 20px 20px 0px 0px;
+        }
+
+        .claim {
+            width: 100%;
+            border-radius: 30px;
+            font-size: 24px;
+            font-weight: 800;
+            color: #000;
+            background: linear-gradient(to bottom, #ffea01, #f2ad01);
+            box-shadow: inset 0px -5px 10px 0px rgba(255, 255, 255, 0.5);
+            filter: drop-shadow(0px 4px 4px rgba(95, 34, 169, 0.25));
+            border: 1px solid transparent;
+            padding: 10px 10px;
+        }
+
+        .rupee-symbol {
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            border-radius: 50%;
+            background-color: #5f22a9;
+            color: white;
+        }
+
+        canvas {
+            display: none;
+            overflow-y: hidden;
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            position: absolute;
+            top: 0;
+            z-index: 4;
+        }
+
+        .popup-con {
+            position: absolute;
+            z-index: 3;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            padding-top: 20px;
+        }
+
+        .envelope {
+            width: 80%;
+            padding-bottom: 40px;
+            background-color: #652887;
+            border-radius: 10px 10px 30px 30px;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            flex-direction: column;
+            height: 180px;
+            overflow: visible;
+        }
+
+        .envelope-img {
+            margin-top: -100px;
+        }
+
+        .claim {
+            box-sizing: border-box;
+            padding: 10px;
+            gap: 10px;
+            font-size: 20px;
+            position: relative;
+            color: #830A00;
+            font-weight: 700;
+            width: 90%;
+            text-transform: uppercase;
+            text-wrap: nowrap;
+            background: linear-gradient(183.05deg, #FFC60A 2.52%, #FDF578 97.48%);
+            box-shadow: inset 0px 4px 11px #DEA71C;
+            border-radius: 97px;
+            margin-top: -60px;
+            border: 5px solid transparent;
+        }
+
+        .offer {
+            width: 90%;
+            height: 300px;
+            background-color: white;
+            border-radius: 15px;
+            margin-top: -120px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 20px;
+            flex-direction: column;
+            gap: 10px;
+            border: 10px solid #815E95;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .hr {
+            width: 75%;
+            height: 1px;
+            border: 0.5px dashed #815e9587;
+
+        }
+
+        .offer h3 {
+            font-size: 1.5rem;
+        }
+
+        .offer h1 {
+            font-size: 2rem;
+            color: #652887;
+        }
+
+        canvas {
+            overflow-y: hidden;
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            position: absolute;
+            top: 0;
+            z-index: -10;
+        }
+
+        .icon {
+            font-size: 30px;
+            background-color: #652887;
+            border-radius: 50%;
+            padding: 20px;
+            width: 36px;
+            height: 36px;
+            color: white;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .scale-in-center {
+            animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        @keyframes scale-in-center {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media only screen and (max-height: 665px) {
+            body {
+                height: fit-content;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            body {
+                display: none;
+            }
+        }
+
+        .prize_con {
+            z-index: 2;
+            box-shadow: inset 0px 0px 23px rgba(252, 204, 139, 0.72);
+        }
+
+        legend {
+            background: linear-gradient(90deg, #F88750 0%, #FE4A9F 100%);
+        }
+
+        .prize_item {
+            background: linear-gradient(90deg, #F88750 0%, #FE4A9F 100%);
+        }
+
+        marquee {
+            background-color: #fff;
+            text-align: center;
+            border: 1px solid #652887;
+        }
+
+        marquee p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .header {
+            margin-bottom: -10px;
+        }
+
+        .steps {
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            gap: 10px;
+            margin-top: 20px;
+            border-radius: 6px;
+            width: 80%;
+            color: black;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px 0px;
+        }
+
+        .step p {
+            margin: 0px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .circle {
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            background-color: black;
+            height: 30px;
+            width: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .right_arrow {
+            width: 8%;
+        }
+
+        .blink-1 {
+            -webkit-animation: blink-1 2s infinite both;
+            animation: blink-1 2s infinite both;
+        }
+
+        @-webkit-keyframes blink-1 {
+
+            0%,
+            50%,
+            100% {
+                opacity: 1;
+            }
+
+            25%,
+            75% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes blink-1 {
+
+            0%,
+            50%,
+            100% {
+                opacity: 1;
+            }
+
+            25%,
+            75% {
+                opacity: 0;
+            }
+        }
+    </style>
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body>
+    <canvas id="canvas" width="375" height="667"></canvas>
+    <img src="https://tejkunitsolutions.com/spins/new_spins/spin/" alt="" class="overlay" style="height: 691px;">
+    <main>
+        <div class="ui">
+            <img src="./LuckySpinWheel_files/title.webp" alt="title" width="100%">
+            <p class="sub-heading">Your Chance to Join the Winner’s <br> Circle Starts Now! <br> <span>Lucky chance to
+                    win upto Rs.50,000/-</span></p>
+            <div class="winners-list">
+                <img src="./LuckySpinWheel_files/speaker.svg" width="30px" alt="icon">
+                <marquee behavior="smooth" direction="up">
+                    <p>+91 87*** ***** has won Rs.50000/-</p>
+                    <br>
+                    <p>+91 87*** ***** has won Rs.50000/-</p>
+                    <br>
+                    <p>+91 87*** ***** has won Rs.50000/-</p>
+                    <br>
+                    <p>+91 87*** ***** has won Rs.50000/-</p>
+                    <br>
+                    <p>+91 87*** ***** has won Rs.50000/-</p>
+                    <br>
+                </marquee>
+            </div>
+            <div class="spin">
+                <img src="./LuckySpinWheel_files/wheel.webp" class="wheel auto-spin" alt="wheel">
+                <div class="spin-btn">
+                    START
+                </div>
+                <img src="./LuckySpinWheel_files/pointer.png" class="pointer" alt="pointer">
+                <img src="./LuckySpinWheel_files/hand.webp" alt="hand" class="hand">
+            </div>
+
+        </div>
+        <!-- <div class="popup-con">
+            <div class="popup">
+                <div class="amount-container">
+                    <img src="./assets/banner.webp" alt="banner" width="100%">
+                    <small>You Won <b>Rs. 550/-</b> and <br> win upto <b>Rs. 50,000/-</b> Daily</small>
+                </div>
+                <button class="claim" type="button">
+                    CLAIM AMOUNT
+                </button>
+            </div>
+        </div> -->
+        <div class="popup-con " style="height: 691px;">
+            <canvas id="canvas"></canvas>
+            <div class="envelope" style="margin-top: 40px;">
+                <div class="offer">
+                    <div class="icon">₹</div>
+                    <div class="hr"></div>
+                    <div>
+                        <h3>Congratulations</h3>
+                        <h1 class="font-bold">Rs.10000</h1>
+                    </div>
+                </div>
+                <img src="./LuckySpinWheel_files/envelope.svg" alt="" class="envelope-img" width="100%">
+                <button class="claim">Collect Amount</button>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center; margin-top: 18px; gap: 10px; flex-direction: column;  background-color: #fff; padding-top: 8px; width: 80%; border-radius: 10px;">
+                <p style="font-size: 16px; color: rgb(0, 0, 0); margin: 0px; font-weight: 600;">Our Withdraw Partners
+                </p>
+                <div style=" background-color: #fff; display: flex; align-items: center; justify-content: space-around; padding: 10px; width: 80%; border-radius: 8px;">
+                    <div class="text-center">
+                        <img src="./LuckySpinWheel_files/bank.svg" alt="wallet" loading="lazy" width="35px">
+                        <!-- <p>Banks</p> -->
+                    </div>
+                    <div class="text-center">
+                        <img src="./LuckySpinWheel_files/upi.webp" loading="lazy" alt="upi" width="60px">
+                        <!-- <p>UPI</p> -->
+                    </div>
+                    <div class="text-center">
+                        <img src="./LuckySpinWheel_files/wallet2.svg" alt="bank" loading="lazy" width="35px">
+                        <!-- <p>Wallets</p> -->
+                    </div>
+                </div>
+            </div>
+            <div class="steps">
+                <div class="step">
+                    <div class="circle">1</div>
+                    <p>Download</p>
+                </div>
+
+                <img src="./LuckySpinWheel_files/caret-right-fill.svg" alt="right_arrow" class="right_arrow blink-1">
+
+                <div class="step">
+                    <div class="circle">2</div>
+                    <p>Install</p>
+                </div>
+
+                <img src="./LuckySpinWheel_files/caret-right-fill.svg" alt="right_arrow" class="right_arrow blink-1">
+
+                <div class="step">
+                    <div class="circle">3</div>
+                    <p>Register </p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.querySelector('.spin-btn').addEventListener('click', () => {
+            document.querySelector('.overlay').style.display = 'none';
+            document.querySelector('.hand').style.display = 'none';
+            document.querySelector('.wheel').classList.replace('auto-spin', 'spinning');
+            setTimeout(() => {
+                document.querySelector('#canvas').style.display = 'block';
+                document.querySelector('.popup-con').style.display = 'flex';
+                document.querySelector('.popup-con').style.opacity = '1';
+            }, 3200)
+        })
+
+        // document.querySelector('.claim').addEventListener('click', () => {
+        //     window.location.href = 'https://trk.i1x.in/click?<?php echo $_SERVER['QUERY_STRING']; ?>';
+        // });
+
+        // setTimeout(() => {
+        //     window.location.href = 'https://trk.i1x.in/click?<?php echo $_SERVER['QUERY_STRING']; ?>';
+        // }, 9500)
+
+        let height = 691;
+        if (window.innerHeight < 691) {
+            console.log(window.innerHeight);
+            document.querySelector('.overlay').style.height = height + 'px';
+            document.querySelector('.popup-con').style.height = height + 'px';
+        } else {
+            document.querySelector('.overlay').style.height = '100vh';
+            document.querySelector('.popup-con').style.height = '100vh';
+        }
+    </script>
+    <script>
+        let W = window.innerWidth;
+        let H = window.innerHeight;
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+        const maxConfettis = 10;
+        const particles = [];
+
+
+        const possibleColors = [
+            "DodgerBlue",
+            "OliveDrab",
+            "Gold",
+            "Pink",
+            "SlateBlue",
+            "LightBlue",
+            "Gold",
+            "Violet",
+            "PaleGreen",
+            "SteelBlue",
+            "SandyBrown",
+            "Chocolate",
+            "Crimson"
+        ];
+
+
+        function randomFromTo(from, to) {
+            return Math.floor(Math.random() * (to - from + 1) + from);
+        }
+
+
+        function confettiParticle() {
+            this.x = Math.random() * W; // x
+            this.y = Math.random() * H - H; // y
+            this.r = randomFromTo(11, 33); // radius
+            this.d = Math.random() * maxConfettis + 11;
+            this.color =
+                possibleColors[Math.floor(Math.random() * possibleColors.length)];
+            this.tilt = Math.floor(Math.random() * 33) - 11;
+            this.tiltAngleIncremental = Math.random() * 0.07 + 0.05;
+            this.tiltAngle = 0;
+
+
+            this.draw = function () {
+                context.beginPath();
+                context.lineWidth = this.r / 2;
+                context.strokeStyle = this.color;
+                context.moveTo(this.x + this.tilt + this.r / 3, this.y);
+                context.lineTo(this.x + this.tilt, this.y + this.tilt + this.r / 5);
+                return context.stroke();
+            };
+        }
+
+
+        function Draw() {
+            const results = [];
+
+
+            // Magical recursive functional love
+            requestAnimationFrame(Draw);
+
+
+            context.clearRect(0, 0, W, window.innerHeight);
+
+
+            for (var i = 0; i < maxConfettis; i++) {
+                results.push(particles[i].draw());
+            }
+
+
+            let particle = {};
+            let remainingFlakes = 0;
+            for (var i = 0; i < maxConfettis; i++) {
+                particle = particles[i];
+
+
+                particle.tiltAngle += particle.tiltAngleIncremental;
+                particle.y += (Math.cos(particle.d) + 3 + particle.r / 2) / 2;
+                particle.tilt = Math.sin(particle.tiltAngle - i / 3) * 15;
+
+
+                if (particle.y <= H) remainingFlakes++;
+
+
+                // If a confetti has fluttered out of view,
+                // bring it back to above the viewport and let if re-fall.
+                if (particle.x > W + 30 || particle.x < -30 || particle.y > H) {
+                    particle.x = Math.random() * W;
+                    particle.y = -30;
+                    particle.tilt = Math.floor(Math.random() * 10) - 20;
+                }
+            }
+
+
+            return results;
+        }
+
+
+        window.addEventListener(
+            "resize",
+            function () {
+                W = window.innerWidth;
+                H = window.innerHeight;
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            },
+            false
+        );
+
+
+        // Push new confetti objects to `particles[]`
+        for (var i = 0; i < maxConfettis; i++) {
+            particles.push(new confettiParticle());
+        }
+
+
+        // Initialize
+        canvas.width = W;
+        canvas.height = H;
+        Draw();
+    </script>
+<script type="module" src="./LuckySpinWheel_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style><button class="glasp-banner-root glasp-fab-root" aria-label="Glasp" title="Glasp" style="position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); z-index: 2147483646; pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(255, 255, 255, 0.92); box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"></path><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path></svg></button></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

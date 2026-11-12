@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://tejkunitsolutions.com/lowcreditoffer/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing page</title>
+    <link rel="stylesheet" href="./Landingpage_files/bootstrap.min.css">
+    <style>
+        body {
+            display: flex;
+            /* justify-content: center; */
+            height: 100vh;
+            flex-direction: column;
+            background-image: url(./assets/APPROVED.png);
+            background-size: 18%;
+        }
+
+        .btn-primary {
+            border: 0px solid transparent !important;
+        }
+
+        .btn-default {
+            font-weight: 700 !important;
+            font-size: 20px;
+        }
+
+        .loader-con {
+            z-index: 10;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 30px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: white;
+        }
+
+        .loader {
+            width: 100px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 16px solid;
+            border-color: #000 #0000;
+            animation: l1 1s infinite;
+        }
+
+        @keyframes l1 {
+            to {
+                transform: rotate(.5turn)
+            }
+        }
+
+        .loader-text {
+            font-size: 1.3rem;
+            transition: all 0.5s;
+            font-weight: 600;
+        }
+
+        .details {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .points {
+            display: flex;
+            border-radius: 10px;
+            gap: 10px;
+            align-items: center;
+            /* justify-content: center; */
+        }
+
+        .points p {
+            margin: 0;
+        }
+
+        .offers {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+
+
+        }
+
+        .offer-details {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            /* gap: 20px; */
+        }
+
+        .verifications {
+            display: flex;
+            gap: 5px;
+            flex-direction: column;
+            border-radius: 20px;
+        }
+
+        .feature-text {
+            font-size: 0.8rem;
+            margin: 0;
+        }
+
+        .amount {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .main {
+            display: flex;
+            flex-direction: column;
+            margin-top: 150px;
+            height: fit-content;
+
+        }
+
+        .swipe {
+            animation: swipe 0.5s ease 1 forwards;
+        }
+
+        @keyframes swipe {
+            0% {
+                transform: translateY(300px);
+                opacity: 0.5;
+            }
+
+            100% {
+                transform: translateY(0px);
+                opacity: 1;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            body {
+                display: none;
+            }
+        }
+
+        .offer-details {
+            margin-top: -90px;
+            position: relative;
+        }
+
+        li {
+            list-style: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        li small {
+            font-size: 0.7rem;
+        }
+
+        .approved {
+            border-color: #3fc700 !important;
+            color: #3fc700;
+            /* font-size: 20px; */
+            /* position: absolute; */
+        }
+
+        .rounded-4 {
+            border-radius: 20px 20px 0px 0px !important;
+        }
+
+        .tick {
+            display: none;
+        }
+    </style>
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body style="background: linear-gradient(rgb(43, 85, 130), transparent);">
+    <div class="p-5 loader-con d-none">
+        <div class="loader"></div>
+        <script src="./Landingpage_files/dotlottie-player.mjs" type="module"></script>
+        <dotlottie-player src="https://lottie.host/e1c380d6-15dc-4903-ae87-5962763bf380/WmLERG7Pe7.json" id="lottie" class="tick" background="transparent" speed="0.5" style="width: 150px; height: 150px" direction="1" playmode="normal"><template shadowrootmode="open"><!---->
+      <div id="animation-container" lang="en" role="img" aria-label="lottie-animation-container" class="main">
+        <div id="animation" class="animation" style="background:transparent;">
+          <!--?lit$86489609$--> <div class="error">⚠️</div> 
+        </div>
+        <!--?lit$86489609$-->
+      </div>
+    </template></dotlottie-player>
+        <div class="d-flex">
+            <p class="p-0 px-4 m-0 text-center loader-text">Verifying your profile<span class="p-0 m-0 dots"></span>
+            </p>
+        </div>
+    </div>
+
+    <div class="p-2 bg-white header-logo col-12 d-flex align-items-center justify-content-center">
+        <img src="./Landingpage_files/header-logo.png" alt="logo" width="50%" class="logo">
+    </div>
+
+
+    <div class="border main bg-light rounded-4 col-12 swipe">
+
+        <div class="p-4 pb-0">
+            <div class="p-4 bg-white shadow-sm offer-details rounded-4">
+                <div class="col-12 d-flex align-items-center justify-content-center" style="width: 100%;">
+                    <div class="px-3 py-1 border rounded d-flex align-items-center justify-content-center approved " style="width: fit-content;">
+                        <ul class="p-0 m-0">
+                            <li class="p-0 m-0"> Pre-Approved</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="mt-3 mb-3 d-flex flex-column align-items-center justify-content-center">
+                    <img src="./Landingpage_files/flexiloan.jpg" alt="logo" width="75px" class="rounded" id="logo">
+                </div>
+                <div class="mb-3 text-center col-12">
+                    <p class="p-0 m-0">Your Eligible for the Loan amount of </p>
+                    <p class="p-0 m-0 amount">Rs 1 Crore</p>
+                </div>
+                <button type="button" class="shadow btn btn-default col-12 apply" style="background-color: rgb(142, 33, 60); color: rgb(255, 255, 255);">Apply Now</button>
+            </div>
+            <div class="mt-4 offers">
+                <div class="p-2 details col-3">
+                    <img src="./Landingpage_files/icon-1.svg" width="40px" class="mb-2" alt="icon">
+                    <h5 class="text-center feature-text">Safe and<br>Secure</h5>
+                </div>
+                <div class="p-2 details col-3">
+                    <img src="./Landingpage_files/icon-2.svg" width="40px" class="mb-2" alt="icon">
+                    <h5 class="text-center feature-text">Quick<br>Process</h5>
+                </div>
+                <div class="p-2 details col-3">
+                    <img src="./Landingpage_files/icon-3.svg" width="40px" class="mb-2" alt="icon">
+                    <h5 class="text-center feature-text">Low<br>Interest</h5>
+                </div>
+            </div>
+        </div>
+
+        <div class="px-4 py-3 mt-2 verifications col-12">
+            <h4 class="px-2 mt-2">Details of the Application</h4>
+            <div class="p-2 rounded points col-12 broder">
+                <img src="./Landingpage_files/tick.png" class="" width="30px" alt="">
+
+                <h6 class="p-0 m-0">Check Eligibility</h6>
+            </div>
+            <hr class="m-0 mx-1">
+            <div class="p-2 rounded points col-12 broder">
+                <img src="./Landingpage_files/tick.png" class="" width="30px" alt="">
+
+                <h6 class="p-0 m-0">Select Loan offer &amp; tenure</h6>
+            </div>
+            <hr class="m-0 mx-1">
+            <div class="p-2 rounded points col-12 broder">
+                <img src="./Landingpage_files/tick.png" class="" width="30px" alt="">
+                <h6 class="p-0 m-0">Verify Pincode</h6>
+            </div>
+        </div>
+
+        <footer class="p-2 mt-2 text-center text-muted border-top">
+            Copyrights @ 2024 | All rights Resereved
+        </footer>
+
+
+    </div>
+
+    <script>
+        const loaderText = document.querySelector('.loader-text');
+        const dotsSpan = document.querySelector('.dots');
+
+        const logoElement = document.getElementById('logo');
+        const body = document.body;
+
+
+        function getParameterByName(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const logoUrl = getParameterByName('id');
+        if (logoUrl) {
+            logoElement.src = './assets/' + logoUrl + '.jpg';
+        }
+
+        function changeColorByLogo(logoSrc) {
+            if (logoSrc.includes('adityabirla.jpg')) {
+                body.style.backgroundColor = "#D92227";
+                body.style.background = 'linear-gradient(180deg, #D92227, transparent)';
+                document.querySelector('.btn-default').style.backgroundColor = '#D92227';
+                document.querySelector('.btn-default').style.color = '#fff';
+                document.querySelector('.amount').textContent = "Rs.10,00,000*";
+
+            }
+            else if (logoSrc.includes('indifi.jpg')) {
+                body.style.backgroundColor = "#0032A1";
+                body.style.background = 'linear-gradient(180deg, #0032A1, transparent)';
+                document.querySelector('.btn-default').style.backgroundColor = '#03BC71';
+                document.querySelector('.btn-default').style.color = '#fff';
+                document.querySelector('.amount').textContent = "Rs.50,00,000*";
+
+            }
+            else if (logoSrc.includes('lendingkart.jpg')) {
+                body.style.backgroundColor = "#1571B6";
+                body.style.background = 'linear-gradient(180deg, #1571B6, transparent)';
+                document.querySelector('.btn-default').style.backgroundColor = '#FF6700';
+                document.querySelector('.btn-default').style.color = '#fff';
+                document.querySelector('.amount').textContent = "Rs. 2 Crore";
+
+            }
+            else if (logoSrc.includes('flexiloan.jpg')) {
+                body.style.backgroundColor = "#2B5582";
+                body.style.background = 'linear-gradient(180deg, #2B5582, transparent)';
+                document.querySelector('.btn-default').style.backgroundColor = '#8E213C';
+                document.querySelector('.btn-default').style.color = '#fff';
+                document.querySelector('.amount').textContent = "Rs 1 Crore";
+
+            }
+            else if (logoSrc.includes('incred.jpg')) {
+                body.style.backgroundColor = "#F37C20";
+                body.style.background = 'linear-gradient(180deg, #F37C20, transparent)';
+                document.querySelector('.btn-default').style.backgroundColor = '#0E489A';
+                document.querySelector('.btn-default').style.color = '#fff';
+                document.querySelector('.amount').textContent = "Rs.10,00,000*";
+
+            }
+            else if (logoSrc.includes('bajaj.jpg')) {
+                body.style.backgroundColor = "#0072BB";
+                body.style.background = 'linear-gradient(180deg, #0072BB, transparent)';
+                document.querySelector('.btn-default').style.backgroundColor = '#FFFFFF';
+                document.querySelector('.btn-default').style.color = '#0072BB';
+                document.querySelector('.btn-default').style.border = '1px solid #0072BB';
+            }
+        }
+
+        const currentLogoSrc = logoElement.src;
+        changeColorByLogo(currentLogoSrc);
+
+        function animateDots() {
+            let dots = '';
+            let count = 0;
+            setInterval(() => {
+                dots = '.'.repeat(count % 4);
+                dotsSpan.textContent = dots;
+                count++;
+            }, 500);
+        }
+
+        animateDots();
+
+        document.querySelector('.apply').addEventListener('click', loader);
+
+        function loader() {
+            document.querySelector('.loader-con').classList.remove('d-none');
+
+            setTimeout(() => {
+                document.querySelector('.loader-text').innerHTML = "Identifying Right offers for you<span class='p-0 m-0 dots'>...</span>";
+            }, 1500);
+
+            setTimeout(() => {
+                document.querySelector('.loader').style.display = 'none';
+                document.querySelector('.tick').style.display = "block";
+                document.getElementById('lottie').play();
+                document.querySelector('.loader-text').innerHTML = "Super, we found a right offer for you";
+            }, 3000);
+
+            setTimeout(() => {
+                window.location.href = 'https://www.google.com/';
+                body.style.overflow = 'visible';
+            }, 6000);
+        }
+
+    </script>
+<script type="module" src="./Landingpage_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style><button class="glasp-banner-root glasp-fab-root" aria-label="Glasp" title="Glasp" style="position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); z-index: 2147483646; pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(255, 255, 255, 0.92); box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"></path><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path></svg></button></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

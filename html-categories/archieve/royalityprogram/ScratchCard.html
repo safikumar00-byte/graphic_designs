@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<!-- saved from url=(0070)https://tejkunitsolutions.com/royalityprogram8/scratch_card/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scratch Card</title>
+    <link rel="stylesheet" href="./ScratchCard_files/bootstrap.min.css">
+    <style>
+        body {
+            background: linear-gradient(175.11deg, #6F46C5 0%, #8947A8 100.43%);
+            width: 100%;
+            height: 300px;
+            background-size: 100% 100%;
+            background-color: #8947A8;
+            background-repeat: no-repeat;
+            color: white;
+            animation: moveGradient 1s ease infinite;
+            /* Apply the animation */
+
+        }
+
+        @keyframes moveGradient {
+            0% {
+                background-position: 0% 50%;
+                /* Starting position */
+            }
+
+            50% {
+                background-position: 100% 50%;
+                /* Move to the end */
+            }
+
+            100% {
+                background-position: 0% 50%;
+                /* Move back to the starting position */
+            }
+        }
+
+        main {
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+        }
+
+        .o-5 {
+            opacity: 0.5;
+        }
+
+        .black {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #scratchCanvas {
+            cursor: crosshair;
+            touch-action: none;
+            margin-top: -300px;
+        }
+
+        canvas {
+            height: 300px;
+            /* z-index: 3; */
+        }
+
+        .prize {
+            height: 300px;
+            background: url(./assets/gift.webp) center/cover no-repeat;
+            overflow: hidden;
+
+        }
+
+        #prize-text {
+            display: none;
+        }
+
+        #prize {
+            z-index: 10;
+        }
+
+        .btn {
+            font-size: 20px;
+        }
+
+        .bounce {
+            animation: bounce 1s ease 1;
+        }
+
+        .jello-horizontal {
+            -webkit-animation: jello-horizontal 0.9s infinite;
+            animation: jello-horizontal 0.9s infinite;
+        }
+
+        @-webkit-keyframes jello-horizontal {
+            0% {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+
+            30% {
+                -webkit-transform: scale3d(1.25, 0.75, 1);
+                transform: scale3d(1.25, 0.75, 1);
+            }
+
+            40% {
+                -webkit-transform: scale3d(0.75, 1.25, 1);
+                transform: scale3d(0.75, 1.25, 1);
+            }
+
+            50% {
+                -webkit-transform: scale3d(1.15, 0.85, 1);
+                transform: scale3d(1.15, 0.85, 1);
+            }
+
+            65% {
+                -webkit-transform: scale3d(0.95, 1.05, 1);
+                transform: scale3d(0.95, 1.05, 1);
+            }
+
+            75% {
+                -webkit-transform: scale3d(1.05, 0.95, 1);
+                transform: scale3d(1.05, 0.95, 1);
+            }
+
+            100% {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        @keyframes jello-horizontal {
+            0% {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+
+            30% {
+                -webkit-transform: scale3d(1.25, 0.75, 1);
+                transform: scale3d(1.25, 0.75, 1);
+            }
+
+            40% {
+                -webkit-transform: scale3d(0.75, 1.25, 1);
+                transform: scale3d(0.75, 1.25, 1);
+            }
+
+            50% {
+                -webkit-transform: scale3d(1.15, 0.85, 1);
+                transform: scale3d(1.15, 0.85, 1);
+            }
+
+            65% {
+                -webkit-transform: scale3d(0.95, 1.05, 1);
+                transform: scale3d(0.95, 1.05, 1);
+            }
+
+            75% {
+                -webkit-transform: scale3d(1.05, 0.95, 1);
+                transform: scale3d(1.05, 0.95, 1);
+            }
+
+            100% {
+                -webkit-transform: scale3d(1, 1, 1);
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(0.9);
+            }
+        }
+
+        .scratch-con {
+            z-index: 10;
+            background-color: rgba(0, 0, 0, 0.5);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        #canvas {
+            position: absolute;
+            display: none;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        .coins {
+            background: url(./assets/coins.webp);
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .popup {
+            /* display: none; */
+            position: absolute;
+            height: 110%;
+            width: 100vw;
+            top: 0;
+            overflow: hidden;
+            background-color: #1e191f;
+            animation: overlay 1s ease 1;
+        }
+
+        @keyframes overlay {
+            from {
+                background-color: #1e191f00;
+            }
+
+            to {
+                background-color: #1e191f;
+            }
+        }
+
+        @keyframes scale {
+            0% {
+                transform: scale(0);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+        }
+
+
+
+        @media only screen and (min-width: 768px) {
+            body {
+                display: none;
+            }
+        }
+
+        .coupon {
+            background: linear-gradient(180deg, #F7B54E 45.31%, #ED7636 127.64%);
+            width: 300px;
+        }
+
+        .circle {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: #1e191f;
+            /* filter: blur(px); */
+        }
+
+        .dots {
+            width: 320px;
+        }
+
+        .dots-line {
+            border: 2px dotted white;
+            height: 1px;
+            width: 100%;
+        }
+
+
+        .steps {
+            background: linear-gradient(180deg, #F7B54E 45.31%, #ED7636 127.64%);
+        }
+
+        .hover {
+            animation: hover 2s ease infinite;
+        }
+
+        @keyframes hover {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .amount {
+            font-size: 48px;
+            font-weight: 700;
+        }
+
+        .offer_amount {
+            text-shadow: 0 0 5px #ddd !important;
+        }
+
+        .z-inde-11 {
+            z-index: 11;
+        }
+
+        .navigation {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body>
+    <div class="navigation col-12 px-3 py-2 shadow    ">
+        <div class="bg-whgite p-1 rounded-circle d-flex align-items-center justify-content-center" style="width: 40px; height: 40px;">
+            <a href="https://tejkunitsolutions.com/royalityprogram8/games.html"><img src="./ScratchCard_files/back.svg" alt=""></a>
+        </div>
+        <h3 class="m-0"><i>Scratch &amp; Win</i></h3>
+    </div>
+    <main class="p-4 pt-0 col-12">
+        <div class="col-12 d-flex align-items-center justify-content-center title-img">
+            <img src="./ScratchCard_files/title.webp" class="hover" alt="" width="70%">
+        </div>
+        <p class="text-center o-5 p-0 m-0">Your are one choose one !</p>
+        <h2 class="text-center p-0 m-0">Scratch &amp; Reveal (<span class="scratches_left">3</span>/3) </h2>
+        <div class="rounded mt-4 d-flex align-items-center flex-column justify-content-center scratch-card">
+            <div class="col-11 prize rounded-3"></div>
+            <canvas id="scratchCanvas" class="rounded-3 col-11" height="300"></canvas>
+        </div>
+
+        <hr class="col-12">
+        <div tabindex="0" class="focusablediv">
+            <h4>What can you win ?</h4>
+            <div class="d-flex justify-content-between col-12 black rounded">
+                <div class="col p-3 ">
+                    <h4 class="m-0">Win upto Rs.15000*</h4>
+                    <p class="o-5 m-0">It's your chance to win upto 15000*</p>
+                </div>
+                <div class="col coins">
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="popup d-none container align-items-center flex-column text-dark py-5" id="popup">
+
+        <div class="col-12 d-flex align-items-center justify-content-end m-0 p-0 close" style="z-index: 25;">
+            <button class="border rounded bg-light text-dark text-center px-2 py-1 fw-bold popup_close" type="button" onclick="closepopup()"> X
+            </button>
+        </div>
+
+        <canvas id="canvas" width="375" height="667"></canvas>
+        <h1 class="text-light">Congratulations!</h1>
+        <div class="coupon container d-flex align-items-center justify-content-center p-4 bg-warning flex-column rounded col-11 g-10" id="prize">
+            <h5 class="my-3 d-block offer_amount text-center text-white">You have won <br> <span class="amount" id="amount">Rs.10*</span> </h5>
+
+            <img src="./ScratchCard_files/prize.webp" alt="" class="d-none offer_img" width="100%">
+            <div class="d-flex align-items-center justify-content-between dots">
+                <div class="circle"></div>
+                <hr class="dots-line">
+                <div class="circle"></div>
+            </div>
+            <a href="https://tejkunitsolutions.com/royalityprogram8/scratch_card/www.google.com" class="col-12"><button class="btn btn-light text-dark rounded col-12"><b>Claim the
+                        Prize</b></button></a>
+        </div>
+
+        <div class="mt-3 d-none align-items-center bg-light rounded-2 col-11 p-2 justify-content-center flex-column offer-steps steps">
+            <h6 class="m-0 p-0">Steps to claim the offer</h6>
+            <div class="d-flex align-items-center rounded-2 col-10 p-2 justify-content-center col-12">
+                <div class="d-flex text-center align-items-center justify-content-center flex-column gap-1 p-2 col">
+                    <img src="./ScratchCard_files/install.svg" alt="steps-icons" class="rounded-circle" height="30px" width="30px">
+                    <small>Install</small>
+                </div>
+                <div class="arrow px-2">
+                    &gt;
+                </div>
+                <div class="d-flex text-center align-items-center justify-content-center flex-column gap-1 p-2 col">
+                    <img src="./ScratchCard_files/register.svg" alt="steps-icons" class="rounded-circle" height="30px" width="30px">
+                    <small>Register</small>
+                </div>
+                <div class="arrow px-2">
+                    &gt;
+                </div>
+                <div class="d-flex text-center align-items-center justify-content-center flex-column gap-1 p-2 col">
+                    <img src="./ScratchCard_files/withdraw.svg" alt="steps-icons" class="rounded-circle" height="30px" width="30px">
+                    <small>Withdraw</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./ScratchCard_files/poppers.js.download"></script>
+
+    <script>
+        const canvas = document.getElementById("scratchCanvas");
+        const ctx = canvas.getContext("2d");
+        const prizeDiv = document.getElementById("popup");
+
+        let isDrawing = false;
+        let totalScratched = 0;
+        const scratchRadius = 15;
+        const scratchThreshold = 0.6; // 60% scratched
+        let count = 3;
+
+        // Initialize scratch card
+        function initializeScratchCard() {
+            // Fill the canvas with a scratchable surface
+            ctx.fillStyle = "#EEBF5D";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.font = "20px Arial";
+            ctx.fillStyle = "#000";
+            ctx.textAlign = "center";
+            ctx.fillText("Scratch Here!", canvas.width / 2, canvas.height / 2);
+        }
+
+
+        // Handle pointer down
+        function handlePointerDown(e) {
+            e.preventDefault();
+            isDrawing = true;
+            scratch(e);
+        }
+
+        // Handle pointer move
+        function handlePointerMove(e) {
+            if (!isDrawing) return;
+            e.preventDefault();
+            scratch(e);
+        }
+
+        // Handle pointer up/cancel
+        function handlePointerUp(e) {
+            if (!isDrawing) return;
+            isDrawing = false;
+            checkScratchCompletion();
+        }
+
+        // Scratch function
+        function scratch(e) {
+            const rect = canvas.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            ctx.globalCompositeOperation = "destination-out";
+            ctx.beginPath();
+            ctx.arc(x, y, scratchRadius, 0, Math.PI * 2, false);
+            ctx.fill();
+
+            // Update scratched area
+            updateScratchedPercentage();
+        }
+
+        // Calculate scratched area
+        function updateScratchedPercentage() {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const pixels = imageData.data;
+            const totalPixels = pixels.length / 4; // Each pixel has RGBA
+            let transparentPixels = 0;
+
+            for (let i = 0; i < pixels.length; i += 4) {
+                if (pixels[i + 3] === 0) {
+                    // Alpha channel
+                    transparentPixels++;
+                }
+            }
+
+            const scratchedPercentage = transparentPixels / totalPixels;
+
+            if (scratchedPercentage > scratchThreshold) {
+                revealPrize();
+            }
+        }
+
+        // Reveal prize
+        function revealPrize() {
+            document.querySelector(".prize").classList.add("bounce");
+            document.querySelector(".prize").classList.add('z-index-11');
+            document.getElementById("canvas").style.display = "block";
+            document.getElementById("scratchCanvas").style.display = "none";
+
+            poppers();
+            setTimeout(() => {
+
+                if (count < 3) {
+                    prizeDiv.classList.replace('d-none', 'd-flex');
+                    document.body.style.overflow = "hidden";
+                    document.querySelector('.offer_amount').classList.replace('d-block', 'd-none');
+                    document.querySelector('.offer_img').classList.replace('d-none', 'd-flex');
+                } else {
+                    prizeDiv.classList.replace('d-none', 'd-flex');
+                    document.body.style.overflow = "hidden";
+                }
+            }, 1000);
+        }
+
+        function closepopup() {
+            let popupCon = document.querySelector('.popup');
+            if (popupCon) {
+                popupCon.classList.replace('d-flex', 'd-none');
+            }
+
+            // Reset the z-index of the prize element
+            document.querySelector(".prize").classList.remove('z-index-11');
+            document.querySelector(".prize").classList.remove("bounce");
+            document.querySelector(".offer-steps").classList.remove("d-none");
+            document.querySelector(".prize").style.background = 'url(./assets/prize.webp) center/cover no-repeat';
+
+
+            // Reset the scratch card after closing the popup
+            resetScratchCard();
+            count--;
+            document.querySelector('.scratches_left').innerHTML = count;
+
+        }
+
+        function resetScratchCard() {
+            // Clear the canvas completely
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Reset the globalCompositeOperation to normal drawing mode
+            ctx.globalCompositeOperation = "source-over";
+
+            // Reinitialize the scratchable surface
+            if (count <= 1) {
+                // Display a message if no scratches are left
+                ctx.fillStyle = "#e3e3e3";
+                ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill background
+                ctx.fillStyle = "#000"; // Text color
+                ctx.textAlign = "center";
+                ctx.font = "20px Arial";
+                ctx.fillText("No Scratches Left! Try Tomorrow", canvas.width / 2, canvas.height / 2);
+                // document.querySelector('.scratches_left').styl.color = 'red';
+
+
+                // Disable scratching interactions
+                canvas.removeEventListener("pointerdown", handlePointerDown);
+                canvas.removeEventListener("pointermove", handlePointerMove);
+                canvas.removeEventListener("pointerup", handlePointerUp);
+            } else {
+                // Set up the scratchable canvas if scratches are left
+
+                ctx.fillStyle = "#EEBF5D"; // Scratchable surface color
+                ctx.fillRect(0, 0, canvas.width, canvas.height); // Fill the scratch layer
+
+                // Add the "Scratch Here!" text over the surface
+                ctx.font = "20px Arial";
+                ctx.fillStyle = "#000";
+                ctx.textAlign = "center";
+                ctx.fillText("Scratch Here!", canvas.width / 2, canvas.height / 2);
+
+                // Re-enable the scratchable surface
+                initializeScratchCard();
+
+                // Re-enable interaction
+                canvas.addEventListener("pointerdown", handlePointerDown);
+                canvas.addEventListener("pointermove", handlePointerMove);
+                canvas.addEventListener("pointerup", handlePointerUp);
+            }
+
+            // Show the scratch canvas again and hide the prize div
+            document.getElementById("canvas").style.display = "none"; // Hide the prize
+            document.getElementById("scratchCanvas").style.display = "block"; // Show the scratch canvas
+
+            // Reset the scratch tracking variables
+            isDrawing = false;
+            totalScratched = 0;
+
+            // Allow scrolling again
+            document.body.style.overflow = "auto";
+
+        }
+
+        // Add pointer event listeners
+        canvas.addEventListener("pointerdown", handlePointerDown);
+        canvas.addEventListener("pointermove", handlePointerMove);
+        canvas.addEventListener("pointerup", handlePointerUp);
+        canvas.addEventListener("pointercancel", handlePointerUp);
+
+        // Initialize the scratch card on page load
+        initializeScratchCard();
+    </script>
+
+<script type="module" src="./ScratchCard_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style><button class="glasp-banner-root glasp-fab-root" aria-label="Glasp" title="Glasp" style="position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); z-index: 2147483646; pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(255, 255, 255, 0.92); box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"></path><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path></svg></button></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

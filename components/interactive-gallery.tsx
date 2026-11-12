@@ -10,6 +10,7 @@ import {
 } from "react";
 import type { GalleryCardData, GalleryImage } from "@/lib/gallery-data";
 import LiquidRevealCursor from "@/components/mfa/LiquidRevealCursor";
+import PixelTrail from "@/components/pixel-trail";
 
 const COLUMN_COUNT = 4;
 const MIN_ZOOM = 0.3;
@@ -678,6 +679,17 @@ export function InteractiveGallery({ cards }: { cards: GalleryCardData[] }) {
           aria-label="Interactive design gallery. Drag to move and scroll to zoom."
         >
           <div className="gallery-backdrop" aria-hidden="true" />
+          <PixelTrail
+            gridSize={44}
+            trailSize={0.075}
+            maxAge={420}
+            interpolate={3}
+            color="#d7f0e2"
+            trailColor="#83b9a2"
+            gooeyFilter={{ strength: 1.4 }}
+            glow={0.22}
+            shine={0.45}
+          />
           <div ref={canvasRef} className="gallery-canvas">
             {positions.map(({ col, row, card }, index) => (
               <GalleryTile

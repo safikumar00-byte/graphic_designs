@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://tejkunitsolutions.com/spins/six/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin Wheel</title>
+    <link rel="stylesheet" href="./six_files/output.css">
+    <style>
+        body {
+            /* background-image: url(./assets/bg.webp), linear-gradient(90deg, #FDCD9B 0%, #FCCC8C 100%); */
+            background: linear-gradient(167.79deg, #FFFFFF 1.35%, #F1EBFF 50.18%, #FFFFFF 100%);
+            background-size: cover;
+            background-color: #FDCD9B;
+            background-position: center;
+            background-repeat: no-repeat;
+            scroll-behavior: smooth;
+        }
+
+        .title {
+            z-index: -1;
+        }
+
+        .center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .click {
+            background: radial-gradient(50% 274% at 50% 50%, #971B51 0%, #AF3F72 25%, #971B51 50%, #AF3F72 75%, #971B51 100%);
+
+        }
+
+        .coin {
+            position: absolute;
+            width: 100px;
+            animation: hover 2s ease infinite forwards;
+            z-index: -1;
+        }
+
+        .coin-1 {
+            right: 0%;
+            top: 7%;
+        }
+
+        .coin-2 {
+            bottom: -1%;
+            left: 5%;
+            z-index: 2;
+        }
+
+        .coin-3 {
+            top: 4%;
+            left: 0%;
+        }
+
+        .spin-win {
+            background: linear-gradient(to right, #fd693b 0%, #feb544 100%);
+        }
+
+        .auto-rotate {
+            animation: auto_rotate 120s linear infinite;
+        }
+
+        @keyframes auto_rotate {
+            from {
+                transform: translate(-50%, -50%) rotate(30deg);
+
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(3600deg);
+
+            }
+        }
+
+        @keyframes hover {
+
+            0%,
+            100% {
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
+
+            50% {
+                margin-top: 0px;
+                margin-top: 0px;
+            }
+        }
+
+
+
+        .rotate-wheel {
+            animation: rotate-wheel 4s ease-in-out forwards;
+        }
+
+        @keyframes rotate-wheel {
+            from {
+                transform: translate(-50%, -50%) rotate(30deg);
+            }
+
+            to {
+                transform: translate(-50%, -50%) rotate(3570deg);
+            }
+        }
+
+        .popup-con {
+            position: absolute;
+            z-index: 3;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 100vw;
+            background-color: rgba(0, 0, 0, 0.2);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            flex-direction: column;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .envelope {
+            width: 80%;
+            padding-bottom: 40px;
+            background-color: #652887;
+            border-radius: 10px 10px 30px 30px;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            flex-direction: column;
+            height: 180px;
+            overflow: visible;
+        }
+
+        .envelope-img {
+            margin-top: -100px;
+        }
+
+        .claim {
+            box-sizing: border-box;
+            padding: 10px;
+            gap: 10px;
+            font-size: 20px;
+            position: relative;
+            color: #830A00;
+            font-weight: 700;
+            width: 90%;
+            text-transform: uppercase;
+            text-wrap: nowrap;
+            background: linear-gradient(183.05deg, #FFC60A 2.52%, #FDF578 97.48%);
+            box-shadow: inset 0px 4px 11px #DEA71C;
+            border-radius: 97px;
+            margin-top: -60px;
+            border: 5px solid transparent;
+            animation: bounce 2s ease infinite forwards;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .offer {
+            width: 90%;
+            height: 300px;
+            background-color: white;
+            border-radius: 15px;
+            margin-top: -120px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 20px;
+            flex-direction: column;
+            gap: 10px;
+            border: 10px solid #815E95;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .hr {
+            width: 75%;
+            height: 1px;
+            border: 0.5px dashed #815e9587;
+
+        }
+
+        .offer h3 {
+            font-size: 1.5rem;
+
+        }
+
+        .offer h1 {
+            font-size: 2rem;
+            color: #652887;
+        }
+
+        canvas {
+            display: none;
+            overflow-y: hidden;
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            position: absolute;
+            top: 0;
+            z-index: 2;
+        }
+
+        .icon {
+            font-size: 30px;
+            background-color: #652887;
+            border-radius: 50%;
+            padding: 20px;
+            width: 36px;
+            height: 36px;
+            color: white;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .scale-in-center {
+            animation: scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        @keyframes scale-in-center {
+            0% {
+                transform: scale(0);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        @media only screen and (max-height: 665px) {
+            body {
+                height: fit-content;
+            }
+        }
+
+        @media only screen and (min-width: 768px) {
+            body {
+                display: none;
+            }
+        }
+
+        .pointer {
+            cursor: pointer;
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            translate: translate(-45%, -65%);
+            animation: pointer 1.5s ease-in-out infinite;
+            transform: rotate(-30deg);
+            width: 50px;
+            height: 50px;
+        }
+
+        @keyframes pointer {
+
+            0%,
+            100% {
+                top: 55%;
+                left: 50%;
+            }
+
+            50% {
+                top: 60%;
+                left: 55%;
+            }
+        }
+
+        .prize_con {
+            z-index: 2;
+            box-shadow: inset 0px 0px 23px #f1ebff;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        legend {
+            background-color: #241246;
+            /* background: linear-gradient(90deg, #F88750 0%, #FE4A9F 100%); */
+        }
+
+        .prize_item {
+            background: linear-gradient(90deg, #F88750 0%, #FE4A9F 100%);
+        }
+
+        marquee {
+            background-color: #fff;
+            text-align: center;
+            border: 1px solid #652887;
+        }
+
+        marquee p {
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .header {
+            margin-bottom: -10px;
+        }
+
+        .wheel {
+            margin: -20px 0px;
+        }
+
+        .inner_wheel {
+            transform: translate(-50%, -50%), rotate(30deg);
+        }
+
+        .text-custom {
+            color: #241246;
+        }
+
+        .bg-custom {
+            background-color: #652887;
+        }
+    </style>
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body>
+    <canvas id="canvas" width="375" height="667"></canvas>
+    <img src="https://tejkunitsolutions.com/spins/six/" tabindex="0" class="focus" alt="">
+
+    <main class="flex flex-col h-fit">
+
+        <div class="flex items-center justify-center mb-6 title header">
+            <img src="./six_files/title.webp" width="100%" alt="header_img">
+        </div>
+        <div class="relative flex items-center justify-center my-4 ">
+            <img src="./six_files/megaphone.svg" class="absolute top-0 m-2 left-10" width="20px" alt="">
+            <marquee behavior="scroll" direction="up" height="20px" class="w-5/6 h-8 rounded-full bg-violet-50" scrollamount="3">
+                <p>+91 93******** has won 5000/-</p>
+                <p>+91 82******** has won 15000/-</p>
+                <p>+91 63******** has won 2000/-</p>
+                <p>+91 99******** has won 10000/-</p>
+                <p>+91 65******** has won 15000/-</p>
+                <p>+91 60******** has won 10000/-</p>
+                <p>+91 72******** has won 10000/-</p>
+                <p>+91 69******** has won 2000/-</p>
+                <p>+91 94******** has won 10000/-</p>
+                <p>+91 80******** has won 15000/-</p>
+                <p>+91 89******** has won 10000/-</p>
+                <p>+91 93******** has won 10000/-</p>
+                <p>+91 82******** has won 10000/-</p>
+                <p>+91 63******** has won 5000/-</p>
+                <p>+91 99******** has won 5000/-</p>
+                <p>+91 65******** has won 2000/-</p>
+                <p>+91 60******** has won 15000/-</p>
+                <p>+91 72******** has won 10000/-</p>
+                <p>+91 69******** has won 5000/-</p>
+                <p>+91 94******** has won 2000/-</p>
+                <p>+91 80******** has won 10000/-</p>
+                <p>+91 89******** has won 10000/-</p>
+            </marquee>
+        </div>
+        <div class="wheel w-full h-[400px] relative flex items-center justify-center overflow-hidden">
+            <img src="./six_files/inner-wheel.webp" alt="" class="inner_wheel over auto-rotate center" width="85%">
+            <img src="./six_files/outer-wheel.webp" alt="" class="outer_wheel over auto-rotate center" width="90%">
+            <img src="./six_files/spin-btn.webp" alt="" class="spin-btn center" width="30%" onclick="spin()">
+            <!-- <img src="./assets/coin.webp" alt="" class=" coin coin-1">
+            <img src="./assets/coin_1.webp" alt="" class="coin-2 coin">
+            <img src="./assets/coin_2.webp" alt="" class="coin-3 coin"> -->
+            <div class="flex flex-row items-center justify-center pointer center">
+                <img src="./six_files/pointer.webp" alt="" class="center " width="100%" onclick="spin()">
+                <p class="px-4 mt-24 font-bold text-center bg-white rounded-md text-shadow text-nowrap">Click to Spin
+                </p>
+            </div>
+        </div>
+
+        <div class="flex items-center justify-center w-full p-4 ">
+            <fieldset class="w-full p-4 bg-white border-2 rounded-lg border-violet-100 prize_con">
+                <legend class="px-6 py-3 text-xl font-semibold text-center text-white rounded-lg">Mega Prize Bonus
+                </legend>
+                <div>
+                    <p class="text-xl font-bold text-custom">Win Upto Rs.15000*</p>
+                    <p class="text-lg text-custom">Spin &amp; Win mega Prizes</p>
+                </div>
+                <img src="./six_files/gift.svg" alt="" width="20%" class="prize">
+            </fieldset>
+        </div>
+
+        <div class="h-full popup-con">
+            <!-- <canvas id="canvas"></canvas> -->
+            <div class="envelope">
+                <div class="offer">
+                    <div class="icon">₹</div>
+                    <div class="hr"></div>
+                    <div>
+                        <h3>Congratulations</h3>
+                        <h1 class="font-bold">Rs.10000</h1>
+                    </div>
+                </div>
+                <img src="./six_files/envelope.svg" alt="" class="envelope-img" width="100%">
+                <button class="claim">Claim now</button>
+            </div>
+
+            <div class="flex flex-col w-5/6 p-2 mt-3 text-white rounded-md bg-custom offer-steps">
+                <h6 class="p-0 m-0 text-center">Steps to claim the offer</h6>
+                <div class="flex items-center justify-center w-full p-2 rounded-md col-10">
+                    <div class="flex flex-col items-center justify-center w-full gap-1 p-2 text-center">
+                        <img src="./six_files/install.svg" alt="steps-icons" class="rounded-circle" height="30px" width="30px">
+                        <small>Install</small>
+                    </div>
+                    <div class="px-2 arrow">
+                        &gt;
+                    </div>
+                    <div class="flex flex-col items-center justify-center w-full gap-1 p-2 text-center">
+                        <img src="./six_files/register.svg" alt="steps-icons" class="rounded-circle" height="30px" width="30px">
+                        <small>Register</small>
+                    </div>
+                    <div class="px-2 arrow">
+                        &gt;
+                    </div>
+                    <div class="flex flex-col items-center justify-center w-full gap-1 p-2 text-center">
+                        <img src="./six_files/withdraw.svg" alt="steps-icons" class="rounded-circle" height="30px" width="30px">
+                        <small>Withdraw</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script>
+        function spin() {
+            document.querySelector('.inner_wheel').classList.replace('auto-rotate', 'rotate-wheel');
+            document.querySelector('.pointer').style.display = 'none';
+            setTimeout(() => {
+                document.getElementById('canvas').style.display = 'block';
+                setTimeout(() => {
+                    document.querySelector('.focus').focus();
+                    document.body.style.overflow = 'hidden';
+                    document.querySelector('.popup-con').style.display = 'flex';
+                    document.querySelector('.popup-con').style.opacity = 1;
+                    document.querySelector('.envelope').style.animation = "scale-in-center 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both";
+                }, 2000);
+            }, 4000);
+        }
+
+        document.querySelector('.claim').addEventListener('click', () => {
+            window.location.href = "www.google.com";
+        });
+    </script>
+    <script>
+        let W = window.innerWidth;
+        let H = window.innerHeight;
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+        const maxConfettis = 10;
+        const particles = [];
+
+
+        const possibleColors = [
+            "DodgerBlue",
+            "OliveDrab",
+            "Gold",
+            "Pink",
+            "SlateBlue",
+            "LightBlue",
+            "Gold",
+            "Violet",
+            "PaleGreen",
+            "SteelBlue",
+            "SandyBrown",
+            "Chocolate",
+            "Crimson"
+        ];
+
+
+        function randomFromTo(from, to) {
+            return Math.floor(Math.random() * (to - from + 1) + from);
+        }
+
+
+        function confettiParticle() {
+            this.x = Math.random() * W; // x
+            this.y = Math.random() * H - H; // y
+            this.r = randomFromTo(11, 33); // radius
+            this.d = Math.random() * maxConfettis + 11;
+            this.color =
+                possibleColors[Math.floor(Math.random() * possibleColors.length)];
+            this.tilt = Math.floor(Math.random() * 33) - 11;
+            this.tiltAngleIncremental = Math.random() * 0.07 + 0.05;
+            this.tiltAngle = 0;
+
+
+            this.draw = function () {
+                context.beginPath();
+                context.lineWidth = this.r / 2;
+                context.strokeStyle = this.color;
+                context.moveTo(this.x + this.tilt + this.r / 3, this.y);
+                context.lineTo(this.x + this.tilt, this.y + this.tilt + this.r / 5);
+                return context.stroke();
+            };
+        }
+
+
+        function Draw() {
+            const results = [];
+
+
+            // Magical recursive functional love
+            requestAnimationFrame(Draw);
+
+
+            context.clearRect(0, 0, W, window.innerHeight);
+
+
+            for (var i = 0; i < maxConfettis; i++) {
+                results.push(particles[i].draw());
+            }
+
+
+            let particle = {};
+            let remainingFlakes = 0;
+            for (var i = 0; i < maxConfettis; i++) {
+                particle = particles[i];
+
+
+                particle.tiltAngle += particle.tiltAngleIncremental;
+                particle.y += (Math.cos(particle.d) + 3 + particle.r / 2) / 2;
+                particle.tilt = Math.sin(particle.tiltAngle - i / 3) * 15;
+
+
+                if (particle.y <= H) remainingFlakes++;
+
+
+                // If a confetti has fluttered out of view,
+                // bring it back to above the viewport and let if re-fall.
+                if (particle.x > W + 30 || particle.x < -30 || particle.y > H) {
+                    particle.x = Math.random() * W;
+                    particle.y = -30;
+                    particle.tilt = Math.floor(Math.random() * 10) - 20;
+                }
+            }
+
+
+            return results;
+        }
+
+
+        window.addEventListener(
+            "resize",
+            function () {
+                W = window.innerWidth;
+                H = window.innerHeight;
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            },
+            false
+        );
+
+
+        // Push new confetti objects to `particles[]`
+        for (var i = 0; i < maxConfettis; i++) {
+            particles.push(new confettiParticle());
+        }
+
+
+        // Initialize
+        canvas.width = W;
+        canvas.height = H;
+        Draw();
+    </script>
+<script type="module" src="./six_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style><button class="glasp-banner-root glasp-fab-root" aria-label="Glasp" title="Glasp" style="position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); z-index: 2147483646; pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(255, 255, 255, 0.92); box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"></path><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path></svg></button></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

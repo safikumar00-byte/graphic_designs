@@ -1,0 +1,12 @@
+.pixel-canvas {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  pointer-events: none;
+}
+
+.pixel-canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}

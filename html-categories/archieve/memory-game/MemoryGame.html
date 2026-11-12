@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<!-- saved from url=(0061)https://tejkunitsolutions.com/latest_page/memory_game1_all_3/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Memory Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./MemoryGame_files/css2" rel="stylesheet">
+    <link rel="stylesheet" href="./MemoryGame_files/styles.css">
+    <style>
+        body {
+            display: flex;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            background: url(./asests/bg.webp);
+            background-repeat: no-repeat;
+            background-size: cover;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+
+        .title {
+            width: 100%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            margin-top: 25px;
+        }
+
+        .game-board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            gap: 10px;
+            margin-top: 40px;
+        }
+
+        .card {
+            width: 100px;
+            height: 100px;
+            perspective: 1000px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: solid 2px #000000;
+            border-radius: 10px;
+        }
+
+        .card .front,
+        .card .back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: transform 0.6s ease-in-out;
+            /* Smooth flip animation */
+        }
+
+        .card .front {
+            transform: rotateY(0deg);
+            background: #fff;
+        }
+
+        .card .back {
+            transform: rotateY(180deg);
+            background: #333;
+            color: white;
+        }
+
+        .card.flip .front {
+            transform: rotateY(-180deg);
+        }
+
+        .card.flip .back {
+            transform: rotateY(0deg);
+        }
+
+        .sentece {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 10px;
+            color: #ffffff;
+        }
+
+        .sentece span {
+            color: #000000;
+        }
+
+        .popup {
+            display: none;
+            /* Hidden by default */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgb(0 0 0 / 70%);
+            height: 100vh;
+            width: 100vw;
+            justify-self: center;
+            align-items: center;
+            color: white;
+            /*   */
+            text-align: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .popup_con {
+            background-color: white;
+            color: black;
+            border-radius: 10px;
+            width: 80%;
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: 600;
+            /* border: 5px solid wheat; */
+        }
+
+        .popup_con img {
+            border-radius: 8px;
+            border: 5px solid wheat;
+            display: flex;
+            align-items: center;
+            width: 96%;
+        }
+
+
+        canvas {
+            width: 100%;
+            margin: 0;
+            position: absolute;
+            top: 0;
+            z-index: -1;
+            overflow-y: hidden;
+            overflow-x: hidden;
+            height: 100vh;
+        }
+
+        a {
+            width: 80%;
+        }
+
+        button {
+            width: 100%;
+            color: rgb(255, 255, 255);
+            background: linear-gradient(135deg, #588b74, #28a745);
+            font-size: 20px;
+            border: 1px solid black;
+            border-radius: 4px;
+            height: 40px;
+            font-weight: 600;
+            z-index: 3;
+        }
+
+        .banner {
+            width: 100%;
+        }
+
+        .timer {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+
+        .steps {
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: row;
+            gap: 10px;
+            margin-top: 20px;
+            border-radius: 6px;
+            width: 80%;
+            color: black;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 20px 0px;
+        }
+
+        .step p {
+            margin: 0px;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .circle {
+            border-radius: 50px;
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            background-color: black;
+            height: 30px;
+            width: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .right_arrow {
+            width: 8%;
+        }
+
+
+        .glow {
+            box-shadow: 0 0 15px rgba(255, 255, 0, 0.8);
+            /* Glowing yellow effect */
+        }
+
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .blink {
+            animation: blink 1s infinite;
+            /* Blinking effect */
+        }
+
+        .pulsate-fwd {
+            -webkit-animation: pulsate-fwd 2s ease-in-out infinite both;
+            animation: pulsate-fwd 2s ease-in-out infinite both;
+        }
+
+        /* ----------------------------------------------
+ * Generated by Animista on 2025-4-1 11:52:15
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+        /**
+ * ----------------------------------------
+ * animation pulsate-fwd
+ * ----------------------------------------
+ */
+        @-webkit-keyframes pulsate-fwd {
+            0% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+
+            50% {
+                -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+            }
+
+            100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulsate-fwd {
+            0% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+
+            50% {
+                -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+            }
+
+            100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        /* Blocked cards styling (visual feedback) */
+        .card.blocked {
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+
+        .timer{
+            display: flex;
+            align-items: center;
+            justify-content:center;
+            flex-direction: row;
+            font-size: 16px;
+            color: black;
+            font-weight: 500;
+        }
+
+        #timer{
+            color: #ff3131;
+            font-weight: 700;
+        }
+
+        .blink-1 {
+            -webkit-animation: blink-1 2s infinite both;
+            animation: blink-1 2s infinite both;
+        }
+
+        /* ----------------------------------------------
+ * Generated by Animista on 2025-4-1 16:42:48
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+        /**
+ * ----------------------------------------
+ * animation blink-1
+ * ----------------------------------------
+ */
+        @-webkit-keyframes blink-1 {
+
+            0%,
+            50%,
+            100% {
+                opacity: 1;
+            }
+
+            25%,
+            75% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes blink-1 {
+
+            0%,
+            50%,
+            100% {
+                opacity: 1;
+            }
+
+            25%,
+            75% {
+                opacity: 0;
+            }
+        }
+
+
+        @media (min-width: 380px) {
+            .title {
+                margin-top: 40px;
+            }
+
+            .sentece {
+                margin: 20px;
+            }
+
+            .game-board {
+                margin-top: 40px;
+            }
+        }
+
+        @media (min-width: 700px) {
+            body {
+                display: none;
+            }
+        }
+    </style>
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body>
+
+    <img src="./MemoryGame_files/title.webp" alt="title" class="title">
+    <p class="sentece pulsate-fwd"> <span>Match any 3 <br></span>
+        to win exciting rewards!</p>
+
+    <div class="game-board">
+
+        <div class="card" onclick="flipCard(this)">
+            <div class="front">
+                <img src="./MemoryGame_files/question_mark.webp" alt="Front Image 1">
+            </div>
+            <div class="back">
+                <img src="./MemoryGame_files/blue.webp" alt="Back Image">
+            </div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="front">
+                <img src="./MemoryGame_files/question_mark.webp" alt="Front Image 1" class="">
+            </div>
+            <div class="back">
+                <img src="./MemoryGame_files/blue.webp" alt="Back Image">
+            </div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="front">
+                <img src="./MemoryGame_files/question_mark.webp" alt="Front Image 1" class="">
+            </div>
+            <div class="back">
+                <img src="./MemoryGame_files/blue.webp" alt="Back Image">
+            </div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="front">
+                <img src="./MemoryGame_files/question_mark.webp" alt="Front Image 1" class="">
+            </div>
+            <div class="back">
+                <img src="./MemoryGame_files/blue.webp" alt="Back Image">
+            </div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="front">
+                <img src="./MemoryGame_files/question_mark.webp" alt="Front Image 1" class="blink">
+            </div>
+            <div class="back">
+                <img src="./MemoryGame_files/blue.webp" alt="Back Image">
+            </div>
+        </div>
+        <div class="card" onclick="flipCard(this)">
+            <div class="front">
+                <img src="./MemoryGame_files/question_mark.webp" alt="Front Image 1" class="">
+            </div>
+            <div class="back">
+                <img src="./MemoryGame_files/blue.webp" alt="Back Image">
+            </div>
+        </div>
+    </div>
+
+    <div class="popup">
+        <canvas id="canvas" width="1182" height="919"></canvas>
+        <div class="popup_con">
+            <img src="./MemoryGame_files/banner.webp" alt="banner" class="banner">
+            <div class="timer">
+                <p>Limited-Time Offer : </p>
+            <p id="timer">1:30</p>
+        </div>
+            <a href="https://tejkunitsolutions.com/latest_page/memory_game1_all_3/www.google.com"><button class="pulsate-fwd">Withdraw Now</button></a>
+            <p>🎉 Grab the Offer Now! 🎉</p>
+        </div>
+
+        <div class="steps">
+            <div class="step">
+                <div class="circle">1</div>
+                <p>Download</p>
+            </div>
+
+            <img src="./MemoryGame_files/right.webp" alt="right_arrow" class="right_arrow blink-1">
+
+            <div class="step">
+                <div class="circle">2</div>
+                <p>Install</p>
+            </div>
+
+            <img src="./MemoryGame_files/right.webp" alt="right_arrow" class="right_arrow blink-1">
+
+            <div class="step">
+                <div class="circle">3</div>
+                <p>Register </p>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        let flippedCards = [];
+        const cards = document.querySelectorAll('.card'); // Get all cards
+        const frontImages = document.querySelectorAll('.front img'); // Get all front images;
+        const gameBoard = document.querySelector('.game-board'); // Get the game board
+
+        // Apply blinking effect with a staggered delay and remove after 5 seconds
+        window.onload = function () {
+            setInterval(() => {
+                let previousNum = -1;
+                let randNum;
+                do {
+                    randNum = Math.floor(Math.random() * 6);
+                } while (randNum === previousNum);
+                previousNum = randNum;
+                frontImages[randNum].classList.add('blink');
+                setTimeout(() => {
+                    frontImages[randNum].classList.remove('blink');
+                }, 1000);
+            }, 2000); // Runs every 2 seconds
+        };
+
+        function flipCard(card) {
+            // Prevent interaction if game board is disabled
+            if (card.classList.contains('blocked') || gameBoard.classList.contains('disabled')) return;
+
+            card.classList.add('flip'); // Add flip animation
+
+            if (!flippedCards.includes(card)) {
+                flippedCards.push(card);
+            }
+
+            // Add glow effect after a short delay
+            setTimeout(() => {
+                card.classList.add('glow'); // Apply glow effect
+            }, 500); // Adjust delay as needed
+
+            if (flippedCards.length === 3) {
+                blockOtherCards(); // Block other cards
+                setTimeout(checkMatch, 600); // Wait for flip animations to finish
+            }
+        }
+
+        function blockOtherCards() {
+            cards.forEach(card => {
+                if (!flippedCards.includes(card)) {
+                    card.classList.add('blocked'); // Add a visual cue to blocked cards
+                }
+            });
+        }
+
+        function unblockAllCards() {
+            cards.forEach(card => {
+                card.classList.remove('blocked'); // Remove the blocked state
+            });
+        }
+
+        function checkMatch() {
+            const [firstCard, secondCard, thirdCard] = flippedCards;
+            const firstImg = firstCard.querySelector('.front img').src;
+            const secondImg = secondCard.querySelector('.front img').src;
+            const thirdImg = thirdCard.querySelector('.front img').src;
+
+            if (firstImg === secondImg && secondImg === thirdImg) {
+                displayPopup(); // Show the popup when the match is found
+            }
+
+            flippedCards.forEach(card => {
+                card.classList.remove('flip');
+                card.classList.remove('glow'); // Remove glow effect after match check
+            });
+
+            flippedCards = [];
+            unblockAllCards(); // Unblock cards after the turn
+        }
+
+        function displayPopup() {
+            const popup = document.querySelector('.popup');
+            popup.style.display = "flex"; // Show the popup
+
+            // Disable interaction with the game board
+            gameBoard.classList.add('disabled');
+
+            startCountdown(); // Start the countdown timer
+        }
+
+        function startCountdown() {
+            let time = 90; // 1 minute 30 seconds in seconds
+            const timerElement = document.getElementById("timer");
+
+            const countdown = setInterval(() => {
+                const minutes = Math.floor(time / 60);
+                const seconds = time % 60;
+                timerElement.textContent = `${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+                time--;
+
+                if (time < 0) {
+                    clearInterval(countdown); // Stop timer
+                }
+            }, 1000);
+        }
+    </script>
+
+    <script>
+        let W = window.innerWidth;
+        let H = window.innerHeight;
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+        const maxConfettis = 10;
+        const particles = [];
+
+        const possibleColors = [
+            "DodgerBlue",
+            "OliveDrab",
+            "Gold",
+            "Pink",
+            "SlateBlue",
+            "LightBlue",
+            "Gold",
+            "Violet",
+            "PaleGreen",
+            "SteelBlue",
+            "SandyBrown",
+            "Chocolate",
+            "Crimson"
+        ];
+
+        function randomFromTo(from, to) {
+            return Math.floor(Math.random() * (to - from + 1) + from);
+        }
+
+        function confettiParticle() {
+            this.x = Math.random() * W; // x
+            this.y = Math.random() * H - H; // y
+            this.r = randomFromTo(11, 33); // radius
+            this.d = Math.random() * maxConfettis + 11;
+            this.color =
+                possibleColors[Math.floor(Math.random() * possibleColors.length)];
+            this.tilt = Math.floor(Math.random() * 33) - 11;
+            this.tiltAngleIncremental = Math.random() * 0.07 + 0.05;
+            this.tiltAngle = 0;
+
+            this.draw = function () {
+                context.beginPath();
+                context.lineWidth = this.r / 2;
+                context.strokeStyle = this.color;
+                context.moveTo(this.x + this.tilt + this.r / 3, this.y);
+                context.lineTo(this.x + this.tilt, this.y + this.tilt + this.r / 5);
+                return context.stroke();
+            };
+        }
+
+        function Draw() {
+            const results = [];
+
+            // Magical recursive functional love
+            requestAnimationFrame(Draw);
+
+            context.clearRect(0, 0, W, window.innerHeight);
+
+            for (var i = 0; i < maxConfettis; i++) {
+                results.push(particles[i].draw());
+            }
+
+            let particle = {};
+            let remainingFlakes = 0;
+            for (var i = 0; i < maxConfettis; i++) {
+                particle = particles[i];
+
+                particle.tiltAngle += particle.tiltAngleIncremental;
+                particle.y += (Math.cos(particle.d) + 3 + particle.r / 2) / 2;
+                particle.tilt = Math.sin(particle.tiltAngle - i / 3) * 15;
+
+                if (particle.y <= H) remainingFlakes++;
+
+                // If a confetti has fluttered out of view,
+                // bring it back to above the viewport and let if re-fall.
+                if (particle.x > W + 30 || particle.x < -30 || particle.y > H) {
+                    particle.x = Math.random() * W;
+                    particle.y = -30;
+                    particle.tilt = Math.floor(Math.random() * 10) - 20;
+                }
+            }
+
+            return results;
+        }
+
+        window.addEventListener(
+            "resize",
+            function () {
+                W = window.innerWidth;
+                H = window.innerHeight;
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            },
+            false
+        );
+
+        // Push new confetti objects to particles[]
+        for (var i = 0; i < maxConfettis; i++) {
+            particles.push(new confettiParticle());
+        }
+
+        // Initialize
+        canvas.width = W;
+        canvas.height = H;
+        Draw();
+    </script>
+
+<script type="module" src="./MemoryGame_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://tejkunitsolutions.com/spins/new_spins/newspin_sms5/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./Spin6_files/BLKCHCRY.TTF">
+    <link rel="stylesheet" href="./Spin6_files/css2">
+    <link rel="stylesheet" href="./Spin6_files/css2(1)">
+    <title>Spin - 6</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: scroll;
+        }
+
+        body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100vw;
+            background-color: #2A96FB;
+            /* background: url(./images/bg.jpg);
+            background-position: center;
+            background-attachment: fixed;
+            background-size: cover;
+            background-repeat: no-repeat;*/
+            text-align: center;
+        }
+
+        .container {
+            max-width: 500px;
+            display: flex;
+            align-items: center;
+            /* justify-content: center; */
+            flex-direction: column;
+        }
+
+        .logo-con {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            margin-top: 5px;
+            /* padding: 20px 0px; */
+        }
+
+        .wallet-con {
+            width: 240px;
+            /* height: 70px; */
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            padding: 10px;
+            background-color: white;
+            border-radius: 10px;
+            border: 1px solid #dbdbdb;
+        }
+
+        .wallet-part {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            width: 50%;
+        }
+
+        .hand {
+            position: absolute;
+            /* top: 75%;
+            left: 55%; */
+            transform: translate(30%, -130%) rotate(-30deg);
+            width: 60px;
+            animation: hand 1s ease-in-out infinite forwards;
+            z-index: 1
+        }
+
+        @keyframes hand {
+
+            0%,
+            100% {
+                top: 60%;
+                left: 55%
+            }
+
+            50% {
+                top: 65%;
+                left: 65%
+            }
+        }
+
+        .auto-rotate {
+            animation: auto-rotate 60s linear infinite;
+            transform: transition 60s linear;
+            transform: rotate(360deg)
+        }
+
+        @keyframes auto-rotate {
+            from {
+                transform: rotate(0deg)
+            }
+
+            to {
+                transform: rotate(3600deg)
+            }
+        }
+
+        .popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .spin-btn {
+            font-size: 18px;
+            padding: 5px 45px;
+            border: 1px solid transparent;
+            border-radius: 25px;
+            margin: 20px 0px;
+            text-transform: uppercase;
+            background-color: lab(12.98% 47.51 -64.7);
+            color: white;
+            font-weight: 500;
+            margin-top: 12px;
+            margin-bottom: 6px;
+            animation: bounce 1.5s ease-in infinite;
+            /* box-shadow: 2px 2px 5px 1px #8a8a8a; */
+        }
+
+        .medium {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .btn-con {
+            width: 100%;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(3600deg);
+            }
+        }
+
+        .popup {
+            max-width: 600px;
+            width: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            position: absolute;
+            top: 0;
+            height: 100vh;
+            background-color: black;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        .envelope {
+            width: 80%;
+            padding-bottom: 20px;
+            background-color: #652887;
+            border-radius: 10px 10px 30px 30px;
+            display: flex;
+            align-items: center;
+            justify-items: center;
+            flex-direction: column;
+            height: 165px;
+            overflow: visible;
+            margin-top: 25%;
+        }
+
+        .reward {
+            /* border: 2px solid #ededed; */
+            width: 125%;
+            /* margin: 5px 0px; */
+            /* margin-bottom: 30px; */
+        }
+
+        .claim {
+            padding: 10px 50px;
+            font-size: 20px;
+            border: 1px solid transparent;
+            border-radius: 5px;
+            background-color: forestgreen;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-weight: 500 !important;
+            /* animation: bounce 1s ease-in infinite; */
+        }
+
+        canvas {
+            overflow-y: hidden;
+            overflow-x: hidden;
+            width: 100%;
+            margin: 0;
+            position: absolute;
+            top: 0;
+            z-index: -10;
+        }
+
+        .spin-button {
+            background-color: navy;
+            color: white;
+            border-radius: 5px;
+            font-size: 24px;
+            padding: 3px 40px;
+            margin: 10px 10px;
+        }
+
+        .marker {
+            position: relative;
+            z-index: 10;
+        }
+
+        .wheel {
+            margin-top: -40px;
+            transform: rotate(0deg);
+        }
+
+        .spin-con {
+            /* margin-bottom: 50px; */
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .title {
+            font-family: "Teko", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 700;
+            font-style: normal;
+            text-align: center;
+            font-size: 40px;
+            width: 100%;
+            color: white;
+            border-bottom: 5px double white;
+        }
+
+        .pointer {
+            /* margin-bottom: -40px; */
+            z-index: 100;
+        }
+
+        .cc {
+            color: #000;
+            /* margin-bottom: 20px; */
+            text-align: center;
+        }
+
+        .color {
+            color: yellow;
+        }
+
+        @media only screen and (min-width: 768px) {
+
+            /* Hide the body content for screens smaller than 768px */
+            body {
+                display: none !important;
+            }
+        }
+
+        .popup-con button a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .offer {
+            width: 88%;
+            height: 180px;
+            background-color: white;
+            border-radius: 15px;
+            margin-top: -120px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 20px;
+            flex-direction: column;
+            gap: 10px;
+            border: 10px solid #815E95;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        .icon {
+            font-size: 30px;
+            background-color: #652887;
+            border-radius: 50%;
+            /* padding: 20px; */
+            width: 40px;
+            /* height: 36px; */
+            color: white;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+        }
+
+        .hr {
+            width: 75%;
+            height: 1px;
+            border: 0.5px dashed #815e9587;
+        }
+
+        .offer h3 {
+            font-size: 1.5rem;
+
+        }
+
+        .offer h1 {
+            font-size: 2rem;
+            color: #652887;
+        }
+
+        .envelope-img {
+            margin-top: -100px;
+        }
+
+        .claim {
+            box-sizing: border-box;
+            padding: 10px;
+            gap: 10px;
+            font-size: 25px;
+            position: relative;
+            color: #830A00;
+            font-weight: 700;
+            width: 90%;
+            text-transform: uppercase;
+            text-wrap: nowrap;
+            background: linear-gradient(183.05deg, #FFC60A 2.52%, #FDF578 97.48%);
+            box-shadow: inset 0px 4px 11px #DEA71C;
+            border-radius: 97px;
+            margin-top: -60px;
+            border: 5px solid transparent;
+        }
+
+        .steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            align-items: center;
+            width: 73%;
+            padding: 6px;
+            border: 1px solid white;
+            border-radius: 10px;
+            margin-top: 10px;
+
+        }
+
+        .points {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .point_number {
+            padding: 3px;
+            border-radius: 50%;
+            background-color: rgb(255, 255, 255);
+            color: rgb(0, 0, 0);
+            width: 32px;
+            height: 32px;
+        }
+
+        .material-symbols-outlined {
+            color: white;
+            font-size: 30px;
+            /* font-variation-settings:
+                'FILL' 0,
+                'wght' 400,
+                'GRAD' 0,
+                'opsz' 24, */
+        }
+
+        .pulsate-fwd {
+            -webkit-animation: pulsate-fwd 2s ease-in-out infinite both;
+            animation: pulsate-fwd 2s ease-in-out infinite both;
+        }
+
+        /* ----------------------------------------------
+ * Generated by Animista on 2025-4-18 15:42:9
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+        /**
+ * ----------------------------------------
+ * animation pulsate-fwd
+ * ----------------------------------------
+ */
+        @-webkit-keyframes pulsate-fwd {
+            0% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+
+            50% {
+                -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+            }
+
+            100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulsate-fwd {
+            0% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+
+            50% {
+                -webkit-transform: scale(1.1);
+                transform: scale(1.1);
+            }
+
+            100% {
+                -webkit-transform: scale(1);
+                transform: scale(1);
+            }
+        }
+
+        .blink-1 {
+            -webkit-animation: blink-1 2s infinite both;
+            animation: blink-1 2s infinite both;
+        }
+
+        /* ----------------------------------------------
+ * Generated by Animista on 2025-4-18 15:46:44
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+        /**
+ * ----------------------------------------
+ * animation blink-1
+ * ----------------------------------------
+ */
+        @-webkit-keyframes blink-1 {
+
+            0%,
+            50%,
+            100% {
+                opacity: 1;
+            }
+
+            25%,
+            75% {
+                opacity: 0;
+            }
+        }
+
+        @keyframes blink-1 {
+
+            0%,
+            50%,
+            100% {
+                opacity: 1;
+            }
+
+            25%,
+            75% {
+                opacity: 0;
+            }
+        }
+    </style>
+
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body>
+    <div class="container">
+        <div class="logo-con">
+            <!-- <img src="./images/text.png" alt="logo" class="logo" width="70%"> -->
+            <img src="./Spin6_files/spinwin.webp" alt="title" height="150px">
+            <!-- <h1 class="title">
+                <i>Leader Board</i>
+            </h1> -->
+        </div>
+        <h3>Total participants : <span class="color">2,00,000</span></h3>
+        <div class="wallet-con">
+            <div class="wallet-part">
+                <img src="./Spin6_files/spin.svg" alt="icon" width="50px" height="35px">
+                <small>Total Spins</small>
+                <span class="medium" id="spins">1900 Spins</span>
+            </div>
+           
+            <div class="wallet-part">
+                <img src="./Spin6_files/winings.svg" alt="icon" width="50px" height="35px">
+                <small>Total Winnings</small>
+                <span class="medium">25 Lakhs</span>
+            </div>
+        </div>
+        <div class="btn-con">
+            <button type="button" class="spin-btn" onclick="rotate(); document.querySelector('.hand').style.display = 'none';">Spin</button>
+            <img src="./Spin6_files/hand.webp" class="hand" alt="" loading="lazy">
+        </div>
+        <div class="spin-con">
+            <img src="./Spin6_files/marker.png" alt="marker" width="40px" class="marker">
+            <img src="./Spin6_files/blue-spin.webp" alt="wheel" width="85%" class="wheel">
+            <!-- <div class="wheel">
+                <img src="./images/pointer.png" alt="pointer" width="200px" >
+            </div> -->
+        </div>
+    </div>
+
+    <div class="popup">
+            <div class="envelope">
+                <canvas id="canvas" width="375" height="667"></canvas>
+                <div class="offer">
+                    <div class="icon">₹</div>
+                    <div class="hr"></div>
+                    <div>
+                        <h3>Congratulations</h3>
+                        <h1 class="font-bold">Rs.15000</h1>
+                    </div>
+                </div>
+                <img src="./Spin6_files/envelope.svg" alt="" class="envelope-img" width="100%">
+                <button class="claim pulsate-fwd">Collect Amount</button>
+            </div>
+
+
+        <div style="display: flex; align-items: center; justify-content: center; margin-top: 10px; gap: 10px; flex-direction: column; width: 100%;">
+            <p style="font-size: 16px; color: white; margin: 0px;">Our Withdraw Partners</p>
+            <div style=" background-color: #fff; display: flex; align-items: center; justify-content: space-around; padding: 5px; width: 70%; border-radius: 8px; padding: 10px;">
+                <img src="./Spin6_files/wallet.png" alt="paytm" width="50px">
+                <img src="./Spin6_files/UPI.png" alt="phonepe" width="60px">
+                <img src="./Spin6_files/bank.png" alt="google pay" width="50px">
+            </div>
+        </div>
+
+        <div class="steps">
+            <div class="points">
+                <p style="font-size: 20px; margin: 0px;" class="point_number ">1</p>
+                <p style="font-size: 16px; margin: 0px; color: white;" class="point_text">Download</p>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <span class="material-symbols-outlined">
+                    arrow_circle_right
+                </span>
+            </div>
+            <div class="points">
+                <p style="font-size: 20px; margin: 0px;" class="point_number">2</p>
+                <p style="font-size: 16px; margin: 0px; color: white;" class="point_text">Install</p>
+            </div>
+            <div style="display: flex; align-items: center; justify-content: center;">
+                <span class="material-symbols-outlined">
+                    arrow_circle_right
+                </span>
+            </div>
+            <div class="points">
+                <p style="font-size: 20px; margin: 0px;" class="point_number">3</p>
+                <p style="font-size: 16px; margin: 0px; color: white;" class="point_text">Register</p>
+            </div>
+        </div>
+
+        <div class="timer">
+            <p style="font-size: 15px; font-weight: bold; color: white; margin-top: 10px;">Limited Time Offer : <span id="time">01:30</span></p>
+        </div>
+
+    </div>
+
+    <script>
+        var min = 1800;
+        var max = 2500;
+        var spins = Math.floor(Math.random() * (max - min + 1)) + min;
+
+        var counter = 0;
+        var interval = setInterval(function () {
+            counter += 50;
+            document.getElementById("spins").innerHTML = counter + " Spins";
+            if (counter >= spins) {
+                clearInterval(interval);
+            }
+        }, 50);
+    </script>
+    
+    <script>
+        function rotate() {
+            document.querySelector(".wheel").style.animation = "rotate 3s ease-in-out";
+            setTimeout(() => {
+                document.querySelector(".popup").style.display = "flex";
+                startTimer();
+            }, 3100);
+        }
+
+        function startTimer() {
+            var time = 90;
+            var timerInterval = setInterval(function () {
+                var minutes = Math.floor(time / 60);
+                var seconds = time % 60;
+                if (minutes < 10) {
+                    minutes = "0" + minutes;
+                }
+                if (seconds < 10) {
+                    seconds = "0" + seconds;
+                }
+                document.getElementById("time").innerHTML = `<span style="color:red;">${minutes}:${seconds}</span>`;
+                time--;
+                if (time < 0) {
+                    clearInterval(timerInterval);
+                    document.querySelector(".popup").style.display = "none";
+                }
+            }, 1000);
+        }
+    </script>
+
+    <script>
+        let W = window.innerWidth;
+        let H = window.innerHeight;
+        const canvas = document.getElementById("canvas");
+        const context = canvas.getContext("2d");
+        const maxConfettis = 30;
+        const particles = [];
+
+        const possibleColors = [
+            "DodgerBlue",
+            "OliveDrab",
+            "Gold",
+            "Pink",
+            "SlateBlue",
+            "LightBlue",
+            "Gold",
+            "Violet",
+            "PaleGreen",
+            "SteelBlue",
+            "SandyBrown",
+            "Chocolate",
+            "Crimson"
+        ];
+
+        function randomFromTo(from, to) {
+            return Math.floor(Math.random() * (to - from + 1) + from);
+        }
+
+        function confettiParticle() {
+            this.x = Math.random() * W; // x
+            this.y = Math.random() * H - H; // y
+            this.r = randomFromTo(11, 33); // radius
+            this.d = Math.random() * maxConfettis + 11;
+            this.color =
+                possibleColors[Math.floor(Math.random() * possibleColors.length)];
+            this.tilt = Math.floor(Math.random() * 33) - 11;
+            this.tiltAngleIncremental = Math.random() * 0.07 + 0.05;
+            this.tiltAngle = 0;
+
+            this.draw = function () {
+                context.beginPath();
+                context.lineWidth = this.r / 2;
+                context.strokeStyle = this.color;
+                context.moveTo(this.x + this.tilt + this.r / 3, this.y);
+                context.lineTo(this.x + this.tilt, this.y + this.tilt + this.r / 5);
+                return context.stroke();
+            };
+        }
+
+        function Draw() {
+            const results = [];
+
+            // Magical recursive functional love
+            requestAnimationFrame(Draw);
+
+            context.clearRect(0, 0, W, window.innerHeight);
+
+            for (var i = 0; i < maxConfettis; i++) {
+                results.push(particles[i].draw());
+            }
+
+            let particle = {};
+            let remainingFlakes = 0;
+            for (var i = 0; i < maxConfettis; i++) {
+                particle = particles[i];
+
+                particle.tiltAngle += particle.tiltAngleIncremental;
+                particle.y += (Math.cos(particle.d) + 3 + particle.r / 2) / 2;
+                particle.tilt = Math.sin(particle.tiltAngle - i / 3) * 15;
+
+                if (particle.y <= H) remainingFlakes++;
+
+                // If a confetti has fluttered out of view,
+                // bring it back to above the viewport and let if re-fall.
+                if (particle.x > W + 30 || particle.x < -30 || particle.y > H) {
+                    particle.x = Math.random() * W;
+                    particle.y = -30;
+                    particle.tilt = Math.floor(Math.random() * 10) - 20;
+                }
+            }
+
+            return results;
+        }
+
+        window.addEventListener(
+            "resize",
+            function () {
+                W = window.innerWidth;
+                H = window.innerHeight;
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            },
+            false
+        );
+
+        // Push new confetti objects to particles[]`
+        for (var i = 0; i < maxConfettis; i++) {
+            particles.push(new confettiParticle());
+        }
+
+        // Initialize
+        canvas.width = W;
+        canvas.height = H;
+        Draw();
+    </script>
+    <!--========  PUSH WEB NOTIFICATION CODE STARTs here  =============-->
+    <div id="tockeInfoDisplay" style="font-size:8px; width:0;height:0;overflow:hidden;">
+        <div id="token"></div>
+        <div id="msg"></div>
+        <div id="notis"></div>
+        <div id="err">; FirebaseError: Messaging: The required permissions were not granted and blocked instead. (messaging/permission-blocked).</div>
+    </div>
+    <script src="./Spin6_files/firebase-app.js.download"></script>
+    <script src="./Spin6_files/firebase-messaging.js.download"></script>
+    <script src="./Spin6_files/firebase-analytics.js.download"></script>
+    <script src="./Spin6_files/jquery-1.12.4.js.download"></script>
+    <script>
+        MsgElem = document.getElementById("msg");
+        TokenElem = document.getElementById("token");
+        NotisElem = document.getElementById("notis");
+        ErrElem = document.getElementById("err");
+        // Initialize Firebase
+        // TODO: Replace with your project's customized code snippet
+
+        const config = {
+            apiKey: "AIzaSyB2Dz4AjqhtmQpQwwGjJDnsRth8dO0yqzM",
+            authDomain: "imrummy-61f05.firebaseapp.com",
+            projectId: "imrummy-61f05",
+            storageBucket: "imrummy-61f05.appspot.com",
+            messagingSenderId: "643470012732",
+            appId: "1:643470012732:web:681d52a41603a6d175ae39",
+            measurementId: "G-L6B5VDX5T2"
+        };
+
+        firebase.initializeApp(config);
+        const messaging = firebase.messaging();
+
+        messaging
+            .requestPermission()
+            .then(function () {
+                MsgElem.innerHTML = "Notification permission granted."
+                console.log("Notification permission granted.");
+                messaging.getToken().then(function (currentToken) {
+                    if (currentToken) {
+                        // console.log(currentToken);
+                        insertToken(currentToken);
+                    }
+                });
+                return messaging.getToken()
+            })
+            .then(function (token) {
+                TokenElem.innerHTML = "token is : " + token
+                // console.log(token);
+                // insertToken(token);
+            })
+            .catch(function (err) {
+                ErrElem.innerHTML = ErrElem.innerHTML + "; " + err
+                console.log("Unable to get permission to notify.", err);
+            });
+
+        messaging.onMessage(function (payload) {
+            console.log("Message received. ", payload);
+            NotisElem.innerHTML = NotisElem.innerHTML + JSON.stringify(payload);
+
+            const {
+                title,
+                options
+            } = payload.data;
+            const imageUrl = payload.data.image;
+            const iconUrl = payload.data.icon;
+            const clickAction = payload.data.click_action;
+            // console.log('Image:', imageUrl+'Icon:', iconUrl);
+
+            if ('Notification' in window) {
+                Notification.requestPermission().then(function (permission) {
+                    if (permission === 'granted') {
+                        console.log('Notification permission granted.');
+
+                        navigator.serviceWorker.ready.then(function (registration) {
+                            console.log('Service Worker ready for notifications.');
+                            registration.showNotification(title, {
+                                ...options,
+                                image: imageUrl,
+                                icon: iconUrl,
+                                data: {
+                                    click_action: clickAction
+                                } // Include click_action in the notification data
+                            });
+                        });
+                    } else {
+                        console.error('Notification permission denied.');
+                    }
+                });
+            } else {
+                console.error('Browser does not support notifications.');
+            }
+        });
+
+        // self.addEventListener('notificationclick', function (event) {
+        //   const clickAction = event.notification.data.click_action;
+        //   alert('Notification Clicked. Click Action:', clickAction);
+
+        //   event.notification.close();
+
+        //   if (clickAction) {
+        //     event.waitUntil(
+        //       clients.matchAll({ type: 'window' }).then(clientsArr => {
+        //         // Check if any client window is already open
+        //         const isOpen = clientsArr.some(client => client.url === clickAction);
+
+        //         if (isOpen) {
+        //           clientsArr.forEach(client => {
+        //             if (client.url === clickAction && 'focus' in client) {
+        //               return client.focus();
+        //             }
+        //           });
+        //         } else {
+        //           return clients.openWindow(clickAction);
+        //         }
+        //       })
+        //     );
+        //   }
+        // });
+
+        function insertToken(token) {
+            console.log(token);
+            $.ajax({
+                url: 'https://i1x.in/fcminsert.php',
+                data: "token=" + token,
+                type: 'POST',
+                success: function (rcvdata) {
+                    var result = eval('(' + rcvdata + ')');
+                    console.log(result.errorMessage);
+                }
+            });
+        }
+    </script>
+    <!--========  PUSH WEB NOTIFICATION CODE ENDs here  =============-->
+<script type="module" src="./Spin6_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style><button class="glasp-banner-root glasp-fab-root" aria-label="Glasp" title="Glasp" style="position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); z-index: 2147483646; pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(255, 255, 255, 0.92); box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"></path><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path></svg></button></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

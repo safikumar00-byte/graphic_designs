@@ -1,0 +1,107 @@
+const urlParams = new URLSearchParams(window.location.search);
+let spinParam = urlParams.get('id');
+
+window.onload = function () {
+  document.querySelector(".pre-loader").style.display = "none";
+  document.querySelector("main").style.display = "flex";
+
+
+  const validTime = document.querySelector(".valid_time");
+  validTime.style.display = "flex";
+
+  let date = new Date(Date.now() + 180000); // 3 minutes later
+  const updateTimer = () => {
+    const now = new Date();
+    const timeleft = date - now;
+    const mins = Math.floor((timeleft / 1000 / 60) % 60);
+    const secs = Math.floor((timeleft / 1000) % 60);
+
+    validTime.querySelector(".mins").textContent = mins.toString().padStart(2, '0');
+    validTime.querySelector(".secs").textContent = secs.toString().padStart(2, '0');
+
+    if (timeleft <= 0) {
+      return;
+    }
+    setTimeout(updateTimer, 1000);
+  }
+  updateTimer();
+
+}
+
+document.querySelector('.hand').addEventListener('click', function () {
+  document.getElementById("spin").click();
+})
+
+
+document.getElementById("spin").addEventListener("click", function () {
+  document.querySelector('.wheel').classList.remove('auto-rotate');
+
+
+  document.getElementById("myAudio").play();
+  document.querySelector(".hand").style.display = "none";
+  document.querySelector(".pointer").classList.add("pointer-toggle");
+
+  const wheel = document.getElementById("wheel");
+  let degree;
+
+  if (spinParam === '45000') {
+    degree = 4020;
+  } else if (spinParam === '15000') {
+    degree = 4162;
+  } else if (spinParam === '2000') {
+    degree = 4080;
+  } else if (spinParam === '10000') {
+    degree = 4140;
+  } else if (spinParam === '75000') {
+    degree = 3960;
+  } else if (spinParam === '5000') {
+    degree = 3840;
+  } else {
+    degree = 4162;
+    spinParam = '15000';
+  }
+
+  let date = new Date(Date.now() + 90000); // 1.5 minutes later
+
+  wheel.style.transition = "transform 4s ease-out";
+  wheel.style.transform = `rotate(${degree}deg)`;
+
+  setTimeout(() => {
+    document.getElementById('coins_audio').play();
+    document.querySelector(".pointer").classList.remove("pointer-toggle");
+    setTimeout(() => {
+      document.getElementById('winner_cheer').play();
+      document.getElementById('canvas').style.display = 'block';
+      document.querySelector('.popup-model').style.display = "flex";
+      document.querySelector('.popup-model').style.bottom = "-100%";
+      document.querySelector('.popup-model').style.transition = "bottom 0.1s ease-out";
+      document.querySelector('.popup-model').style.bottom = "0";
+      document.body.style.overflow = 'hidden';
+
+      const validTime = document.querySelector(".valid_time");
+      validTime.style.display = "flex";
+
+      let date = new Date(Date.now() + 90000); // 1min 30sec later
+      const updateTimer = () => {
+        const now = new Date();
+        const timeleft = date - now;
+        const mins = Math.floor((timeleft / 1000 / 60) % 60);
+        const secs = Math.floor((timeleft / 1000) % 60);
+        document.getElementById('timer').style.color = 'black';
+        document.getElementById('timer').textContent = `Limited Time Offer - ${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+        if (timeleft <= 0) {
+          return;
+        }
+        setTimeout(updateTimer, 1000);
+      }
+      updateTimer();
+
+    }, 100);
+  }, 4000); // Match the duration of the CSS transition
+
+  document.querySelector('.claim-amount').addEventListener('click', () => {
+    window.location.href = "https://www.google.com/";
+  })
+
+});

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://tejkunitsolutions.com/lowcreditrewards3/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LowCredit Rewards</title>
+    <link rel="stylesheet" href="./index_files/bootstrap.min.css">
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet"> -->
+
+    <style>
+        * {
+            font-family: "Poppins", sans-serif;
+            font-style: normal;
+        }
+
+        .title {
+            font-size: 42px;
+            line-height: 1.2;
+        }
+
+        .amount {
+            font-size: 60px;
+            font-weight: 600;
+        }
+
+        body {
+            background: linear-gradient(90deg, #A6D9F8 0%, #D2CCFC 100%) 0 0 / 100% 55%;
+            padding: 30px 0px;
+
+        }
+
+        .underline {
+            height: 40px;
+        }
+
+        .btn-main {
+            /* background: linear-gradient(90deg, #3CC2C5 0%, #9F9CF3 100%); */
+            background-color: #051C3B;
+            color: white;
+            font-weight: 500;
+            /* font-size: 18px; */
+            position: relative;
+            overflow: hidden;
+            box-shadow: 1px 1px 25px 10px rgba(146, 148, 248, 0.4);
+        }
+
+        .btn-main:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -150%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            animation: shine 2s linear infinite;
+        }
+
+        .popup-con {
+            z-index: 3;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            display: none;
+            justify-content: center;
+            padding-top: 30px;
+            background-color: rgba(0, 0, 0, 0.4);
+            --webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        @keyframes shine {
+            0% {
+                left: -150%;
+            }
+
+            100% {
+                left: 150%;
+            }
+        }
+
+        .jello-horizontal {
+            animation: jello-horizontal 0.9s both;
+        }
+
+        @keyframes jello-horizontal {
+            0% {
+                transform: scale3d(1, 1, 1);
+            }
+
+            30% {
+                transform: scale3d(1.25, 0.75, 1);
+            }
+
+            40% {
+                transform: scale3d(0.75, 1.25, 1);
+            }
+
+            50% {
+                transform: scale3d(1.15, 0.85, 1);
+            }
+
+            65% {
+                transform: scale3d(0.95, 1.05, 1);
+            }
+
+            75% {
+                transform: scale3d(1.05, 0.95, 1);
+            }
+
+            100% {
+                transform: scale3d(1, 1, 1);
+            }
+        }
+
+        .blur-white {
+            background: linear-gradient(180deg, rgba(192, 200, 222, 0) 0%, rgba(192, 200, 222, 0.5) 50%, rgba(192, 200, 222, 0) 99.43%);
+        }
+
+        .rewards-con {
+            margin-top: 30px;
+        }
+
+        .f-14 {
+            font-size: 14px;
+        }
+
+        .btn-con {
+            z-index: 1;
+        }
+
+        .o-5 {
+            opacity: 0.5;
+        }
+
+
+        .f-16 {
+            font-size: 20px;
+        }
+
+        .border-style {
+            border-style: dashed !important;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .title {
+                font-size: 32px;
+                line-height: 1.1;
+            }
+
+            .btn-main {
+                /* font-size: 16px; */
+            }
+
+            .f-14 {
+                font-size: 12px;
+            }
+
+            .rewards-con {
+                flex-direction: column;
+                align-items: center;
+                margin-top: 20px;
+            }
+
+            .underline {
+                display: none;
+            }
+
+            .btn-con {
+                margin-top: 15px;
+            }
+        }
+
+        .border-top-none {
+            border-top: 0px !important;
+        }
+
+        .form-con {
+            height: fit-content;
+        }
+
+        .otp-in {
+            width: 50px;
+            height: 50px;
+        }
+
+        .terms {
+            height: 100%;
+            background:
+                linear-gradient(90deg, rgb(166, 217, 248, 1) 0%, rgb(210, 204, 252, 1) 100%) 0 0 / 100% 55%;
+            flex-direction: column;
+            text-align: left;
+            color: black;
+            position: absolute;
+            top: 0;
+            z-index: 20;
+        }
+
+        .dispute {
+            height: 100%;
+            background:
+                linear-gradient(90deg, rgb(166, 217, 248, 1) 0%, rgb(210, 204, 252, 1) 100%) 0 0 / 100% 55%;
+            padding-top: 60px !important;
+            flex-direction: column;
+            text-align: left;
+            color: black;
+            position: absolute;
+            top: 0;
+            z-index: 20;
+        }
+
+        .border-none {
+            border: 0px solid transparent !important;
+        }
+
+        .dispute-in::placeholder {
+            color: rgba(0, 0, 0, 0.6);
+            font-size: 16px;
+        }
+
+        .border-light {
+            border-color: rgba(0, 0, 0, 0.4) !important;
+        }
+
+        .close {
+            width: 40px;
+            height: 40px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body>
+    <main class="d-flex align-items-center justify-content-center flex-column minus">
+        <div class="px-4 text-center">
+            <h1 class="title thin">LowCredit <br> <span class="fw-bold">Rewards</span></h1>
+        </div>
+
+        <div class="d-flex px-3 align-items-center justify-content-center gap-2 col-12 rewards-con">
+            <div class="text-center col-12  border-style border border-dark rounded-3  p-4 ">
+                <h4 class="m-0 mb-3 thin">Apply for a Lifetime Free Credit Card</h4>
+                <img src="./index_files/card1.png" width="80%" alt="gift-box" class="gift-box jello-horizontal mb-2">
+            </div>
+            <div style="margin: -30px 0px -30px 0px; z-index: 2;">
+                <p class="p-2 px-4 m-0 bg-dark text-white border rounded">and Get</p>
+            </div>
+            <div class="text-center col-12 border-style border-top-none rounded-3 p-4 border border-dark d-flex border-top align-items-center justify-content-center flex-column">
+                <h4 class="mt-3 thin m-0">Amazon Gift Card worth</h4>
+                <h1 class="m-0 amount">Rs.1000</h1>
+                <div class="rounded-pill">
+                    <small class="m-0 p-0">*Only on Successful Disbursal</small>
+                </div>
+                <div class="col-12 btn-con text-center">
+                    <input type="number" id="mobile" placeholder="Enter mobile number" class="form-control mobile f-16 rounded-3 mb-2">
+                    <button type="button" class="btn col-6 btn-primary rounded-3 shadow" onclick="validateMobileNumber()">Get OTP</button>
+                </div>
+            </div>
+
+            <div class="mt-4 col-12 text-center">
+                <small class="mt-4 o-5 text-center "><span onclick="terms()">Terms &amp; Conditions</span> |
+                    <span onclick="dispute()"> Raise a Dispute</span> </small>
+                <br>
+                <small class="o-5">Contact us : support@lowcredit.in</small>
+            </div>
+        </div>
+    </main>
+
+    <div class="col-12 p-4 terms d-none" id="terms">
+        <div class="col-12 d-flex justify-content-end align-items-center">
+            <div class="close btn rounded p-1 bg-light" onclick="closecon('terms')">X</div>
+        </div>
+        <h3 class="m-0"> Terms &amp; conditions</h3>
+        <hr class="border bg-white col-12 p-0">
+        <div class="my-3">
+            <h6>About your reward</h6>
+            <ul>
+                <li>
+                    You will receive a confirmation message on WhatsApp about your Reward within 72 hours of successful
+                    application submission.
+                </li>
+                <br>
+                <li>
+                    Reward will be received through an Amazon Gift Card on WhatsApp within 75 days of successful card
+                    disbursal.
+                </li>
+            </ul>
+        </div>
+        <p style="font-style: italic;">*Reward on Successful Card Disbursal</p>
+    </div>
+
+    <div class="col-12 p-4 dispute d-none" id="dispute">
+        <div class="col-12 d-flex justify-content-end align-items-center">
+            <button class="close btn rounded p-1 bg-light" onclick="closecon('dispute')">X</button>
+        </div>
+        <h1 class="title thin">LowCredit <br> <span class="fw-bold">Rewards</span></h1>
+        <br>
+        <p class="text-dark o-5">Having trouble with your reward? <br> Share the mobile number with email id used for
+            your transaction,
+            and we’ll sort it out.
+        </p>
+        <form action="https://tejkunitsolutions.com/lowcreditrewards3/" class="bg-transparent border-none">
+            <div class="my-3">
+                <label for=" mobile">Mobile Number</label>
+                <input type="number" class="form-control bg-transparent border-light rounded text-white dispute-in" name="number" id="mobile" placeholder="Ener your mobile number">
+                <small class="text-danger d-none">Enter valid mobile number</small>
+            </div>
+            <div class="my-3">
+                <label for=" mobile">Email Id</label>
+                <input type="email" class="form-control bg-transparent border-light rounded text-white dispute-in" name="email" id="email" placeholder="Ener your email id">
+                <small class="text-danger d-none">Enter valid email id</small>
+            </div>
+            <div>
+                <button class="mt-1 f-18 col-12  btn  btn-primary text-white" type="button">Submit</button>
+            </div>
+        </form>
+        <div class="text-center my-4"> OR </div>
+        <div class="text-center">
+            <small class="text-dark o-5">Contact us : </small> <br>
+            <small>support@lowcredit.in</small>
+        </div>
+    </div>
+
+
+    <div class="popup-con">
+        <form action="https://tejkunitsolutions.com/lowcreditrewards3/" class="form-con mt-5 col-11 p-4 rounded-3 bg-light d-flex flex-column gap-3">
+            <div class="close-con col-12 border-bottom p-2 d-flex align-items-center justify-content-between">
+                <h3 class="m-0" id="focus" tabindex="0">Enter OTP</h3>
+                <button class="fw-20 px-2 border shadow-sm" onclick="closepopup()" type="button">x</button>
+            </div>
+
+            <div class="form-group otp-con ">
+                <div class="d-flex align-items-center gap-3">
+                    <input type="number" class="form-control otp-in text-center">
+                    <input type="number" class="form-control otp-in text-center">
+                    <input type="number" class="form-control otp-in text-center">
+                    <input type="number" class="form-control otp-in text-center">
+                </div>
+            </div>
+
+            <div class="form-group d-flex align-items-start">
+
+                <label class="f-14"><input type="checkbox" class="form-control-check mt-1" id="checkbox" checked="">
+                    &nbsp;I agree
+                    with <a href="https://tejkunitsolutions.com/lowcreditrewards3/">Terms &amp; Conditions</a> &amp; <a href="https://tejkunitsolutions.com/lowcreditrewards3/">Privacy Policy</a> and i agree to receive
+                    message through whatsapp, RCS and Email</label>
+            </div>
+            <div class="form-group">
+                <a href="https://tejkunitsolutions.com/lowcreditrewards3/cards.html"><button type="button" onclick="" class="btn col-12 btn-primary rounded-3">Submit</button></a>
+            </div>
+        </form>
+    </div>
+
+    <script>
+
+        function dispute() {
+            document.getElementById('dispute').classList.replace('d-none', 'd-flex');
+        }
+
+        function terms() {
+            document.getElementById('terms').classList.replace('d-none', 'd-flex');
+        }
+
+        function closecon(element) {
+            console.log('working');
+            console.log(element);
+            document.getElementById(element).classList.replace('d-flex', 'd-none');
+        }
+        function redirect() {
+            window.location.href = "https://dev.lowcredit.in/reward/cards?series=1&source=test";
+        }
+
+        function getotp() {
+            document.querySelector(".popup-con").style.display = "flex";
+            document.getElementById('focus').focus();
+        }
+
+        function validateMobileNumber() {
+            var mobile = document.getElementById("mobile").value;
+            var regex = /^[6-9]\d{9}$/;
+
+            if (regex.test(mobile)) {
+                getotp();
+            } else {
+                alert("Please enter a valid Indian mobile number.");
+            }
+        }
+
+
+        function closepopup() {
+            document.querySelector(".popup-con").style.display = "none";
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            var otpInputs = document.querySelectorAll('.otp-in');
+
+            otpInputs.forEach(function (input, index) {
+                input.addEventListener('input', function () {
+                    if (this.value.length === 1 && index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                });
+                input.addEventListener('keydown', function (event) {
+                    if (event.key === 'Backspace' && this.value.length === 0 && index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                });
+            });
+
+        });
+    </script>
+<script type="module" src="./index_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style><button class="glasp-banner-root glasp-fab-root" aria-label="Glasp" title="Glasp" style="position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); z-index: 2147483646; pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(255, 255, 255, 0.92); box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"></path><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path></svg></button></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

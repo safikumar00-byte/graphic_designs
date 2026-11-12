@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<!-- saved from url=(0057)https://tejkunitsolutions.com/royalityprogram8/games.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <link rel="stylesheet" href="./games_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./games_files/all.min.css">
+    <link rel="stylesheet" href="./games_files/all(1).min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://tejkunitsolutions.com/royalityprogram8/assets/fav_icon.png" type="image/png">
+
+    <title>Document</title>
+    <style>
+        .games-list {
+            width: 100vw;
+            /* height: 100vh; */
+            background: linear-gradient(180deg, #111c4a 0%, #3d1a8e 100%);
+            background-color: #3d1a8e;
+            background-repeat: no-repeat;
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0);
+
+            }
+
+            50% {
+                transform: translateY(-10px);
+
+            }
+
+            100% {
+                transform: translateY(0);
+
+            }
+        }
+
+        @keyframes slide-in-left {
+            0% {
+                transform: translateX(-100%);
+
+                opacity: 0;
+
+            }
+
+            100% {
+                transform: translateX(0);
+
+                opacity: 1;
+
+            }
+        }
+
+        @keyframes floating {
+            0% {
+                transform: translateY(0);
+
+            }
+
+            50% {
+                transform: translateY(-10px);
+
+            }
+
+            100% {
+                transform: translateY(0);
+
+            }
+        }
+
+        .element {
+            display: inline-block;
+            animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both,
+                floating 3s ease-in-out infinite;
+        }
+
+        .element-1 {
+            animation-delay: 0s, 0.5s;
+
+        }
+
+        .element-2 {
+            animation-delay: 0.5s, 1s;
+
+        }
+
+        .element-3 {
+            animation-delay: 1s, 1.5s;
+
+        }
+
+        .top-offers {
+            text-transform: uppercase;
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, #feb727 0%, #fef4b3 50%, #c16e24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .wallet-amount-container {
+            display: flex;
+            align-items: center;
+            color: white;
+            justify-content: end;
+        }
+
+        .wallet-amount-box {
+            background-color: #2a2d31;
+            border-radius: 10px;
+            margin-top: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+
+        .wallet-amount {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #f5cd08;
+        }
+
+        .Withdraw-btn {
+            background-color: #f5cd08;
+            font-size: 16px;
+            padding: 5px 10px;
+            /* box-shadow: inset -1px -1px 2px rgba(0, 0, 0, 1); */
+        }
+
+        @media only screen and (min-width: 768px) {
+            body {
+                display: none;
+            }
+        }
+
+        .modal-content {
+            background-color: #1e2125;
+            border-radius: 10px;
+            color: white;
+        }
+
+        label {
+            color: #fff;
+        }
+
+        .form-control {
+            background-color: #2a2d31;
+            border: none;
+            color: white;
+        }
+
+        .error-message {
+            color: #ff6b6b;
+            font-size: 0.9em;
+        }
+
+        .disabled-btn {
+            pointer-events: none;
+            opacity: 0.6;
+        }
+
+        label .required-asterisk {
+            color: red;
+        }
+
+        .payment_interface {
+            position: absolute;
+            top: 0;
+            left: 0;
+            min-height: fit-content;
+            height: 100%;
+            background-color: #2a2d319f;
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            z-index: 3;
+        }
+
+        .payment-amount-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .payment-amount-box {
+            background-color: #2a2d31;
+            padding: 10px 20px;
+            border-radius: 10px;
+            margin-top: 8px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+
+        .payment-amount {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #f5cd08;
+        }
+
+
+        .gift-icon {
+            position: absolute;
+            top: 30px;
+            right: 0px;
+            z-index: 2;
+        }
+
+        .gift-icon div {
+            width: 60px;
+            height: 60px;
+        }
+
+        .offers-count {
+            right: 0;
+        }
+
+        .offers-con {
+            width: 100%;
+            position: absolute;
+            top: 0;
+            height: 100%;
+            z-index: 4;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(20px);
+        }
+
+        .offers-list {
+            margin-top: 20px;
+            width: 100%;
+            background-color: white;
+            min-height: 500px;
+        }
+
+        .offers {
+            display: flex;
+            align-items: center;
+            background-color: white;
+            gap: 10px;
+        }
+
+        .wobble-hor-bottom {
+            animation: wobble-hor-bottom 0.8s 1 both;
+        }
+
+        @keyframes wobble-hor-bottom {
+
+            0%,
+            100% {
+                transform: translateX(0%);
+                transform-origin: 50% 50%;
+            }
+
+            15% {
+                transform: translateX(-30px) rotate(-6deg);
+            }
+
+            30% {
+                transform: translateX(15px) rotate(6deg);
+            }
+
+            45% {
+                transform: translateX(-15px) rotate(-3.6deg);
+            }
+
+            60% {
+                transform: translateX(9px) rotate(2.4deg);
+            }
+
+            75% {
+                transform: translateX(-6px) rotate(-1.2deg);
+            }
+        }
+
+        .display-card-con {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+            /* align-items: center; */
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 5;
+            backdrop-filter: blur(20px);
+        }
+
+        .card{
+            margin-top: 30px;
+            height: fit-content;
+        }
+
+
+        .slide-in-bottom {
+            animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        @keyframes slide-in-bottom {
+            0% {
+                transform: translateY(1000px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .slide-in-top {
+            animation: slide-in-top 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+
+        @keyframes slide-in-top {
+            0% {
+                transform: translateY(0px);
+                display: flex;
+            }
+
+            100% {
+                transform: translateY(-1000px);
+                display: none;
+            }
+        }
+
+        .fade-out{
+            animation: fade-out 0.8s ease 1 forwards;
+        }
+
+        @keyframes fade-out {
+            from{
+                opacity: 1;
+                display: flex;
+            }
+            to {
+                opacity: 0;
+                display: none;
+            }
+        }
+    </style>
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body class="position-relative">
+    <div class="games-list gap-4 col-12 d-flex align-items-center justify-content-center flex-column p-4 pt-0">
+        <div class="wallet-amount-container text-center col-12 mt-4">
+            <div class="wallet-amount-box">
+                <img src="./games_files/wallet.svg" alt="">
+                <p class="wallet-amount m-0" id="walletAmount">₹0.00</p>
+                <button class="Withdraw-btn rounded" id="withdrawBtn">Withdraw</button>
+            </div>
+        </div>
+
+        <div class="offers-con d-none p-3 flex-column gap-3">
+            <div class="offers-list d-flex flex-column gap-3 p-3 rounded">
+                <div class="close_con d-flex justify-content-end align-items-center">
+                    <div class="border p-1 d-flex align-items-center justify-content-center text-center rounded" style="width: 30px; height: 30px;" onclick="closeofferslist()">
+                        <p style="font-weight: bold; font-size: 20px; " class="m-0">X</p>
+                    </div>
+                </div>
+                <h4 class="text-center">Claim your offers</h4>
+                <div class="offers p-2 rounded border ">
+                    <img src="./games_files/1.webp" alt="" class="border rounded" width="40%">
+                    <div>
+                        <p class="m-0">15000/- Welcome Bonus</p>
+                        <button class="btn btn-success mt-2 col-12">Claim Here</button>
+                    </div>
+                </div>
+
+                <div class="offers p-2 rounded border ">
+                    <img src="./games_files/1.webp" alt="" class="border rounded" width="40%">
+                    <div>
+                        <p class="m-0">15000/- Welcome Bonus</p>
+                        <button class="btn btn-success mt-2 col-12">Claim Here</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex align-items-center justify-content-center flex-column gap-3 position-relative  col-12">
+            <h6 class="top-offers">Today's top offers</h6>
+            <img src="./games_files/stars.svg" alt="" width="50%">
+
+            <div class="gift-icon wobble-hor-bottom " onclick="showoffers()">
+                <div class="d-flex align-items-center justify-content-center position-relative rounded-circle p-2 bg-white d-flex align-items-center justify-content-center" style="border: 1px solid #5925b2;">
+                    <div class="position-absolute bg-danger text-white rounded-circle text-center offers-count top-0 right-0" style="width: 20px; height: 20px; font-size: 12px;">2</div>
+                    <img src="./games_files/gift-solid.svg" width="70%" alt="">
+                </div>
+            </div>
+        </div>
+
+        <a href="https://tejkunitsolutions.com/royalityprogram8/spin/index.html" title="link" class="element element-1">
+            <img src="./games_files/spin.webp" alt="img" width="100%">
+        </a>
+        <a href="https://tejkunitsolutions.com/royalityprogram8/slotmachinenew/index.html" title="link" class="element element-2">
+            <img src="./games_files/slotmachine.png" alt="img" width="100%">
+        </a>
+        <a href="https://tejkunitsolutions.com/royalityprogram8/scratch_card/index.html" title="link" class="element element-3">
+            <img src="./games_files/scratchcard.webp" alt="img" width="100%">
+        </a>
+
+
+
+        <div class="Referral-con alert alert-warning d-flex flex-column align-items-center justify-content-center gap-3">
+            <h5 class="text-center m-0">Refer &amp; Earn</h5>
+            <ul class="text-left m-0">
+                <li>Refer 20 Friends and Earn Rs.500/-</li>
+                <li>* Must Complete Three offers</li>
+            </ul>
+
+            <button class="btn btn-success col-10" onclick="shareReferral()">Refer Now</button>
+        </div>
+    </div>
+
+    <div class="display-card-con p-4 d-flex ">
+        <div class="card p-4 rounded-md bg-white flex flex-col gap-3 slide-in-bottom">
+            <div class="close_con d-flex justify-content-end align-items-center">
+                <div class="border p-1 d-flex align-items-center justify-content-center text-center rounded" style="width: 30px; height: 30px;" onclick="closeoffer()">
+                    <p style="font-weight: bold; font-size: 20px; " class="m-0">X</p>
+                </div>
+            </div>
+            <h3 class="text-center p-0">Would you like to claim this offer ?</h3>
+            <img src="./games_files/1.webp" alt="" class="card-img ">
+            <div class="d-flex align-items-center justify-content-center bg-gray-900 mt-3n gap-1">
+                <button class="btn btn-warning btn-lg px-4 py-2 col-6 fw-bold" onclick="closeoffer()">Decline</button>
+                <button class="btn btn-primary btn-lg px-4 py-2 col-6 fw-bold text-nowrap">Claim</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container payment_interface pb-4" style="display: none;">
+        <div class="modal-dialog modal-dialog-centered my-4">
+            <div class="modal-content p-4">
+
+                <div class="btn-close-con d-flex justify-content-end">
+                    <button class="btn btn-secondary backBtn">X</button>
+                </div>
+                <h4 class="text-center mb-4">Enter Payment Details</h4>
+
+
+                <div class="payment-amount-container text-center mb-4">
+                    <p class="m-0">Wallet Amount</p>
+                    <div class="payment-amount-box">
+                        <p class="payment-amount m-0">₹0.00</p>
+                    </div>
+                </div>
+
+                <ul class="nav nav-tabs mb-3" id="accountTypeTab" role="tablist">
+                    <li class="nav-item col-6 text-center" role="presentation">
+                        <a class="nav-link active" id="upi-tab" data-bs-toggle="tab" href="https://tejkunitsolutions.com/royalityprogram8/games.html#upi" role="tab" aria-controls="upi" aria-selected="true">UPI ID</a>
+                    </li>
+                    <li class="nav-item col-6 text-center" role="presentation">
+                        <a class="nav-link" id="bank-tab" data-bs-toggle="tab" href="https://tejkunitsolutions.com/royalityprogram8/games.html#bank" role="tab" aria-controls="bank" aria-selected="false">Bank a/c</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="accountTypeTabContent">
+                    <div class="tab-pane fade show active" id="upi" role="tabpanel" aria-labelledby="upi-tab">
+                        <form id="upiForm">
+                            <div class="mb-3">
+                                <label for="upiId" class="form-label">UPI ID<span class="required-asterisk">*</span></label>
+                                <input type="text" class="form-control" id="upiId" placeholder="Enter UPI ID" required="">
+                                <span class="error-message" id="upiError"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="beneficiaryNameUpi" class="form-label">Beneficiary Name<span class="required-asterisk">*</span></label>
+                                <input type="text" class="form-control" id="beneficiaryNameUpi" placeholder="Beneficiary Name" required="">
+                                <span class="error-message" id="beneficiaryUpiError"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="transferAmount" class="form-label">Transfer Amount<span class="required-asterisk">*</span></label>
+                                <input type="number" class="form-control" id="transferAmount" placeholder="Enter amount to transfer" required="">
+                                <span class="error-message" id="amountError"></span>
+                            </div>
+                            <div class="d-flex justify-content-between gap-3 mt-4">
+                                <!-- <button type="button" class="btn btn-secondary backBtn" id="backBank">Back</button> -->
+                                <button type="submit" class="btn btn-primary disabled-btn col" id="bankSubmitBtn" disabled="">Withdraw</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="tab-pane fade" id="bank" role="tabpanel" aria-labelledby="bank-tab">
+                        <form id="bankForm">
+                            <div class="mb-3">
+                                <label for="accountNo" class="form-label">Account No.<span class="required-asterisk">*</span></label>
+                                <input type="text" class="form-control" id="accountNo" placeholder="Enter account number" required="">
+                                <span class="error-message" id="accountError"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirmAccountNo" class="form-label">Confirm Account No.<span class="required-asterisk">*</span></label>
+                                <input type="text" class="form-control" id="confirmAccountNo" placeholder="Re-enter account number" required="">
+                                <span class="error-message" id="confirmAccountError"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="ifsc" class="form-label">IFSC<span class="required-asterisk">*</span></label>
+                                <input type="text" class="form-control" id="ifsc" placeholder="IFSC of the bank account" required="">
+                                <span class="error-message" id="ifscError"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="beneficiaryNameBank" class="form-label">Beneficiary Name<span class="required-asterisk">*</span></label>
+                                <input type="text" class="form-control" id="beneficiaryNameBank" placeholder="Beneficiary Name" required="">
+                                <span class="error-message" id="beneficiaryBankError"></span>
+                            </div>
+                            <div class="mb-3">
+                                <label for="transferAmountBank" class="form-label">Transfer Amount<span class="required-asterisk">*</span></label>
+                                <input type="number" class="form-control" id="transferAmountBank" placeholder="Enter amount to transfer" required="">
+                                <span class="error-message" id="amountBankError"></span>
+                            </div>
+                            <div class="d-flex justify-content-between gap-3 mt-4">
+                                <button type="submit" class="btn btn-primary disabled-btn col" id="bankSubmitBtn" disabled="">Withdraw</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./games_files/jquery.min.js.download"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            $('#withdrawBtn').on('click', function () {
+                $('.payment_interface').show();
+            })
+
+            $('.payment_interface').hide();
+
+            let walletAmount = 0;
+            $(".wallet-amount").text(`₹${walletAmount.toFixed(2)}`);
+            $(".payment-amount").text(`₹${walletAmount.toFixed(2)}`);
+
+            $('.backBtn').on('click', function () {
+                $('.payment_interface').hide();
+            })
+
+            function restrictToNumbers(event) {
+                const key = event.which || event.keyCode;
+                if (key < 48 || key > 57) {
+                    event.preventDefault();
+                }
+            }
+
+            function restrictToAlphabets(event) {
+                const key = event.which || event.keyCode;
+                if ((key < 65 || key > 90) && (key < 97 || key > 122) && key !== 32) {
+                    event.preventDefault();
+                }
+            }
+
+            $('#mobileNumber, #accountNo, #confirmAccountNo').on('keypress', restrictToNumbers);
+            $('#beneficiaryNameUpi, #beneficiaryNameBank').on('keypress', restrictToAlphabets);
+
+            $('#transferAmount').on('focus', function () {
+                $(this).val(walletAmount.toFixed(2));
+            });
+
+            $('#mobileNumber').on('blur', function () {
+                const mobileNumber = $(this).val();
+                $('#mobileError').text('');
+
+                if (!/^[6-9]\d{9}$/.test(mobileNumber)) {
+                    $('#mobileError').text('Invalid mobile number');
+                }
+            });
+
+            $('#upiId').on('blur', function () {
+                const upiId = $(this).val();
+                $('#upiError').text('');
+
+                const upiPattern = /^[0-9]{10}@[a-zA-Z0-9.-]+$/;
+
+                if (!upiPattern.test(upiId)) {
+                    $('#upiError').text('Invalid UPI ID. Must be 10 digits followed by @domain.');
+                }
+            });
+
+            $('#transferAmount').on('blur', function () {
+                const transferAmount = parseFloat($(this).val());
+                $('#amountError').text('');
+
+                if (isNaN(transferAmount) || transferAmount <= 0) {
+                    $('#amountError').text('Invalid amount');
+                } else if (transferAmount > walletAmount) {
+                    $('#amountError').text('Amount exceeds wallet balance');
+                }
+            });
+
+            $('#accountNo, #confirmAccountNo').on('blur', function () {
+                const accountNo = $('#accountNo').val();
+                const confirmAccountNo = $('#confirmAccountNo').val();
+                $('#accountError, #confirmAccountError').text('');
+
+                if (accountNo.length < 9 || accountNo.length > 18) {
+                    $('#accountError').text('Invalid account number');
+                }
+
+                if (confirmAccountNo !== accountNo) {
+                    $('#confirmAccountError').text('Account numbers do not match');
+                }
+            });
+
+            $('#ifsc').on('blur', function () {
+                const ifsc = $(this).val();
+                $('#ifscError').text('');
+
+                if (!/^[A-Z]{4}0[A-Z0-9]{6}$/.test(ifsc)) {
+                    $('#ifscError').text('Invalid IFSC code');
+                }
+            });
+
+            function enableSubmitBtn() {
+                const upiFormValid = $('#upiId').val() && $('#mobileNumber').val() && $('#beneficiaryNameUpi').val() && $('#transferAmount').val();
+                const bankFormValid = $('#accountNo').val() && $('#confirmAccountNo').val() && $('#ifsc').val() && $('#beneficiaryNameBank').val() && $('#transferAmountBank').val();
+                $('#bankSubmitBtn').prop('disabled', !(upiFormValid || bankFormValid));
+            }
+
+            $('#upiForm, #bankForm input').on('input', enableSubmitBtn);
+
+            $('#upi-tab').on('click', function () {
+                $('#upi').addClass('active show');
+                $('#bank').removeClass('active show');
+                $('#upi-tab').addClass('active');
+                $('#bank-tab').removeClass('active');
+
+            });
+
+            $('#bank-tab').on('click', function () {
+                $('#bank').addClass('active show');
+                $('#upi').removeClass('active show');
+                $('#bank-tab').addClass('active');
+                $('#upi-tab').removeClass('active');
+            });
+
+        });
+
+        body.style.overflow = 'hidden';
+
+        function closeofferslist() {
+            document.querySelector('.offers-con').classList.replace('d-flex', 'd-none');
+        }
+
+        function closeoffer() {
+            // document.querySelector('.card').classList.add('close');
+            document.querySelector('.display-card-con').classList.add('slide-in-top');
+        }
+
+        function showoffers() {
+            console.log('working')
+            document.querySelector('.offers-con').classList.replace('d-none', 'd-flex');
+        }
+
+        function shareReferral() {
+            if (navigator.share) {
+                navigator.share({
+                    title: document.title, // Page title
+                    text: 'Check out this page!',
+                    url: window.location.href // Current page URL
+                })
+                    .then(() => console.log('Share successful'))
+                    .catch((error) => console.error('Error sharing:', error));
+            } else {
+                console.log('Web Share API not supported in this browser.');
+            }
+
+        }
+    </script>
+<script type="module" src="./games_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style><button class="glasp-banner-root glasp-fab-root" aria-label="Glasp" title="Glasp" style="position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); z-index: 2147483646; pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(255, 255, 255, 0.92); box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"></path><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path></svg></button></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

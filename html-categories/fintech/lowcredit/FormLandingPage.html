@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<!-- saved from url=(0040)https://tejkunitsolutions.com/lowcredit/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Landing Page </title>
+    <link rel="stylesheet" href="./FormLandingPage_files/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="./FormLandingPage_files/css2" rel="stylesheet">
+    <style>
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            to {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+
+        .fade-out {
+            animation: fadeOut 0.5s forwards;
+        }
+
+        .fade-in {
+            animation: fadeIn 0.5s forwards;
+        }
+
+        .line-transition {
+            width: 0;
+            transition: width 0.5s ease;
+        }
+
+        /* Keyframes for the line animation */
+        @keyframes line-expand {
+            0% {
+                width: 0;
+            }
+
+            100% {
+                width: 100%;
+            }
+        }
+
+        .line {
+            width: 0;
+            height: 2px;
+            /* Adjust the height as needed */
+            background-color: #000;
+            /* Adjust the color as needed */
+        }
+
+        .line-active {
+            animation: line-expand 0.5s ease forwards;
+            /* Play the animation forwards */
+        }
+
+
+
+        * {
+            font-family: "Lato", sans-serif;
+            font-style: normal;
+        }
+
+        .bg-main {
+            background-color: #ebeeff !important;
+        }
+
+        label {
+            font-size: 14px;
+        }
+
+        .form-control-1 {
+            /* display: flex; */
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .middle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wallet {
+            font-size: 36px;
+        }
+
+        .circle {
+            min-width: 25px;
+            min-height: 25px;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            border: 2px solid #929292;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .line {
+            width: 100%;
+            border-top: 3px solid #929292;
+        }
+
+        body {
+            background: linear-gradient(0deg, #fff 0%, #ebeeff 100%);
+            background-color: #ebeeff;
+        }
+
+        .bg-green {
+            background-color: #22ca5d;
+        }
+
+        .text-green {
+            color: #22ca5d;
+            /* font-weight: 700 !important; */
+        }
+
+        h2>b {
+            font-size: 2.2rem;
+        }
+
+        .bg-p {
+            border-color: #ebeeff;
+        }
+
+        .f-14 {
+            font-size: 16px !important;
+        }
+
+        small {
+            font-size: 12px !important;
+            color: #254882;
+        }
+
+        .small-p {
+            color: rgba(37, 73, 130, 0.6) !important;
+        }
+
+        h6 {
+            font-weight: 700;
+            color: #254882;
+        }
+
+        .f-600 {
+            font-weight: 600 !important;
+        }
+
+        .input-group-text,
+        input[type="number"] {
+            border: 0px;
+            background: transparent;
+        }
+
+        .input-group-text {
+            border-right: 1px solid #dee2e6;
+            background-color: #ebeeff;
+            border-radius: 0px !important;
+        }
+
+        .f-16 {
+            font-size: 16px !important;
+        }
+
+        .f-14 {
+            font-size: 14px !important;
+        }
+
+        .form-check-input:checked {
+            background-color: #22ca5d;
+            border-color: #fff;
+        }
+
+        .active {
+            background-color: #22ca5d !important;
+            border-color: #22ca5d !important;
+        }
+
+        @media only screen and (min-width: 768px) {
+
+            /* Hide the body content for screens smaller than 768px */
+            body {
+                display: none;
+            }
+        }
+    </style>
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body>
+    <div class="container col-12 p-0">
+        <div class="top col-12 p-4 text-center pt-0 gap-2 d-flex align-items-center justify-content-center flex-column">
+            <img src="./FormLandingPage_files/logo.png" alt="logo" width="65%" class="py-3">
+            <h2 class="mx-4 mb-0">Instant loan approval in <b class="text-green">5mins,</b> Fast Disbural
+            </h2>
+            <div class="d-flex align-items-center justify-content-center gap-1 rounded-pill bg-white p-2 border" style="width: fit-content;">
+                <img src="./FormLandingPage_files/luggage.svg" alt="icon" width="30px" height="30px" class="bg-primary  rounded rounded-circle border p-1 icon">
+                <img src="./FormLandingPage_files/personal.svg" alt="icon" width="30px" height="30px" class="bg-warning  rounded rounded-circle border p-1 icon" style="margin-left: -10px;">
+                <img src="./FormLandingPage_files/cap.svg" alt="icon" width="30px" height="30px" class="bg-green  rounded rounded-circle border p-1 icon" style="margin-left: -10px;">
+                <small class="m-1 text-nowrap">One loan for all your financial needs.</small>
+            </div>
+        </div>
+        <div class="middle col-12">
+            <form action="https://tejkunitsolutions.com/lowcredit/" class="p-2 col-11 bg-white rounded border shadow-sm">
+                <div class="d-flex align-items-center justify-content-center col-12 flex-column gap-1 px-2 mt-4">
+                    <div class="d-flex align-items-center justify-content-center col-12 px-2">
+                        <div class="bg-p border-p circle active"></div>
+                        <div class="bg-p border-p line l-1"></div>
+                        <div class="bg-p border-p circle c-2"></div>
+                        <div class="bg-p border-p line l-2"></div>
+                        <div class="bg-p border-p circle c-3"></div>
+                    </div>
+                    <div class="d-flex align-items-center justify-content-between col-12">
+                        <p class="p-0 m-0 f-14 text-green">Step-1</p>
+                        <p class="p-0 m-0 f-14 s-2">Step-2</p>
+                        <p class="p-0 m-0 f-14 s-3">Step-3</p>
+                    </div>
+                </div>
+
+                <!-- Step-1 -->
+                <div class="form-control-1 p-2 mt-1 step-1 d-flex flex-column">
+                    <div class="form-group">
+                        <label for="mobile">Enter Mobile number</label>
+                        <div class="input-group border rounded">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text f-14 f-600" id="basic-addon1"><img src="./FormLandingPage_files/phone.svg" alt=""></span>
+                            </div>
+                            <input type="number" class="mobile form-control" id="mobile" placeholder="Enter Mobile number" required="">
+                        </div>
+                        <small class="text-danger d-none">Enter a valid 10 digit mobile number</small>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100">Next</button>
+                </div>
+
+                <!-- Step-2 -->
+                <div class="form-control-1 p-2 mt-1 step-2 d-none">
+                    <div class="form-group">
+                        <label for="employment">Choose Employment</label>
+                        <div class="col-12 d-flex align-items-between justify-content-between gap-1">
+                            <div class="form-check border rounded p-2 w-100">
+                                <input type="radio" id="employed" name="employment" class="form-check-input mx-0" required="">
+                                <label for="salaried" class="px-2 f-14">Salaried</label>
+                            </div>
+                            <div class="form-check border rounded p-2 w-100">
+                                <input type="radio" id="self-employed" name="employment" class="form-check-input mx-0" required="">
+                                <label for="self-employed" class="px-2 f-14">Self-Employed</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group my-2 d-none" id="salarymode">
+                        <label for="employment">Choose Salary Received in</label>
+                        <select name="credited" class="form-select">
+                            <option value="default">Select your Mode of Salary</option>
+                            <option value="bank">Bank</option>
+                            <option value="chequee">Chequee</option>
+                            <option value="cash">Cash</option>
+                        </select>
+                    </div>
+                    <button type="button" class="btn btn-primary w-100 mt-1">Next</button>
+                </div>
+
+                <!-- Step-3 -->
+                <div class="form-control-1 p-2 mt-1 step-3 d-none">
+                    <div class="form-group">
+                        <label for="income">Monthly Income</label>
+                        <div class="input-group border rounded">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text f-16 d-flex align-items-center justify-content-center f-600" id="basic-addon1" style="width: 50px;">₹</span>
+                            </div>
+                            <input type="number" class="income form-control" id="income" placeholder="Enter monthly income" required="">
+                        </div>
+                        <small class="text-danger d-none income-msg">Enter a Montly Income</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pincode">Pincode</label>
+                        <div class="input-group border rounded">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text f-14 f-600" id="basic-addon1"><img src="./FormLandingPage_files/location.svg" alt=""></span>
+                            </div>
+                            <input type="number" class="pincode form-control" id="pincode" placeholder="Enter your pincode" required="">
+                        </div>
+                        <small class="text-danger d-none pincode-msg">Enter a 6 Digit Pincode</small>
+                    </div>
+
+                    <button class="btn btn-primary w-100 submit mt-2" type="button">Submit</button>
+                </div>
+                <div class="col-12 d-flex align-items-center justify-content-center pt-4">
+                    <img src="./FormLandingPage_files/illustration.png" alt="" width="85%">
+                </div>
+            </form>
+        </div>
+
+        <div class="bottom col-12 p-2 d-flex flex-column align-items-center justify-content-center">
+            <div class="row col-12 row-cols-2 p-0 align-items-center justify-content-center p-2 flex-column">
+                <div class="d-flex align-items-center justify-content-between col-12 p-0">
+                    <div class="col m-1 p-2 d-flex flex-column gap-1 border border-sec rounded">
+                        <img src="./FormLandingPage_files/icon-1.svg" alt="Safe and secure icon" width="20%" class="mx-auto">
+                        <h6 class="text-center m-0 p-0">Safe and secure</h6>
+                        <small class="small-p text-center m-0 p-0">Your data is always protected.</small>
+                    </div>
+                    <div class="col m-1 p-2 d-flex flex-column gap-1 border border-sec rounded">
+                        <img src="./FormLandingPage_files/icon-2.svg" alt="Quick process icon" width="20%" class="mx-auto">
+                        <h6 class="text-center m-0 p-0">Quick Process</h6>
+                        <small class="text-center small-p m-0 p-0">Fast and easy application process.</small>
+                    </div>
+                </div>
+                <div class="d-flex align-items-center justify-content-between col-12 p-0">
+                    <div class="col m-1 p-2 d-flex flex-column gap-1 border border-sec rounded">
+                        <img src="./FormLandingPage_files/icon-3.svg" alt="Funds on next day icon" width="20%" class="mx-auto">
+                        <h6 class="text-center m-0 p-0">Fast Approval</h6>
+                        <small class="text-center m-0 p-0 small-p">Get funds as early as tomorrow.</small>
+                    </div>
+                    <div class="col m-1 p-2 d-flex flex-column gap-1 border border-sec rounded">
+                        <img src="./FormLandingPage_files/icon-4.svg" alt="Low interest rates icon" width="20%" class="mx-auto">
+                        <h6 class="text-center m-0 p-0">Low Interest</h6>
+                        <small class="text-center m-0 p-0 small-p">Save more with low interest rates.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="col-12 d-flex align-items-center justify-content-center py-2 border-top" style="color: #254882;">
+        <small class="text-muted m-0 p-0">© 2024 | All rights reserved.</small>
+    </footer>
+
+    <script>
+        document.getElementById("employed").addEventListener("click", function () {
+            console.log(this.checked);
+            if (this.checked) {
+                document.getElementById("salarymode").classList.remove("d-none");
+            } else {
+                document.getElementById("salarymode").classList.add("d-none");
+            }
+        });
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Function to validate Indian mobile number
+            function validateMobileNumber(number) {
+                const regex = /^[6-9]\d{9}$/;
+                return regex.test(number);
+            }
+
+            // Function to validate income
+            function validateIncome(income) {
+                return income.trim() !== '';
+            }
+
+            // Function to validate pincode
+            function validatePincode(pincode) {
+                const regex = /^\d{6}$/;
+                return regex.test(pincode);
+            }
+
+            // Handle Step-1
+            document.querySelector('.step-1 .btn').addEventListener('click', function () {
+                const mobileInput = document.getElementById('mobile');
+                const mobileValue = mobileInput.value;
+                const errorMsg = document.querySelector('.step-1 .text-danger');
+
+                if (mobileValue.trim() === '' || !validateMobileNumber(mobileValue)) {
+                    errorMsg.classList.remove('d-none');
+                } else {
+                    errorMsg.classList.add('d-none');
+
+                    // Add fade-out animation to Step-1
+                    const step1 = document.querySelector('.step-1');
+                    step1.classList.add('fade-out');
+
+                    setTimeout(() => {
+                        // Remove Step-1 from view after fade-out completes
+                        step1.classList.add('d-none');
+                        step1.classList.remove('fade-out');
+
+                        // Add fade-in animation to Step-2
+                        const step2 = document.querySelector('.step-2');
+                        step2.classList.remove('d-none');
+                        step2.classList.add('fade-in');
+
+                        setTimeout(() => {
+                            // Update progress indicators right after step-2 appears
+                            document.querySelector('.l-1').classList.add('active');
+                            document.querySelector('.c-2').classList.add('active');
+                            document.querySelector('.s-2').classList.add('text-green');
+
+                            // Start the line animation immediately after the progress indicators are updated
+                            const line = document.querySelector('.line');
+                            line.classList.add('line-active');
+                        }, 0); // No delay for line transition after step-2 appears
+                    }, 500); // Delay for step-2 fade-in after step-1 is hidden
+                }
+            });
+
+
+
+            // Handle Step-2
+            document.querySelector('.step-2 .btn').addEventListener('click', function () {
+                const selectedRadio = document.querySelector('input[name="employment"]:checked');
+
+                if (!selectedRadio) {
+                    // Show validation error if no radio button selected
+                    alert('Please select an employment status');
+                } else if (selectedRadio.id === "employed") {
+                    const selectedSalaryMode = document.querySelector('select[name="credited"]').value;
+                    if (selectedSalaryMode === "default") {
+                        // Show validation error if salary mode not selected
+                        alert('Please select the mode of salary');
+                    } else {
+                        // Proceed with the rest of the code
+                        const step2 = document.querySelector('.step-2');
+                        step2.classList.add('fade-out');
+
+                        setTimeout(() => {
+                            // Remove Step-2 from view after fade-out completes
+                            step2.classList.add('d-none');
+                            step2.classList.remove('fade-out');
+
+                            // Add fade-in animation to Step-3
+                            const step3 = document.querySelector('.step-3');
+                            step3.classList.remove('d-none');
+                            step3.classList.add('fade-in');
+
+                            setTimeout(() => {
+                                // Update progress indicators
+                                document.querySelector('.l-2').classList.add('active');
+                                document.querySelector('.c-3').classList.add('active');
+                                document.querySelector('.s-3').classList.add('text-green');
+
+                                // Trigger line animation for Step-2 to Step-3
+                                const line2 = document.querySelector('.line-2'); // Ensure this class is correctly used for the Step-2 to Step-3 transition
+                                line2.classList.add('line-active'); // Trigger keyframe animation for line
+                            }, 0); // No delay for line transition after step-3 appears
+                        }, 500); // Delay for step-3 fade-in after step-2 is hidden
+                    }
+                } else {
+                    // Proceed with the rest of the code
+                    const step2 = document.querySelector('.step-2');
+                    step2.classList.add('fade-out');
+
+                    setTimeout(() => {
+                        // Remove Step-2 from view after fade-out completes
+                        step2.classList.add('d-none');
+                        step2.classList.remove('fade-out');
+
+                        // Add fade-in animation to Step-3
+                        const step3 = document.querySelector('.step-3');
+                        step3.classList.remove('d-none');
+                        step3.classList.add('fade-in');
+
+                        setTimeout(() => {
+                            // Update progress indicators
+                            document.querySelector('.l-2').classList.add('active');
+                            document.querySelector('.c-3').classList.add('active');
+                            document.querySelector('.s-3').classList.add('text-green');
+
+                            // Trigger line animation for Step-2 to Step-3
+                            const line2 = document.querySelector('.line-2'); // Ensure this class is correctly used for the Step-2 to Step-3 transition
+                            line2.classList.add('line-active'); // Trigger keyframe animation for line
+                        }, 0); // No delay for line transition after step-3 appears
+                    }, 500); // Delay for step-3 fade-in after step-2 is hidden
+                }
+            });
+
+            // Handle Step-3
+            document.querySelector('.submit').addEventListener('click', function () {
+                const incomeInput = document.getElementById('income');
+                const pincodeInput = document.getElementById('pincode');
+                const incomeValue = incomeInput.value;
+                const pincodeValue = pincodeInput.value;
+
+                let valid = true;
+
+                // Validate income
+                if (!validateIncome(incomeValue)) {
+                    document.querySelector('.income-msg').classList.remove('d-none');
+                    valid = false;
+                } else {
+                    document.querySelector('.income-msg').classList.add('d-none');
+                }
+
+                // Validate pincode
+                if (!validatePincode(pincodeValue)) {
+                    document.querySelector('.pincode-msg').classList.remove('d-none');
+                    valid = false;
+                } else {
+                    document.querySelector('.pincode-msg').classList.add('d-none');
+                }
+
+                if (valid) {
+                    // Redirect to Google
+                    window.location.href = 'https://www.google.com';
+                }
+            });
+        });
+
+
+    </script>
+
+    <script>
+        const formCheckDivs = document.querySelectorAll('.form-check');
+
+        formCheckDivs.forEach(div => {
+            div.addEventListener('click', function () {
+                // Uncheck all radio buttons and remove bg-primary and text-light from all divs
+                formCheckDivs.forEach(d => {
+                    d.classList.remove('bg-main');
+                    d.querySelector('input[type="radio"]').checked = false;
+                });
+
+                // Add bg-primary and text-light to the clicked div
+                div.classList.add('bg-main');
+
+                // Check the radio button inside the clicked div
+                const radioButton = div.querySelector('input[type="radio"]');
+                radioButton.checked = true;
+
+                // If the clicked radio button is "employed", display the salarymode div
+                if (radioButton.id === "employed") {
+                    document.getElementById("salarymode").classList.remove("d-none");
+                } else {
+                    document.getElementById("salarymode").classList.add("d-none");
+                }
+            });
+        });
+    </script>
+
+<script type="module" src="./FormLandingPage_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

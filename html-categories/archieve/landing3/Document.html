@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://tejkunitsolutions.com/landing3/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="icon" href="https://tejkunitsolutions.com/landing3/assets/favicon.ico" type="image/x-icon">
+    <style>
+        * {
+            padding: 0px;
+            margin: 0px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        main {
+            width: 100vw;
+            display: flex;
+            gap: 0px;
+            flex-wrap: wrap;
+            background: linear-gradient(-145deg, #cfedfa 0%, #ffffff 100%);
+        }
+
+        .top,
+        .bottom,
+        .benefits {
+            width: 100%;
+            border-radius: 12px;
+            position: relative;
+            margin: 16px;
+            padding: 16px;
+        }
+
+        .top {
+            background-color: #eff7e8;
+            border: 1px solid #6bbf29;
+            margin-bottom: 0px;
+            overflow: hidden;
+            min-height: 250px;
+        }
+
+
+        .bottom,
+        .benefits {
+            margin-top: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            height: fit-content;
+            gap: 8px;
+        }
+
+        .benefits {
+            margin-top: 0px;
+        }
+
+
+        .top h2,
+        .top p {
+            margin-bottom: 10px;
+            text-wrap: balance;
+            width: 75%;
+        }
+
+
+        h2 {
+            margin-top: 0px;
+            font-weight: 600;
+        }
+
+        .bottom h2 {
+            margin-bottom: 12px;
+        }
+
+
+        ul {
+            margin-top: 12px;
+            padding-left: 0px;
+            list-style: none;
+        }
+
+        ul li {
+            padding-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .star {
+            width: 16px;
+        }
+
+        .btn {
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            width: 100%;
+            padding: 8px;
+            font-size: 18px;
+            outline: transparent;
+            outline-offset: transparent;
+            font-weight: 600;
+            background-color: #0a6fe2;
+            color: white;
+            border-radius: 4px;
+            border: transparent;
+        }
+
+        .btn:hover,
+        .btn:active {
+            background-color: #0552aa;
+        }
+
+        .tick-bg {
+            position: absolute;
+            right: 12px;
+            top: 12px;
+            width: 100px;
+            animation: rotate 1000s linear infinite forwards;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg)
+            }
+
+            to {
+                transform: rotate(36000deg);
+            }
+        }
+
+        .tick {
+            position: absolute;
+            right: 40px;
+            top: 44px;
+            width: 48px;
+            animation: wobble 1s linear infinite forwards;
+        }
+
+        @keyframes wobble {
+
+            0%,
+            100% {
+                transform: scale(1.1);
+            }
+
+            50% {
+                transform: scale(1);
+            }
+        }
+
+        .card {
+            position: absolute;
+            right: -20px;
+            bottom: -50px;
+            width: 300px;
+        }
+
+        input {
+            padding: 8px;
+            border: transparent;
+            border-radius: 4px;
+            font-size: 16px;
+            background-color: white;
+        }
+
+        .bottom p {
+            color: #ababab;
+        }
+
+        header {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 0px;
+            color: white;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .logo {
+            width: 220px;
+        }
+
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: -4px;
+            display: none;
+        }
+
+        @media screen and (min-width: 600px) {
+            body {
+                display: none;
+            }
+        }
+
+        .pre-loader {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loader {
+            width: 50px;
+            padding: 8px;
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: #0a6fe2;
+            --_m:
+                conic-gradient(#0000 10%, #000),
+                linear-gradient(#000 0 0) content-box;
+            -webkit-mask: var(--_m);
+            mask: var(--_m);
+            -webkit-mask-composite: source-out;
+            mask-composite: subtract;
+            animation: l3 1s infinite linear;
+        }
+
+        @keyframes l3 {
+            to {
+                transform: rotate(1turn)
+            }
+        }
+
+        .pop-up-qa {
+            background-color: rgba(0, 0, 0, 0.75);
+            position: absolute;
+            top: 0%;
+            left: 0%;
+            right: 0%;
+            bottom: 0%;
+            width: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        form {
+            width: 80%;
+            background-color: white;
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .radio-inputs-container {
+            margin: 8px 0px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            width: 100%;
+            justify-content: space-between;
+            margin-bottom: 14px;
+        }
+
+        input[type="radio"] {
+            width: fit-content;
+        }
+
+        .active {
+            background-color: #1072CC;
+            color: white;
+        }
+
+        .radio-input {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            width: 100%;
+            border: 1px solid #ccc;
+            padding: 8px 8px;
+            border-radius: 4px;
+        }
+
+        .qa-heading {
+            padding: 12px 0px;
+            font-weight: 600;
+            font-size: 18px;
+            text-align: center;
+        }
+
+        .salary-input {
+            display: none;
+        }
+
+        .step {
+            display: none;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .step:first-of-type {
+            display: block;
+            flex-direction: column;
+        }
+
+        .pincode-error {
+            color: red;
+            display: none;
+        }
+
+        .input-box {
+            width: 100%;
+            display: flex;
+            background-color: #edeef0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            align-items: center;
+        }
+
+        .input-box input {
+            width: 100%;
+        }
+
+        input[type="number"]:focus-visible {
+            border: transparent;
+            outline: none;
+        }
+
+        .input-box img {
+            padding: 0px 8px;
+            width: 24px;
+            height: 24px;
+        }
+
+        .flex-box {
+            display: flex;
+            align-items: start;
+            margin-top: 8px;
+            gap: 5px;
+        }
+
+        .flex-box p {
+            /* text-wrap: balance; */
+            color: rgba(0, 0, 0, 0.70);
+        }
+
+        .flex-box input {
+            margin-top: 6px;
+            width: 18px;
+            height: 18px;
+        }
+
+        .opt-in-error {
+            color: red;
+            display: none;
+        }
+    </style>
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body style="overflow: auto;">
+    <header>
+        <img src="./Document_files/logo.png" alt="" class="logo" tabindex="0" focusable="">
+    </header>
+    <div class="pre-loader" style="display: none;">
+        <div class="loader"></div>
+    </div>
+    <main>
+        <div class="top">
+            <img src="./Document_files/tick-bg.svg" alt="" class="tick-bg">
+            <img src="./Document_files/tick.svg" alt="" class="tick">
+            <h2>
+                Great ! You are Eligible for 5 Lakhs Instant Loan
+            </h2>
+            <p>Get your loan amount disbursed in few minutes</p>
+            <img src="./Document_files/card.webp" alt="card" class="card">
+        </div>
+        <div class="bottom">
+            <h2>
+                With Great Benefits awaiting only for you !
+            </h2>
+            <p>Enter your mobile and get it today !</p>
+            <div class="input-box">
+                <img src="./Document_files/phone.svg" alt="" width="16px">
+                <input type="number" placeholder="Mobile number" class="mobile" id="mobile">
+            </div>
+            <span class="error">Enter valid mobile number</span>
+            <button class="btn">Apply Now</button>
+        </div>
+        <div class="benefits">
+            <h2>Features</h2>
+            <ul>
+                <li><img src="./Document_files/star.png" class="star" alt="">Quick Disbursal</li>
+                <li><img src="./Document_files/star.png" class="star" alt="">Instant Approval</li>
+                <li><img src="./Document_files/star.png" class="star" alt="">Low Rate Of Interest</li>
+                <li><img src="./Document_files/star.png" class="star" alt="">Flexible Loan Tenure</li>
+            </ul>
+        </div>
+
+        <div class="pop-up-qa">
+            <form action="https://tejkunitsolutions.com/landing3/">
+                <div class="step" style="display: flex;">
+                    <label for="" class="qa-heading">Select Employment Type ?</label>
+                    <div class="radio-inputs-container">
+                        <div onclick="document.getElementById('salaried').checked = true;" class="radio-input">
+                            <input type="radio" name="employment-type" id="salaried" value="salaried">
+                            <label for="salaried">Salaried</label>
+                        </div>
+                        <div onclick="document.getElementById('self-employed').checked = true;" class="radio-input">
+                            <input type="radio" name="employment-type" id="self-employed" value="self-employed">
+                            <label for="self-employed">Self-employed</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <label for="" class="qa-heading" aria-label="Mode of Salary Receipt">Select Your Mode of
+                        Salary</label>
+                    <div class="radio-inputs-container">
+                        <div onclick="document.getElementById('bank').checked = true;" class="radio-input">
+                            <input type="radio" name="salary-mode" id="bank" value="bank">
+                            <label for="bank">Bank</label>
+                        </div>
+                        <div onclick="document.getElementById('chequee').checked = true;" class="radio-input">
+                            <input type="radio" name="salary-mode" id="chequee" value="chequee">
+                            <label for="chequee">Chequee</label>
+                        </div>
+                        <div onclick="document.getElementById('cash').checked = true;" class="radio-input">
+                            <input type="radio" name="salary-mode" id="cash" value="cash">
+                            <label for="cash">Cash</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="step">
+                    <label for="" class="qa-heading" aria-label="Mode of Salary Receipt">Enter your Area Pincode</label>
+                    <div class="input-box">
+                        <img src="./Document_files/area.svg" alt="" width="16px">
+                        <input type="number" placeholder="Enter your area pincode" id="pincode" name="pincode" class="pincode">
+                    </div>
+                    <span class="pincode-error">Enter your area pincode</span>
+                    <div class="flex-box" onclick="document.getElementById('opt-in').checked = !document.getElementById('opt-in').checked;">
+                        <input type="checkbox" checked="" name="opt-in" id="opt-in" class="opt-in" placeholder=" ">
+                        <div>
+                            <p>I hereby agree to receive RCS, SMS message, Whatsapp to number from Lowcredit</p>
+                            <span class="opt-in-error">You must agree to proceed</span>
+                        </div>
+                    </div>
+                </div>
+                <button type="button" class="btn next">Next</button>
+            </form>
+        </div>
+    </main>
+
+    <script>
+
+        window.onload = () => {
+            document.querySelector(".pre-loader").style.display = "none";
+            document.body.style.overflow = "auto";
+        };
+
+        function loader() {
+            document.querySelector(".pre-loader").style.display = "flex";
+            document.querySelector(".pre-loader").style.position = 'absolute';
+            document.querySelector(".pre-loader").style.zIndex = '999';
+            document.querySelector(".pre-loader").style.top = '0';
+            document.body.style.overflow = "hidden";
+            setTimeout(() => {
+                document.querySelector(".pre-loader").style.display = "none";
+            }, 1000);
+        }
+
+        const mobileInput = document.querySelector(".mobile");
+        const errorElement = document.querySelector('.error');
+        const mobilePattern = /^[6-9]\d{9}$/;
+
+        mobileInput.addEventListener("input", () => {
+            let mobile = mobileInput.value.slice(0, 10);
+            mobileInput.value = mobile;
+            errorElement.style.display = mobilePattern.test(mobile) ? "none" : "block";
+        });
+
+        document.querySelector(".btn").addEventListener("click", () => {
+            let mobile = mobileInput.value;
+            if (mobilePattern.test(mobile)) {
+                document.querySelector(".pop-up-qa").style.opacity = 0;
+                document.querySelector(".pop-up-qa").style.display = "flex";
+                document.body.style.overflow = "hidden";
+                loader();
+                document.body.style.overflow = 'hidden';
+                document.querySelector('.logo').focus();
+                setTimeout(() => {
+                    document.querySelector(".pop-up-qa").style.opacity = 1;
+                }, 1000);
+            } else {
+                errorElement.style.display = "block";
+                alert("Please enter a valid mobile number");
+            }
+        });
+
+        const pincodeInput = document.getElementById('pincode');
+
+        pincodeInput.addEventListener("input", () => {
+            const pincode = pincodeInput.value.slice(0, 6);
+            pincodeInput.value = pincode;
+            const isValidPincode = pincode.length === 6 && /^\d+$/.test(pincode);
+            document.querySelector('.pincode-error').style.display = isValidPincode ? "none" : "block";
+        });
+
+        let currentStep = 0; // Variable to track the current step
+
+        document.querySelector(".next").addEventListener("click", () => {
+            const employment = document.querySelector('input[name="employment-type"]:checked')?.value;
+            const salaryMode = document.querySelector('input[name="salary-mode"]:checked')?.value;
+            const pincode = document.querySelector('.pincode');
+            const optIn = document.querySelector('.opt-in');
+
+            if (currentStep === 0) {
+                if (!employment) {
+                    alert('Please select employment status');
+                    return;
+                }
+
+                document.querySelector('.step').style.display = "none";
+                if (employment === "salaried") {
+                    document.querySelectorAll('.step')[1].style.display = "block";
+                    currentStep++;
+                } else if (employment === "self-employed") {
+                    document.querySelectorAll('.step')[2].style.display = "block";
+                    document.querySelector('.next').innerHTML = "Submit";
+                    currentStep = 2;  // Skip to pincode step for self-employed
+                }
+            } else if (currentStep === 1) {
+                if (!salaryMode) {
+                    alert('Please select salary mode');
+                    return;
+                }
+
+                document.querySelectorAll('.step')[1].style.display = "none"; // Hide salary mode
+                document.querySelectorAll('.step')[2].style.display = "block";
+                document.querySelector('.next').innerHTML = "Submit";
+                currentStep++;
+            } else if (currentStep === 2) {
+                if (pincode.value.length !== 6 || !/^\d+$/.test(pincode.value)) {
+                    document.querySelector('.pincode-error').style.display = "block";
+                    alert('Please enter a valid 6-digit area pincode');
+                    return;
+                }
+
+                if (!optIn.checked) {
+                    document.querySelector('.opt-in-error').style.display = "block";
+                    alert('You must agree to proceed');
+                    return;
+                }
+
+                window.location.href = "https://www.google.com";
+            }
+        });
+
+        // Initialize the first step
+        document.querySelector('.step').style.display = "flex";
+
+
+
+    </script>
+<script type="module" src="./Document_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style><button class="glasp-banner-root glasp-fab-root" aria-label="Glasp" title="Glasp" style="position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); z-index: 2147483646; pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(255, 255, 255, 0.92); box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"></path><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path></svg></button></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

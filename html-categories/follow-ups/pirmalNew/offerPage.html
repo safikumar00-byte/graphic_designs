@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<!-- saved from url=(0054)https://tejkunitsolutions.com/pirmalNew/offerpage.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Success Page</title>
+    <link rel="stylesheet" href="./offerPage_files/bootstrap.min.css">
+    <script src="./offerPage_files/dotlottie-player.mjs" type="module"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            /* font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; */
+            font-family: 'lato', sans-serif;
+        }
+
+        body {
+            overflow: hidden;
+        }
+
+        .box {
+            width: 100%;
+            height: 100vh;
+            /* background: url('assests/images/bg.png') no-repeat center center/cover; */
+        }
+
+        .background-layer {
+            background: linear-gradient(to bottom, #8478e6, #a59aff);
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            position: absolute;
+            top: 0;
+            border-radius: 0px 0px 60px 60px/0px 0px 20px 20px;
+            z-index: -1;
+        }
+
+        .heading {
+            text-wrap: balance;
+            text-align: center;
+            color: #fff;
+            /* height: 35%; */
+            min-height: 320px;
+            /* max-height: 300px; */
+            /* padding: 60px 60px 20px 60px; */
+            /* font-style: italic; */
+            gap: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .heading h1 {
+            font-size: 48px;
+            line-height: 38px;
+            font-weight: 600;
+        }
+
+        .progress {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        */ .completed {
+            width: 100px;
+            height: 5px;
+            background: green;
+            margin: 0 10px;
+            border-radius: 10px;
+        }
+
+        .line {
+            width: 100px;
+            height: 5px;
+            background: #fff;
+            margin: 0 10px;
+            border-radius: 10px;
+        }
+
+        .card {
+            margin: 20px 20px 20px 20px;
+            padding: 20px;
+        }
+
+        .price p {
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .price h2 {
+            font-size: 46px;
+            margin-bottom: 0px;
+            font-weight: bolder;
+            line-height: 48px;
+        }
+
+        .photo img {
+            width: 60px;
+            padding: 2px;
+            /* padding-right: 10px; */
+        }
+
+
+        #multiStepForm {
+            /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #afafaf; */
+            border-radius: 10px;
+            /* padding: 20px; */
+        }
+
+        #multiStepForm h2 {
+            padding-bottom: 20px;
+            font-size: 32px;
+        }
+
+        label {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 0px;
+        }
+
+        /* input {
+            width: 100%;
+            height: 45px;
+            border: 1px solid #afafaf;
+            border-radius: 5px;
+            padding: 10px;
+        } */
+
+        /* .checkbox input {
+            height: 40px;
+            width: 60px;
+            margin: 0px 5px;
+            font-size: 15px;
+        }
+    
+        .checkbox {
+            font-size: 15px;
+        } */
+
+        button {
+            width: 100%;
+            height: 40px;
+            font-size: 20px;
+            border-radius: 5px;
+            /* margin-top: 20px; */
+            font-weight: 600;
+            text-align: center;
+            border: rgb(128, 128, 128) 2px;
+        }
+
+        .pre {
+            background-color: #afafaf;
+        }
+
+        .btn {
+            background-image: linear-gradient(to bottom, #2ECC71, #1ccc48);
+            color: #FFF;
+            font-weight: bold;
+            font-size: 20px;
+            width: 80%;
+            box-shadow: 0 0px 12px rgba(78, 50, 143, 0.733);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover,
+        .btn:focus {
+            background-image: linear-gradient(to bottom, #1ccc48, #2ECC71);
+        }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            animation: shine 2s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 100%;
+            }
+        }
+
+        .next:active,
+        .next:focus {
+            background-image: linear-gradient(to top, #8478e6, #5d4fb1);
+        }
+
+        .submit {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #d0caff;
+        }
+
+        .f-14 {
+            font-size: 14px !important;
+            /* color: #8478e6; */
+            font-weight: 400;
+        }
+
+        .circle img {
+            width: 25px;
+        }
+
+        .box2 {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid #afafaf80;
+            margin: 0px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+        }
+
+        /* .card_img img {
+            width: 60%;
+        } */
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+        }
+
+        select>option {
+            width: 100% !important;
+        }
+
+        /* input[type=radio] {
+            box-sizing: border-box;
+            padding-right: 20px;
+            width: 20px;
+        } */
+
+        .radio label {
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        select {
+            width: 100%;
+            border: 1px solid #afafaf;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .color-custom {
+            color: #8478e6;
+        }
+
+        .color-custom-80 {
+            color: #8478e6;
+            opacity: 0.8;
+        }
+
+        .bg-custom {
+            background-color: #8478e6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            /* justify-self: unset; */
+            justify-content: center;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        .text-green {
+            color: #4CAF50;
+        }
+
+        .points {
+            margin: 0px 20px 20px 20px;
+        }
+
+        canvas {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+        }
+
+        .preloader {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: white;
+            position: absolute;
+            z-index: 6;
+            flex-direction: column;
+        }
+
+        .preloader .animation {
+            margin-top: -100px;
+        }
+
+        .preloader p {
+            text-align: center;
+            font-weight: 600;
+            margin-top: -50px;
+            text-wrap: balance;
+        }
+
+        .failed-msg-div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 5;
+            background-color: #f7f6fe;
+            flex-direction: column;
+            padding: 20px;
+            text-align: center;
+            font-size: 20px;
+            font-weight: 600;
+            gap: 20px;
+        }
+
+        .btn-primary {
+            background-image: linear-gradient(to top, #5d4fb1, #8478e6);
+            color: white;
+        }
+
+        .btn-primary:active,
+        .btn-primary:focus {
+            background-image: linear-gradient(to top, #8478e6, #5d4fb1);
+        }
+
+
+        @media screen and (min-width: 600px) {
+            body {
+                display: none;
+            }
+        }
+    </style>
+<style data-glasp-print="rule">@media print{[data-glasp-print="hide"]{display:none !important}}</style></head>
+
+<body class="bg-light pb-5">
+    <div class="preloader" style="transition: opacity 0.5s ease-out; opacity: 0; display: none;">
+        <dotlottie-player src="https://lottie.host/7e9af526-7bd0-41b7-b3f3-57a32bca89a0/lb4qOhMklK.lottie" background="transparent" class="animation" speed="1" style="width: 300px; height: 300px" loop="" autoplay=""><template shadowrootmode="open"><!---->
+      <div id="animation-container" lang="en" role="img" aria-label="lottie-animation-container" class="main">
+        <div id="animation" class="animation" style="background:transparent;">
+          <!--?lit$331128141$-->
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 480 480" width="480" height="480" preserveAspectRatio="xMidYMid meet" style="width: 100%; height: 100%; transform: translate3d(0px, 0px, 0px); content-visibility: visible;"><defs><clippath id="__lottie_element_2"><rect width="480" height="480" x="0" y="0"></rect></clippath><lineargradient id="__lottie_element_9" spreadMethod="pad" gradientUnits="userSpaceOnUse" x1="-50.06999969482422" y1="-91.03900146484375" x2="70.08200073242188" y2="67.8030014038086"><stop offset="0%" stop-color="rgb(255,234,0)"></stop><stop offset="50%" stop-color="rgb(255,228,0)"></stop><stop offset="100%" stop-color="rgb(255,221,0)"></stop></lineargradient><lineargradient id="__lottie_element_16" spreadMethod="pad" gradientUnits="userSpaceOnUse" x1="-36.17599868774414" y1="-68.43900299072266" x2="52.7599983215332" y2="47.957000732421875"><stop offset="0%" stop-color="rgb(255,234,0)"></stop><stop offset="50%" stop-color="rgb(255,228,0)"></stop><stop offset="100%" stop-color="rgb(255,221,0)"></stop></lineargradient><g id="__lottie_element_23"><g transform="matrix(1,0,0,1,237,247)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(35,21,38)" fill-opacity="1" d=" M3,-107 C-52.22800064086914,-107 -97,-62.229000091552734 -97,-7 C-97,48.22800064086914 -52.22800064086914,93 3,93 C58.22800064086914,93 103,48.22800064086914 103,-7 C103,-62.229000091552734 58.22800064086914,-107 3,-107z M3,73 C-41.18299865722656,73 -77,37.18299865722656 -77,-7 C-77,-51.18299865722656 -41.18299865722656,-87 3,-87 C47.18299865722656,-87 83,-51.18299865722656 83,-7 C83,37.18299865722656 47.18299865722656,73 3,73z"></path></g><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(35,21,38)" fill-opacity="1" d=" M3,-79.5 C-37.04100036621094,-79.5 -69.5,-47.04100036621094 -69.5,-7 C-69.5,33.04100036621094 -37.04100036621094,65.5 3,65.5 C43.04100036621094,65.5 75.5,33.04100036621094 75.5,-7 C75.5,-47.04100036621094 43.04100036621094,-79.5 3,-79.5z"></path></g></g></g><mask id="__lottie_element_23_1" mask-type="alpha"><use href="#__lottie_element_23"></use></mask><g id="__lottie_element_44"><g transform="matrix(1,0,0,1,237,247)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(35,21,38)" fill-opacity="1" d=" M3,-107 C-52.22800064086914,-107 -97,-62.229000091552734 -97,-7 C-97,48.22800064086914 -52.22800064086914,93 3,93 C58.22800064086914,93 103,48.22800064086914 103,-7 C103,-62.229000091552734 58.22800064086914,-107 3,-107z M3,73 C-41.18299865722656,73 -77,37.18299865722656 -77,-7 C-77,-51.18299865722656 -41.18299865722656,-87 3,-87 C47.18299865722656,-87 83,-51.18299865722656 83,-7 C83,37.18299865722656 47.18299865722656,73 3,73z"></path></g><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(35,21,38)" fill-opacity="1" d=" M3,-79.5 C-37.04100036621094,-79.5 -69.5,-47.04100036621094 -69.5,-7 C-69.5,33.04100036621094 -37.04100036621094,65.5 3,65.5 C43.04100036621094,65.5 75.5,33.04100036621094 75.5,-7 C75.5,-47.04100036621094 43.04100036621094,-79.5 3,-79.5z"></path></g></g></g><mask id="__lottie_element_44_1" mask-type="alpha"><use href="#__lottie_element_44"></use></mask></defs><g clip-path="url(#__lottie_element_2)"><g transform="matrix(1,0,0,1,237,247)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(255,159,0)" fill-opacity="1" d=" M3.317629814147949,92.98744201660156 C-0.9945858120918274,92.98744201660156 2.883965492248535,92.98751831054688 2.883965492248535,92.98751831054688 C2.883965492248535,92.98751831054688 2.883965492248535,52.99871826171875 2.883965492248535,-7.052280902862549 C2.883965492248535,-67.00128173828125 2.883965492248535,-106.99005126953125 2.883965492248535,-106.99005126953125 C2.883965492248535,-106.99005126953125 -0.7481771111488342,-106.99012756347656 3.317629814147949,-106.99012756347656 C59.7111930847168,-106.99012756347656 102.62802124023438,-58.720882415771484 102.62802124023438,-7.25 C102.62802124023438,45.939491271972656 59.22374725341797,92.98744201660156 3.317629814147949,92.98744201660156z"></path></g></g><g transform="matrix(0.9994557499885559,0,0,1,236.5734405517578,247)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="url(#__lottie_element_9)" fill-opacity="1" d=" M103,-7 C103,48.22800064086914 58.22800064086914,93 3,93 C-52.22800064086914,93 -97,48.22800064086914 -97,-7 C-97,-62.22800064086914 -52.22800064086914,-107 3,-107 C58.22800064086914,-107 103,-62.22800064086914 103,-7z"></path></g></g><g transform="matrix(0.9994557499885559,0,0,1,236.5734405517578,247)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(255,187,0)" fill-opacity="1" d=" M83,-7 C83,37.18299865722656 47.18299865722656,73 3,73 C-41.18299865722656,73 -77,37.18299865722656 -77,-7 C-77,-51.18299865722656 -41.18299865722656,-87 3,-87 C47.18299865722656,-87 83,-51.18299865722656 83,-7z"></path></g></g><g transform="matrix(0.9994557499885559,0,0,1,236.5734405517578,247)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="url(#__lottie_element_16)" fill-opacity="1" d=" M75.5,-7 C75.5,33.04100036621094 43.04100036621094,65.5 3,65.5 C-37.04100036621094,65.5 -69.5,33.04100036621094 -69.5,-7 C-69.5,-47.04100036621094 -37.04100036621094,-79.5 3,-79.5 C43.04100036621094,-79.5 75.5,-47.04100036621094 75.5,-7z"></path></g></g><g transform="matrix(3.1169626712799072,0,0,3.1186599731445312,236.07371520996094,282.5)" opacity="1" fill="rgb(255,138,0)" font-size="36" font-family="Konnect" font-style="normal" font-weight="400" aria-label="â¹" style="display: block;"><g stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="4" transform="matrix(1,0,0,1,0,0)" opacity="1" style="display: inherit;"><g><g style="display: none;"></g></g></g><g stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="4" transform="matrix(1,0,0,1,0,0)" opacity="1" style="display: inherit;"><g><g style="display: none;"></g></g></g><g stroke-linecap="butt" stroke-linejoin="round" stroke-miterlimit="4" transform="matrix(1,0,0,1,0,0)" opacity="1" style="display: inherit;"><g><g style="display: none;"></g></g></g></g><g mask="url(#__lottie_element_23_1)" style="display: block;"><g transform="matrix(0.6427876353263855,-0.7660444378852844,0.9651317000389099,0.8098416328430176,-3.0871734619140625,520.4098510742188)" opacity="0.5"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(255,255,255)" fill-opacity="1" d=" M242,93 C242,93 162,93 162,93 C162,93 162,-107 162,-107 C162,-107 242,-107 242,-107 C242,-107 242,93 242,93z"></path></g></g></g><g mask="url(#__lottie_element_44_1)" style="display: block;"><g transform="matrix(0.6427876353263855,-0.7660444378852844,0.9651317000389099,0.8098416328430176,-3.0871734619140625,520.4098510742188)" opacity="0.5"><g opacity="1" transform="matrix(1,0,0,1,0,0)"><path fill="rgb(255,255,255)" fill-opacity="1" d=" M242,93 C242,93 162,93 162,93 C162,93 162,-107 162,-107 C162,-107 242,-107 242,-107 C242,-107 242,93 242,93z"></path></g></g></g><g transform="matrix(0,0,0,0,242.50900268554688,140.25)" opacity="1" style="display: none;"><g opacity="1" transform="matrix(1,0,0,1,-3,-151)"><path fill="rgb(255,255,255)" fill-opacity="1" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(168,168,168)" stroke-opacity="1" stroke-width="0" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path></g></g><g transform="matrix(0,0,0,0,376.5090026855469,194.25)" opacity="1" style="display: none;"><g opacity="1" transform="matrix(1,0,0,1,-3,-151)"><path fill="rgb(255,226,0)" fill-opacity="1" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(168,168,168)" stroke-opacity="1" stroke-width="0" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path></g></g><g transform="matrix(0,0,0,0,241.50900268554688,339.25)" opacity="1" style="display: none;"><g opacity="1" transform="matrix(1,0,0,1,-3,-151)"><path fill="rgb(255,255,255)" fill-opacity="1" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(168,168,168)" stroke-opacity="1" stroke-width="0" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path></g></g><g transform="matrix(0,0,0,0,134.50900268554688,135.25)" opacity="1" style="display: none;"><g opacity="1" transform="matrix(1,0,0,1,-3,-151)"><path fill="rgb(255,213,0)" fill-opacity="1" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(168,168,168)" stroke-opacity="1" stroke-width="0" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path></g></g><g transform="matrix(0,0,0,0,338.5090026855469,380.25)" opacity="1" style="display: none;"><g opacity="1" transform="matrix(1,0,0,1,-3,-151)"><path fill="rgb(255,213,0)" fill-opacity="1" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(168,168,168)" stroke-opacity="1" stroke-width="0" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path></g></g><g transform="matrix(-0.01115830522030592,0.11504990607500076,-0.11504990607500076,-0.01115830522030592,119.14030456542969,357.8249206542969)" opacity="1" style="display: block;"><g opacity="1" transform="matrix(1,0,0,1,-3,-151)"><path fill="rgb(255,213,0)" fill-opacity="1" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path><path stroke-linecap="butt" stroke-linejoin="miter" fill-opacity="0" stroke-miterlimit="4" stroke="rgb(168,168,168)" stroke-opacity="1" stroke-width="0" d=" M1.0481139102512613e-15,-17.117000579833984 C1.0481139102512613e-15,-17.117000579833984 2.5165929794311523,-2.5165929794311523 2.5165929794311523,-2.5165929794311523 C2.5165929794311523,-2.5165929794311523 17.117000579833984,0 17.117000579833984,0 C17.117000579833984,0 2.5165929794311523,2.5165929794311523 2.5165929794311523,2.5165929794311523 C2.5165929794311523,2.5165929794311523 1.0481139102512613e-15,17.117000579833984 1.0481139102512613e-15,17.117000579833984 C1.0481139102512613e-15,17.117000579833984 -2.5165929794311523,2.5165929794311523 -2.5165929794311523,2.5165929794311523 C-2.5165929794311523,2.5165929794311523 -17.117000579833984,2.0962278205025227e-15 -17.117000579833984,2.0962278205025227e-15 C-17.117000579833984,2.0962278205025227e-15 -2.5165929794311523,-2.5165929794311523 -2.5165929794311523,-2.5165929794311523 C-2.5165929794311523,-2.5165929794311523 1.0481139102512613e-15,-17.117000579833984 1.0481139102512613e-15,-17.117000579833984z"></path></g></g></g></svg></div>
+        <!--?lit$331128141$-->
+      </div>
+    </template></dotlottie-player>
+        <p class="col-10" id="typeEffect">Just a Sec ! we're checking the best offer for you....</p>
+    </div>
+
+    <div class="failed-msg-div">
+        <img src="./offerPage_files/file_rejected.svg" alt="" width="80px">
+        <small class="p-0 f-14 text-center col-10">Sorry! You're not eligible for this offer, but we've found the best
+            alternative loan offer.</small>
+        <small class="p-0 f-14 text-center col-10">Click the button below to view offer.</small>
+        <button class="btn-primary view-offer">View Offer</button>
+    </div>
+
+    <canvas id="canvas" width="375" height="667" style="display: block;"></canvas>
+    <div class="box d-flex flex-column">
+        <div class="background-layer"></div>
+
+        <div class="heading pt-5">
+            <img src="./offerPage_files/incred-logo.png" alt="" width="125px" class="mb-3 px-3 py-2 bg-white rounded-2 brand-logo">
+            <h3 class=" success-msg
+              text-center"><span class="text-uppercase">Congratulations</span> <br> You got loan approval upto </h3>
+            <h1 class="">Rs. 5,00,000*</h1>
+
+            <button class=" btn mt-2" type="button">Apply Now</button>
+        </div>
+
+        <div class="card rounded-4">
+            <div class="d-flex flex-row justify-content-between">
+                <div class="d-flex flex-column align-items-center">
+                    <div class="circle">
+                        <img src="./offerPage_files/low.svg" alt="">
+                    </div>
+                    <p class="m-0 text-center f-14">Low Interest</p>
+                </div>
+
+                <div class="d-flex flex-column align-items-center">
+                    <div class="circle">
+                        <img src="./offerPage_files/shield.svg" alt="">
+                    </div>
+                    <p class="m-0 text-center f-14">Turely Secure</p>
+                </div>
+
+                <div class="d-flex flex-column align-items-center">
+                    <div class="circle">
+                        <img src="./offerPage_files/doc.svg" alt="">
+                    </div>
+                    <p class="m-0 text-center f-14">Digital Process</p>
+                </div>
+            </div>
+        </div>
+        <div class="rounded bg-white d-flex flex-column p-3 shadow-sm points">
+            <h6 class="text-uppercase text-center text-muted mb-4 border p-2 rounded-2 ">Details of the offer</h6>
+            <div class="d-flex align-items-center gap-1">
+                <img src="./offerPage_files/tick.svg" alt="tick" class="tickmark" width="28px">
+                <p class="m-0">Check Eligibility</p>
+            </div>
+            <hr>
+            <div class="d-flex align-items-center gap-1">
+                <img src="./offerPage_files/tick.svg" alt="tick" class="tickmark" width="28px">
+                <p class="m-0">Select Loan offer and tenure</p>
+            </div>
+            <hr>
+            <div class="d-flex align-items-center gap-1">
+                <img src="./offerPage_files/tick.svg" alt="tick" class="tickmark" width="28px">
+                <p class="m-0">Verify Pincode</p>
+            </div>
+        </div>
+    </div>
+<script type="module" src="./offerPage_files/vce701823e78c4301a35b7e07294d87301792088814092" integrity="sha512-UKNk8GbxkABxKcXYuLkO16EleLGUkcvJWtpSNmExE0Too3ZaFAxTscNWEc1OdAv5/BikHawapSCaiD2XCmp+Bw==" data-cf-beacon="{&quot;version&quot;:&quot;2024.11.0&quot;,&quot;token&quot;:&quot;5483bf4ab6c045f38000d98a4ab4d4fc&quot;,&quot;r&quot;:1,&quot;spa&quot;:2}" crossorigin="anonymous"></script>
+
+
+<script>
+    let l = 0;
+    const text = 'Just a Sec ! we\'re checking the best offer for you....';
+    const typeWriter = () => {
+        if (l < text.length) {
+            document.getElementById("typeEffect").innerHTML += text.charAt(l);
+            l++;
+            setTimeout(typeWriter, 50);
+        }
+    }
+    typeWriter();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const status = urlParams.get('status');
+
+    window.onload = () => {
+        setTimeout(() => {
+            const preloader = document.querySelector('.preloader');
+            preloader.style.transition = 'opacity 0.5s ease-out';
+            preloader.style.opacity = 0;
+            setTimeout(() => {
+                preloader.style.display = 'none';
+            }, 500);
+            if (status === 'success') {
+                document.querySelector('.brand-logo').src = './assests/images/pirmal_logo.svg';
+                document.querySelector('.failed-msg-div').style.display = 'none';
+                document.body.style.overflow = 'auto';
+            } else if (status === 'failed') {
+                document.querySelector('.brand-logo').src = './assests/images/incred-logo.png';
+            }
+            document.querySelector('canvas').style.display = 'block';
+        }, 5000);
+    }
+
+    document.querySelector('.view-offer').addEventListener('click', () => {
+        document.querySelector('.failed-msg-div').style.display = 'none';
+        document.body.style.overflow = 'auto';
+    })
+</script>
+
+
+<script>
+    let W = window.innerWidth;
+    let H = window.innerHeight;
+    const canvas = document.getElementById("canvas");
+    const context = canvas.getContext("2d");
+    const maxConfettis = 10;
+    const particles = [];
+
+    const possibleColors = [
+        "DodgerBlue",
+        "OliveDrab",
+        "Gold",
+        "Pink",
+        "SlateBlue",
+        "LightBlue",
+        "Gold",
+        "Violet",
+        "PaleGreen",
+        "SteelBlue",
+        "SandyBrown",
+        "Chocolate",
+        "Crimson"
+    ];
+
+    function randomFromTo(from, to) {
+        return Math.floor(Math.random() * (to - from + 1) + from);
+    }
+
+    function confettiParticle() {
+        this.x = Math.random() * W; // x
+        this.y = Math.random() * H - H; // y
+        this.r = randomFromTo(11, 33); // radius
+        this.d = Math.random() * maxConfettis + 11;
+        this.color =
+            possibleColors[Math.floor(Math.random() * possibleColors.length)];
+        this.tilt = Math.floor(Math.random() * 33) - 11;
+        this.tiltAngleIncremental = Math.random() * 0.07 + 0.05;
+        this.tiltAngle = 0;
+
+        this.draw = function () {
+            context.beginPath();
+            context.lineWidth = this.r / 2;
+            context.strokeStyle = this.color;
+            context.moveTo(this.x + this.tilt + this.r / 3, this.y);
+            context.lineTo(this.x + this.tilt, this.y + this.tilt + this.r / 5);
+            return context.stroke();
+        };
+    }
+
+    function Draw() {
+        const results = [];
+
+        // Magical recursive functional love
+        requestAnimationFrame(Draw);
+
+        context.clearRect(0, 0, W, window.innerHeight);
+
+        for (var i = 0; i < maxConfettis; i++) {
+            results.push(particles[i].draw());
+        }
+
+        let particle = {};
+        let remainingFlakes = 0;
+        for (var i = 0; i < maxConfettis; i++) {
+            particle = particles[i];
+
+            particle.tiltAngle += particle.tiltAngleIncremental;
+            particle.y += (Math.cos(particle.d) + 3 + particle.r / 2) / 2;
+            particle.tilt = Math.sin(particle.tiltAngle - i / 3) * 15;
+
+            if (particle.y <= H) remainingFlakes++;
+
+            // If a confetti has fluttered out of view,
+            // bring it back to above the viewport and let if re-fall.
+            if (particle.x > W + 30 || particle.x < -30 || particle.y > H) {
+                particle.x = Math.random() * W;
+                particle.y = -30;
+                particle.tilt = Math.floor(Math.random() * 10) - 20;
+            }
+        }
+
+        return results;
+    }
+
+    window.addEventListener(
+        "resize",
+        function () {
+            W = window.innerWidth;
+            H = window.innerHeight;
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        },
+        false
+    );
+
+    // Push new confetti objects to `particles[]`
+    for (var i = 0; i < maxConfettis; i++) {
+        particles.push(new confettiParticle());
+    }
+
+    // Initialize
+    canvas.width = W;
+    canvas.height = H;
+    Draw();
+</script>
+
+<div class="glasp-extension-toaster glasp-extension-toaster--glasp-extension" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 320px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 40px; right: 24px; z-index: 2147483647;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"></div></template></div><div class="glasp-extension-highlighter" data-glasp-print="hide" dir="ltr" style="text-align: start; display: block; width: 0px; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; top: 0px; left: 0px; height: 0px; z-index: 2147483646; pointer-events: none;"><template shadowrootmode="open"><div class="glasp-extension" style="font-family: inherit;"><style>
+.glasp-md.glasp-md { word-break: break-word; }
+.glasp-md.glasp-md > :first-child { margin-top: 0; }
+.glasp-md.glasp-md > :last-child { margin-bottom: 0; }
+.glasp-md.glasp-md h1, .glasp-md.glasp-md h2, .glasp-md.glasp-md h3, .glasp-md.glasp-md h4 {
+  margin: 0.4em 0 0.2em; font-size: 1.12em; font-weight: 700; line-height: 1.3; padding: 0;
+}
+.glasp-md.glasp-md p { margin: 0.6em 0; line-height: 1.55; }
+.glasp-md.glasp-md ul { list-style: disc outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md ol { list-style: decimal outside; padding-inline-start: 1.4em; margin: 0.6em 0; }
+.glasp-md.glasp-md li { display: list-item; margin: 0.32em 0; line-height: 1.5; }
+.glasp-md.glasp-md ul ul, .glasp-md.glasp-md ol ol, .glasp-md.glasp-md ul ol, .glasp-md.glasp-md ol ul { margin: 0.32em 0; }
+.glasp-md.glasp-md ul ul { list-style: circle outside; }
+.glasp-md.glasp-md strong { font-weight: 700; }
+.glasp-md.glasp-md em { font-style: italic; }
+.glasp-md.glasp-md a { color: rgb(51 121 255); text-decoration: none; }
+.glasp-md.glasp-md a:hover { text-decoration: underline; }
+.glasp-md.glasp-md blockquote {
+  margin: 0.6em 0; padding-block: 0.1em; padding-inline: 0.85em 0;
+  border-inline-start: 3px solid #dfe3ea; color: #5b616e;
+}
+.glasp-md.glasp-md blockquote p { margin: 0.25em 0; }
+.glasp-md.glasp-md code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em;
+  background: #f1f5f9; color: #1f2937; padding: 0 3px; border-radius: 3px;
+}
+.glasp-md.glasp-md pre {
+  background: #f1f5f9; color: #1f2937; padding: 8px 10px; border-radius: 6px; overflow-x: auto; margin: 0.4em 0;
+}
+.glasp-md.glasp-md pre code { background: none; padding: 0; }
+/* Code is ALWAYS left-to-right, whatever the surrounding text does. Without this,
+   an RTL host page — or a dir=auto container that resolved RTL from an Arabic
+   first character — reorders every code line: an opening brace jumps to the far
+   end, and a leading comment marker lands on the wrong side. unicode-bidi
+   isolate also stops the code from reordering the prose around it.
+   NOTE: no backticks in this comment. It lives inside a JS template literal. */
+.glasp-md.glasp-md pre, .glasp-md.glasp-md code { direction: ltr; unicode-bidi: isolate; text-align: start; }
+.glasp-md.glasp-md img { max-width: 100%; border-radius: 2px; }
+</style><button class="glasp-banner-root glasp-fab-root" aria-label="Glasp" title="Glasp" style="position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 24px); z-index: 2147483646; pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; border: 1px solid rgba(0, 0, 0, 0.08); background: rgba(255, 255, 255, 0.92); box-shadow: rgba(0, 0, 0, 0.18) 0px 2px 10px; display: flex; align-items: center; justify-content: center; cursor: pointer; padding: 0px;"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#171717" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-highlighter"><path d="m9 11-6 6v3h9l3-3"></path><path d="m22 12-4.6 4.6a2 2 0 0 1-2.8 0l-5.2-5.2a2 2 0 0 1 0-2.8L14 4"></path></svg></button></div></template></div></body><div class="glasp-extension" data-glasp-print="hide" dir="ltr" id="glasp-web-summary-button" style="text-align: start; display: block; width: unset; margin: unset; padding: unset; border: unset; border-radius: unset; outline: unset; background-color: unset; box-shadow: unset; position: fixed; bottom: 16px; right: 16px; z-index: 9999;"><div class="glasp-extension" style="font-family: inherit;"></div></div></html>

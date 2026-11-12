@@ -30,6 +30,22 @@ button {
   font: inherit;
 }
 
+.gallery-brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.gallery-brand span {
+  color: #a7a7a7;
+  font-family: "DM Mono", monospace;
+  font-size: 9px;
+  font-weight: 400;
+}
+
 .interactive-gallery {
   position: fixed;
   inset: 0;
