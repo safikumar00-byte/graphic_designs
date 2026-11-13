@@ -122,6 +122,7 @@ export default function CardFlipDock({ images, title }: CardFlipDockProps) {
             className="card-flip-image"
             src={activeImage.src}
             alt={activeImage.alt}
+            decoding="async"
             onLoad={(event) => {
               const { naturalWidth, naturalHeight } = event.currentTarget;
               if (naturalWidth && naturalHeight) {
@@ -161,7 +162,13 @@ export default function CardFlipDock({ images, title }: CardFlipDockProps) {
               aria-label={`Show image ${index + 1}: ${image.alt}`}
               aria-pressed={index === activeIndex}
             >
-              <img src={image.src} alt="" draggable={false} />
+              <img
+                src={image.src}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                draggable={false}
+              />
             </button>
           ))}
         </div>

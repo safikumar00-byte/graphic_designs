@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CardNav from "@/components/card-nav";
 import "./globals.css";
 
+
 export const metadata: Metadata = {
   title: "Graphic Design Gallery",
   description: "Selected visual design work and animated project collections.",
@@ -32,6 +33,25 @@ export default function RootLayout({
               links: [
                 { label: "Interactive gallery", href: "/" },
                 { label: "Folder view", href: "/desktop" },
+                { label: "UI/UX case studies", href: "/case-study" },
+              ],
+            },
+            {
+              label: "UI/UX",
+              description: "Explore application case studies and screen flows.",
+              links: [
+                { label: "Credbuddha", href: "/case-study/credbuddha" },
+                { label: "CVM HRM", href: "/case-study/cvm-hrm" },
+                { label: "TurboPaisa", href: "/case-study/turbopaisa" },
+              ],
+            },
+            {
+              label: "Profile",
+              description: "Meet Sunil and explore his design, development, and product work.",
+              links: [
+                { label: "About Sunil", href: "/profile" },
+                { label: "Selected work", href: "/profile#selected-work" },
+                { label: "Contact", href: "/profile#contact" },
               ],
             },
             {
@@ -45,6 +65,7 @@ export default function RootLayout({
           ]}
         />
         {children}
+
       </body>
     </html>
   );

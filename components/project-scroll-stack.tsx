@@ -1,7 +1,6 @@
-"use client";
-
-import { useEffect, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
+import ScrollStack, { ScrollStackItem } from "@/components/scroll-stack";
+import type { CSSProperties } from "react";
 
 type Project = {
   name: string;
@@ -52,60 +51,32 @@ const projects: Project[] = [
 ];
 
 export function ProjectScrollStack() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const cardRefs = useRef<Array<HTMLElement | null>>([]);
-
-  useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
-    let frame = 0;
-
-    const update = () => {
-      frame = 0;
-      const stickyTop = Math.max(100, Math.min(148, window.innerHeight * 0.16));
-      cardRefs.current.forEach((card, index) => {
-        if (!card) return;
-        const nextCard = cardRefs.current[index + 1];
-        if (!nextCard) {
-          card.style.setProperty("--stack-progress", "0");
-          return;
-        }
-        const nextTop = nextCard.getBoundingClientRect().top;
-        const cardHeight = card.getBoundingClientRect().height;
-        const progress = Math.min(1, Math.max(0, (stickyTop + cardHeight - nextTop) / cardHeight));
-        card.style.setProperty("--stack-progress", `${progress}`);
-      });
-    };
-
-    const schedule = () => {
-      if (!frame) frame = requestAnimationFrame(update);
-    };
-
-    update();
-    window.addEventListener("scroll", schedule, { passive: true });
-    window.addEventListener("resize", schedule);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("scroll", schedule);
-      window.removeEventListener("resize", schedule);
-    };
-  }, []);
-
   return (
-    <section className="project-stack-section" ref={sectionRef} aria-labelledby="project-stack-title">
+    <section className="project-stack-section" aria-labelledby="project-stack-title">
       <div className="project-stack-intro">
         <p className="project-stack-eyebrow">A few things we made</p>
         <h2 id="project-stack-title">Selected projects<span>.</span></h2>
         <p className="project-stack-note">Campaigns and identities, made to move people.</p>
       </div>
 
-      <div className="project-stack" aria-label="Featured project case studies">
-        {projects.map((project, index) => (
-          <div className="project-stack-scene" key={project.name}>
-            <article
-              ref={(element) => { cardRefs.current[index] = element; }}
-              className="project-case-card"
-              style={{ "--project-accent": project.accent, "--stack-index": index } as React.CSSProperties}
+      <div role="region" aria-label="Featured project case studies">
+        <ScrollStack
+          className="project-stack"
+          itemDistance={100}
+          itemStackDistance={24}
+          stackPosition="15%"
+          itemScale={0.04}
+          baseScale={0.9}
+          dimAmount={0.12}
+          holdDistance={280}
+          smoothScroll={false}
+          useWindowScroll
+        >
+          {projects.map((project, index) => (
+            <ScrollStackItem
+              key={project.name}
+              itemClassName="project-case-card"
+              style={{ "--project-accent": project.accent } as CSSProperties}
             >
               <div className="project-case-copy">
                 <p className="project-case-kicker">{project.name} · Case study</p>
@@ -139,12 +110,22 @@ export function ProjectScrollStack() {
                       <span>01 / 03</span>
                     </div>
                     <div className="project-browser-feature">
-                      <img src={project.images[0].src} alt={project.images[0].alt} />
+                      <img
+                        src={project.images[0].src}
+                        alt={project.images[0].alt}
+                        loading="lazy"
+                        decoding="async"
+                      />
                     </div>
                     <div className="project-browser-thumbnails">
                       {project.images.slice(1).map((image) => (
                         <div className="project-browser-thumbnail" key={image.src}>
-                          <img src={image.src} alt={image.alt} />
+                          <img
+                            src={image.src}
+                            alt={image.alt}
+                            loading="lazy"
+                            decoding="async"
+                          />
                         </div>
                       ))}
                     </div>
@@ -152,9 +133,9 @@ export function ProjectScrollStack() {
                 </div>
               </div>
               <span className="project-case-index" aria-hidden="true">0{index + 1}</span>
-            </article>
-          </div>
-        ))}
+            </ScrollStackItem>
+          ))}
+        </ScrollStack>
       </div>
 
       <p className="project-stack-outro">More work lives in the gallery above.</p>

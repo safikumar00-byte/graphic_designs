@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import Link from "next/link";
 import type { GalleryCardData, GalleryImage } from "@/lib/gallery-data";
 import LiquidRevealCursor from "@/components/mfa/LiquidRevealCursor";
 import PixelTrail from "@/components/pixel-trail";
@@ -658,9 +659,9 @@ export function InteractiveGallery({ cards }: { cards: GalleryCardData[] }) {
             <span />
           </div>
           <span className="mac-window-title">Interactive Design Gallery</span>
-          <a className="mac-window-status mac-window-link" href="/desktop">
+          <Link className="mac-window-status mac-window-link" href="/desktop">
             FOLDER VIEW <span aria-hidden="true">↗</span>
-          </a>
+          </Link>
         </div>
         <div
           ref={containerRef}

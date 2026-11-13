@@ -1,0 +1,32 @@
+.spotlight-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #111;
+}
+
+.spotlight-card__light,
+.spotlight-card__edge {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.spotlight-card__light {
+  z-index: 2;
+  mix-blend-mode: screen;
+}
+
+.spotlight-card__edge {
+  z-index: 3;
+  padding: 1px;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+}

@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import Link from "next/link";
 import CardFlipDock from "@/components/mfa/CardFlipDock";
 import type { GalleryCardData, GalleryImage } from "@/lib/gallery-data";
 
@@ -123,9 +124,9 @@ export function FolderDesktop({ cards }: { cards: GalleryCardData[] }) {
             <span />
           </div>
           <span className="folder-window-name">Portfolio</span>
-          <a className="folder-gallery-link" href="/">
+          <Link className="folder-gallery-link" href="/">
             Infinite gallery <span aria-hidden="true">↗</span>
-          </a>
+          </Link>
         </header>
 
         <section className="folder-desktop" aria-label="Project folders">
@@ -168,7 +169,14 @@ export function FolderDesktop({ cards }: { cards: GalleryCardData[] }) {
                   <span className="folder-icon" aria-hidden="true">
                     <span className="folder-tab" />
                     <span className="folder-front">
-                      {project.images[0] && <img src={project.images[0].src} alt="" />}
+                      {project.images[0] && (
+                        <img
+                          src={project.images[0].src}
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      )}
                     </span>
                   </span>
                   <span className="folder-label">{project.title}</span>
